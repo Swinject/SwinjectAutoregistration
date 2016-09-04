@@ -9,7 +9,8 @@
 import Swinject
 import Foundation
 
-//infix operator ~ { associativity left precedence 160 }
+//Already declared in Swift
+//infix operator ~> { associativity left precedence 160 }
 postfix operator ~> {}
 
 /** Unary operator which automatically resolves the return type
