@@ -1,0 +1,206 @@
+#!/usr/bin/env xcrun swift
+
+// Generates a Swift file with implementation of function currying for a ridicolously high number of arguments
+
+import Foundation
+
+let genericServices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+let genericArgumentPrefix = "Arg"
+
+let outputPath = "SwinjectAutoregistration/Classes/AutoRegistration.swift"
+
+func headers(fileName: String) -> String {
+    return ["//",
+    "//  \(fileName)",
+    "//  Swinject",
+    "//",
+    "//  Generated using Swinject AutoRegistration generator.",
+    "//"].joinWithSeparator("\n")
+}
+
+func registerComment(dependencies: Int, arguments: Int) -> String {
+    let genericArguments = (1..<(arguments+1)).map{ "\(genericArgumentPrefix)\($0)" } // ["Arg1", "Arg2", "Arg3"]
+    return [
+        "/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.",
+        " ",
+        " Usage: `register(initializer: MyService.init, service: MyService.self\((arguments > 0) ? ", \(arguments == 1 ? "argument" : "arguments"): \(commaConcat(genericArguments.map{"\($0).self"}))" : ""))`",
+        " - Parameters:",
+        "    - initializer: Initializer of the registered service",
+        "    - service: Registered service type",
+        "    - name: Optional name of the service",
+        (arguments > 0) ? "    - \(arguments == 1 ? "argument" : "arguments"): Argument type(s) that will be resolved dynamically instead of resolving dependency" : "",
+        " - Returns: The registered service entry \(arguments > 0 ? "with \(arguments) arguments" : "")",
+        " - Important: Might fail if one of the dependencies is unresolvable.",
+        " */"
+        ].joinWithSeparator("\n")
+}
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+}
+
+func genericType(for position: Int) -> String {
+    let max = genericServices.count
+    switch position {
+    case _ where position < max: return genericServices[position % max]
+    default: return genericServices[position / max - 1] + genericServices[position % max]
+    }
+}
+
+
+func commaConcat(xs: [String]) -> String {
+    return xs.joinWithSeparator(", ")
+}
+
+func registerGenerator(dependenciesCount: Int, argumentsCount: Int, breakIntoVariables: Bool = false) -> String {
+    // If there is only one argument and one dependency, it can be checked by compiler
+    let isArgumentInjection = dependenciesCount == 1 && argumentsCount == 1
+    
+    let argParameterName = argumentsCount == 1 ? "argument" : "arguments"
+    
+    var genericParameters = (0..<dependenciesCount).map(genericType) // ["A", "B", "C"]
+    let genericArguments = (1..<(argumentsCount+1)).map{ "\(genericArgumentPrefix)\($0)" } // ["Arg1", "Arg2", "Arg3"]
+    let genericArgumentsVars = genericArguments.map { $0.lowercaseString } // ["arg1", "arg2", "arg3"]
+    
+    var resolvers = genericParameters.map { _ in "r.resolve(\( argumentsCount > 0 ? "\(argParameterName): \(commaConcat(genericArgumentsVars))" : ""))" }
+    
+    var genericsDefinition = commaConcat(["Service"] + genericParameters + genericArguments)
+    
+    if isArgumentInjection {
+        genericParameters = ["\(genericArgumentPrefix)1"]
+        genericsDefinition = commaConcat(["Service"] + genericParameters)
+        resolvers = ["\(genericArgumentPrefix.lowercaseString)1"]
+    }
+    
+    let concatenatedParameters = commaConcat(genericParameters)
+    
+    let argumentsDefinition = argumentsCount == 0 ? "" : ", \(argParameterName) \(commaConcat(genericArguments.enumerate().map{ "\($0 >= 1 ? "_" : "") \($1.lowercaseString): \($1).Type" }))"
+    
+    let initializer: String
+    
+    if breakIntoVariables {
+        let services = genericParameters.enumerate().map { "let \($1.lowercaseString): \($1)? = \(resolvers[$0])" }
+        initializer =
+            "       " + services.joinWithSeparator("; ") + "\n" +
+            "       checkResolved(initializer: initializer, services: \(commaConcat(genericParameters.map{$0.lowercaseString})))\n" +
+            "       return initializer(\(commaConcat(genericParameters.map{ "\($0.lowercaseString)!" })))"
+    } else {
+        initializer = "       initializer(\(commaConcat(resolvers.map{"\($0)\(isArgumentInjection ? "" : "!")"})))"
+    }
+    
+    let closureParameters = commaConcat(["r"] + genericArgumentsVars)
+    
+    let register = [
+        registerComment(dependenciesCount, arguments: argumentsCount),
+        "public func register<\(genericsDefinition)>(initializer initializer: (\(concatenatedParameters)) -> Service, service: Service.Type, name: String? = nil\(argumentsDefinition)) -> ServiceEntry<Service> {",
+        "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
+        initializer,
+        "   } as (\(commaConcat(["Resolvable"] + genericArguments))) -> Service)",
+        "}"
+    ]
+
+    return register.joinWithSeparator("\n")
+}
+
+
+func resolverGenerator(arguments: Int) -> String {
+    
+    let argParameterName = arguments == 1 ? "argument" : "arguments"
+    
+    let genericArguments = (1..<(arguments+1)).map{ "\(genericArgumentPrefix)\($0)" } // ["Arg1", "Arg2", "Arg3"]
+    
+    let genericsDefinition = commaConcat(["Service"] + genericArguments)
+    
+    let paramArgs = (1..<(arguments+1)).map { "\(genericArgumentPrefix.lowercaseString)\($0)" }
+    
+    let argumentsTests = paramArgs.map { "(\($0) as? Service) ?? " }.joinWithSeparator("")
+
+    let argumentsDefinition = arguments == 0 ? "" : "\(argParameterName) \(commaConcat(genericArguments.enumerate().map{ "\($0 >= 1 ? "_" : "") \($1.lowercaseString): \($1)" }))"
+
+
+    let implementation = "return \(argumentsTests)self.resolve(Service.self)"
+    
+    let resolver = [
+    "private func resolve<\(genericsDefinition)>(\(argumentsDefinition)) -> Service? {",
+    "   \(implementation)",
+    "}"
+    ]
+    return resolver.joinWithSeparator("\n")
+}
+
+func printIf(list: [String]) -> String {
+    if let letter = list.first {
+        var listMutable = list
+        listMutable.removeFirst()
+        return "(\(letter.lowercaseString) == nil ? \"\\(\(letter.uppercaseString).self)\" : \(printIf(listMutable)))"
+    } else {
+        return "\"??\""
+    }
+}
+
+func checkGenerator(dependencies: Int) -> String {
+    
+    let genericParameters = (0..<dependencies).map(genericType) // ["A", "B", "C"]
+    let generics = commaConcat(genericParameters)
+    
+    let servicesDefinition = dependencies == 0 ? "" : "services \(commaConcat(genericParameters.enumerate().map{ "\($0 >= 1 ? "_" : "") \($1.lowercaseString): \($1)?" }))"
+    
+    let check = [
+    "private func checkResolved<Service, \(generics)>(initializer initializer: (\(generics)) -> Service, \(servicesDefinition)){",
+    "   let services: [Any?] = [\(commaConcat(genericParameters.map{ $0.lowercaseString }))].filter{ $0 == nil }",
+    "   if let _ = services.first {",
+    "       assertionFailure(\"Failed to resolve \\(\(printIf(genericParameters))), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
+    "   }",
+    "}"
+    ]
+    
+    return check.joinWithSeparator("\n")
+}
+
+
+print("Generating 💬")
+
+
+let dependenciesCount = Int(Process.arguments[safe: 1] ?? "9")!
+let argumentsCount = Int(Process.arguments[safe: 2] ?? "3")!
+let breakCount = Int(Process.arguments[safe: 3] ?? "0")!
+
+let resolvers = (0...argumentsCount).map { arg in
+    resolverGenerator(arg)
+}
+
+let registers = (0...dependenciesCount).map { dep in
+    (0...argumentsCount).filter{ dep >= $0 }.map { arg in
+        registerGenerator(dep, argumentsCount: arg, breakIntoVariables: dep + arg > breakCount)
+    }
+    }.reduce([]){ $0 + $1}
+
+let checks = (1...dependenciesCount).map { dep in
+    checkGenerator(dep)
+}
+
+var output = [
+    headers(outputPath),
+    "\n\n import Swinject \n\n",
+    "public extension Container {\n\n",
+        registers.joinWithSeparator("\n\n"),
+    "\n\n}",
+    "public extension Resolvable {\n\n",
+        resolvers.joinWithSeparator("\n\n"),
+    "}\n\n",
+    checks.joinWithSeparator("\n\n")
+].joinWithSeparator("\n")
+
+let currentPath = NSURL(fileURLWithPath: NSFileManager.defaultManager().currentDirectoryPath)
+let swinjectPath = currentPath.URLByAppendingPathComponent(outputPath)
+
+do {
+    try output.writeToURL(swinjectPath, atomically: true, encoding: NSUTF8StringEncoding)
+} catch let e as NSError {
+    print("An error occurred while saving the generated functions. Error: \(e)")
+}
+
+print("Done, swinject functions files written at \(outputPath) 👍")

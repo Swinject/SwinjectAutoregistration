@@ -1,0 +1,25 @@
+PODS:
+  - Nimble (3.2.0)
+  - Quick (0.9.3)
+  - Swinject (1.1.3)
+  - SwinjectAutoregistration (1.0.0-beta.1):
+    - Swinject (= 1.1.3)
+
+DEPENDENCIES:
+  - Nimble (~> 3.0)
+  - Quick (~> 0.8)
+  - SwinjectAutoregistration (from `../`)
+
+EXTERNAL SOURCES:
+  SwinjectAutoregistration:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
+  Swinject: 69273c2419f93d52603c3a546f5d2792ee1a5e98
+  SwinjectAutoregistration: 889b55d532504b84ed24cc9204333e94839f5d95
+
+PODFILE CHECKSUM: 7941169da44d4f41dce69ec7e6f90b0f6d540531
+
+COCOAPODS: 1.0.1
