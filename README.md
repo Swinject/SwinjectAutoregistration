@@ -1,4 +1,4 @@
-# ACKSwinject
+# SwinjectAutoregistration
 
 
 ## Example
@@ -9,7 +9,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ```
 import Swinject
-import ACKSwinject
+import SwinjectAutoregistration
 ```
 
 You can register services like this:
@@ -42,28 +42,3 @@ container.register(MyService.self){
 }
 
 ```
-
-For registration of factories use:
-
-```
-typealias MyFactory = (id: Int) -> MyService
-container.registerFactory(MyFactory)
-```
-
-The returning type will be automatically resolved and passed arguments from the closure.
-
-## Installation
-
-ACKImageKit is available through CocoaPods. You need to add Ackee private repo to your Cocoapods installation. See [AckeePods](https://gitlab.ack.ee/Ackee/AckeePods) for details. Then simply add the following line to your Podfile:
-
-```ruby
-pod "ACKSwinject"
-```
-
-## Author
-
-Tomas Kohout, email@tomaskohout.cz
-
-## License
-
-ACKSwinject is available under the MIT license. See the LICENSE file for more info.
