@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Tomas Kohout on 8/30/16.
-//
+//  Copyright © 2016 Swinject Contributors. All rights reserved.
 //
 
 import Swinject

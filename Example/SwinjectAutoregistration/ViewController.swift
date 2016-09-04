@@ -3,7 +3,7 @@
 //  ACKSwinject
 //
 //  Created by Tomas Kohout on 08/30/2016.
-//  Copyright (c) 2016 Tomas Kohout. All rights reserved.
+//  Copyright © 2016 Swinject Contributors. All rights reserved.
 //
 
 import UIKit
