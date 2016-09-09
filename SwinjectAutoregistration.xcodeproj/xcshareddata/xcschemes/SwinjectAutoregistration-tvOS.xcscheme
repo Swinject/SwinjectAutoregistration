@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CD5B9EEF1D83323F007ED05F"
-               BuildableName = ".framework"
-               BlueprintName = "SwinjectAutoregistration-watchOS"
+               BlueprintIdentifier = "CD5B9EFF1D8334BA007ED05F"
+               BuildableName = "SwinjectAutoregistration-tvOS.framework"
+               BlueprintName = "SwinjectAutoregistration-tvOS"
                ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CD5B9F081D8334BA007ED05F"
+               BuildableName = "SwinjectAutoregistration-tvOSTests.xctest"
+               BlueprintName = "SwinjectAutoregistration-tvOSTests"
+               ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "CD5B9EFF1D8334BA007ED05F"
+            BuildableName = "SwinjectAutoregistration-tvOS.framework"
+            BlueprintName = "SwinjectAutoregistration-tvOS"
+            ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CD5B9EEF1D83323F007ED05F"
-            BuildableName = ".framework"
-            BlueprintName = "SwinjectAutoregistration-watchOS"
+            BlueprintIdentifier = "CD5B9EFF1D8334BA007ED05F"
+            BuildableName = "SwinjectAutoregistration-tvOS.framework"
+            BlueprintName = "SwinjectAutoregistration-tvOS"
             ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CD5B9EEF1D83323F007ED05F"
-            BuildableName = ".framework"
-            BlueprintName = "SwinjectAutoregistration-watchOS"
+            BlueprintIdentifier = "CD5B9EFF1D8334BA007ED05F"
+            BuildableName = "SwinjectAutoregistration-tvOS.framework"
+            BlueprintName = "SwinjectAutoregistration-tvOS"
             ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

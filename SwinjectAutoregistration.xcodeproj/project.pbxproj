@@ -15,6 +15,11 @@
 		CD5B9EF81D8333A9007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9EF91D8333A9007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
 		CD5B9EFA1D8333A9007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD5B9F0A1D8334BA007ED05F /* SwinjectAutoregistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9F001D8334BA007ED05F /* SwinjectAutoregistration.framework */; };
+		CD5B9F1F1D83368E007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD5B9F201D833697007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
+		CD5B9F211D833697007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
+		CD5B9F221D83369A007ED05F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +205,41 @@
 			remoteGlobalIDString = 1F1A74281940169200FFFC47;
 			remoteInfo = "Nimble-iOS";
 		};
+		CD5B9F0B1D8334BA007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E161D832813007ED05F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD5B9EFF1D8334BA007ED05F;
+			remoteInfo = "SwinjectAutoregistration-tvOS";
+		};
+		CD5B9F171D833663007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 985010C51BBE76D400A2CCFC;
+			remoteInfo = "Swinject-watchOS";
+		};
+		CD5B9F191D83366A007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 98689C7E1BBFC7A50005C6D3;
+			remoteInfo = "Swinject-tvOS";
+		};
+		CD5B9F1B1D83367B007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F118CD41BDCA4AB005013A2;
+			remoteInfo = "Quick-tvOS";
+		};
+		CD5B9F1D1D83367B007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F5DF1541BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -239,7 +279,9 @@
 		CD5B9ED81D832E18007ED05F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwinjectAutoregistration.h; sourceTree = "<group>"; };
 		CD5B9EDD1D832E2E007ED05F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD5B9EF01D83323F007ED05F /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5B9EF01D83323F007ED05F /* SwinjectAutoregistration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwinjectAutoregistration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5B9F001D8334BA007ED05F /* SwinjectAutoregistration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwinjectAutoregistration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5B9F091D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwinjectAutoregistration-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +304,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9EFC1D8334BA007ED05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9F061D8334BA007ED05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9F0A1D8334BA007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +499,9 @@
 			children = (
 				CD5B9EC01D832D5A007ED05F /* SwinjectAutoregistration.framework */,
 				CD5B9ECA1D832D5A007ED05F /* SwinjectAutoregistration-iOSTests.xctest */,
-				CD5B9EF01D83323F007ED05F /* .framework */,
+				CD5B9EF01D83323F007ED05F /* SwinjectAutoregistration.framework */,
+				CD5B9F001D8334BA007ED05F /* SwinjectAutoregistration.framework */,
+				CD5B9F091D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,6 +522,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9EFA1D8333A9007ED05F /* SwinjectAutoregistration.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9EFD1D8334BA007ED05F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9F1F1D83368E007ED05F /* SwinjectAutoregistration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,11 +587,51 @@
 			buildRules = (
 			);
 			dependencies = (
+				CD5B9F181D833663007ED05F /* PBXTargetDependency */,
 			);
 			name = "SwinjectAutoregistration-watchOS";
 			productName = "SwinjectAutoregistration-watchOS";
-			productReference = CD5B9EF01D83323F007ED05F /* .framework */;
+			productReference = CD5B9EF01D83323F007ED05F /* SwinjectAutoregistration.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		CD5B9EFF1D8334BA007ED05F /* SwinjectAutoregistration-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD5B9F111D8334BA007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-tvOS" */;
+			buildPhases = (
+				CD5B9EFB1D8334BA007ED05F /* Sources */,
+				CD5B9EFC1D8334BA007ED05F /* Frameworks */,
+				CD5B9EFD1D8334BA007ED05F /* Headers */,
+				CD5B9EFE1D8334BA007ED05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD5B9F1A1D83366A007ED05F /* PBXTargetDependency */,
+			);
+			name = "SwinjectAutoregistration-tvOS";
+			productName = "SwinjectAutoregistration-tvOS";
+			productReference = CD5B9F001D8334BA007ED05F /* SwinjectAutoregistration.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CD5B9F081D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD5B9F141D8334BA007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-tvOSTests" */;
+			buildPhases = (
+				CD5B9F051D8334BA007ED05F /* Sources */,
+				CD5B9F061D8334BA007ED05F /* Frameworks */,
+				CD5B9F071D8334BA007ED05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD5B9F1C1D83367B007ED05F /* PBXTargetDependency */,
+				CD5B9F1E1D83367B007ED05F /* PBXTargetDependency */,
+				CD5B9F0C1D8334BA007ED05F /* PBXTargetDependency */,
+			);
+			name = "SwinjectAutoregistration-tvOSTests";
+			productName = "SwinjectAutoregistration-tvOSTests";
+			productReference = CD5B9F091D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -543,6 +650,12 @@
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					CD5B9EEF1D83323F007ED05F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					CD5B9EFF1D8334BA007ED05F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					CD5B9F081D8334BA007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -576,6 +689,8 @@
 				CD5B9EBF1D832D5A007ED05F /* SwinjectAutoregistration-iOS */,
 				CD5B9EC91D832D5A007ED05F /* SwinjectAutoregistration-iOSTests */,
 				CD5B9EEF1D83323F007ED05F /* SwinjectAutoregistration-watchOS */,
+				CD5B9EFF1D8334BA007ED05F /* SwinjectAutoregistration-tvOS */,
+				CD5B9F081D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -759,6 +874,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD5B9EFE1D8334BA007ED05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9F071D8334BA007ED05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -788,6 +917,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD5B9EFB1D8334BA007ED05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9F201D833697007ED05F /* AutoRegistration.swift in Sources */,
+				CD5B9F211D833697007ED05F /* Operators.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9F051D8334BA007ED05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9F221D83369A007ED05F /* Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -810,6 +956,31 @@
 			isa = PBXTargetDependency;
 			name = "Nimble-iOS";
 			targetProxy = CD5B9EE71D8330F7007ED05F /* PBXContainerItemProxy */;
+		};
+		CD5B9F0C1D8334BA007ED05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD5B9EFF1D8334BA007ED05F /* SwinjectAutoregistration-tvOS */;
+			targetProxy = CD5B9F0B1D8334BA007ED05F /* PBXContainerItemProxy */;
+		};
+		CD5B9F181D833663007ED05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Swinject-watchOS";
+			targetProxy = CD5B9F171D833663007ED05F /* PBXContainerItemProxy */;
+		};
+		CD5B9F1A1D83366A007ED05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Swinject-tvOS";
+			targetProxy = CD5B9F191D83366A007ED05F /* PBXContainerItemProxy */;
+		};
+		CD5B9F1C1D83367B007ED05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Quick-tvOS";
+			targetProxy = CD5B9F1B1D83367B007ED05F /* PBXContainerItemProxy */;
+		};
+		CD5B9F1E1D83367B007ED05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-tvOS";
+			targetProxy = CD5B9F1D1D83367B007ED05F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -945,6 +1116,7 @@
 		};
 		CD5B9EF61D83323F007ED05F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
@@ -953,9 +1125,119 @@
 		};
 		CD5B9EF71D83323F007ED05F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
+			};
+			name = Release;
+		};
+		CD5B9F121D8334BA007ED05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
+			};
+			name = Debug;
+		};
+		CD5B9F131D8334BA007ED05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
+			};
+			name = Release;
+		};
+		CD5B9F151D8334BA007ED05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9E391D832A4F007ED05F /* tvOS-Application.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		CD5B9F161D8334BA007ED05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5B9E391D832A4F007ED05F /* tvOS-Application.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -992,6 +1274,22 @@
 			buildConfigurations = (
 				CD5B9EF61D83323F007ED05F /* Debug */,
 				CD5B9EF71D83323F007ED05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CD5B9F111D8334BA007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5B9F121D8334BA007ED05F /* Debug */,
+				CD5B9F131D8334BA007ED05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CD5B9F141D8334BA007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5B9F151D8334BA007ED05F /* Debug */,
+				CD5B9F161D8334BA007ED05F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
