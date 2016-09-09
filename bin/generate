@@ -8,7 +8,7 @@ let genericServices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L
 
 let genericArgumentPrefix = "Arg"
 
-let outputPath = "SwinjectAutoregistration/Classes/AutoRegistration.swift"
+let outputPath = "Sources/AutoRegistration.swift"
 
 func headers(fileName: String) -> String {
     return ["//",

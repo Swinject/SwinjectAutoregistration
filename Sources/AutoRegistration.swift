@@ -1,5 +1,5 @@
 //
-//  SwinjectAutoregistration/Classes/AutoRegistration.swift
+//  Sources/AutoRegistration.swift
 //  Swinject
 //
 //  Generated using Swinject AutoRegistration generator.
