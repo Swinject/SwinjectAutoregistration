@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		CD5B9E461D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F1A74291940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
+		};
+		CD5B9E481D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F1A74341940169200FFFC47;
+			remoteInfo = "Nimble-iOSTests";
+		};
+		CD5B9E4A1D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
+			remoteInfo = "Nimble-OSX";
+		};
+		CD5B9E4C1D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
+			remoteInfo = "Nimble-OSXTests";
+		};
+		CD5B9E4E1D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF1551BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOS";
+		};
+		CD5B9E501D832A6E007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
+			remoteInfo = "Nimble-tvOSTests";
+		};
+		CD5B9E631D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DAEB6B8E1943873100289F44;
+			remoteInfo = "Quick-OSX";
+		};
+		CD5B9E651D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DAEB6B991943873100289F44;
+			remoteInfo = "Quick-OSXTests";
+		};
+		CD5B9E671D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5663E81A4C8D8500193C88;
+			remoteInfo = "QuickFocused-OSXTests";
+		};
+		CD5B9E691D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A5D117C19473F2100F6D13D;
+			remoteInfo = "Quick-iOS";
+		};
+		CD5B9E6B1D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A5D118619473F2100F6D13D;
+			remoteInfo = "Quick-iOSTests";
+		};
+		CD5B9E6D1D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA9876B21A4C70EB0004AA17;
+			remoteInfo = "QuickFocused-iOSTests";
+		};
+		CD5B9E6F1D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F118CD51BDCA4AB005013A2;
+			remoteInfo = "Quick-tvOS";
+		};
+		CD5B9E711D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F118CDE1BDCA4AB005013A2;
+			remoteInfo = "Quick-tvOSTests";
+		};
+		CD5B9E731D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F118CF01BDCA4BB005013A2;
+			remoteInfo = "QuickFocused-tvOSTests";
+		};
+		CD5B9E7C1D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 981ABE811B5FC9DF00294975;
+			remoteInfo = "Swinject-iOS";
+		};
+		CD5B9E7E1D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 981ABE8B1B5FC9DF00294975;
+			remoteInfo = "Swinject-iOSTests";
+		};
+		CD5B9E801D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 981899BC1B5FE63F00C702D0;
+			remoteInfo = "Swinject-OSX";
+		};
+		CD5B9E821D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 981899C51B5FE63F00C702D0;
+			remoteInfo = "Swinject-OSXTests";
+		};
+		CD5B9E841D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 985010C61BBE76D400A2CCFC;
+			remoteInfo = "Swinject-watchOS";
+		};
+		CD5B9E861D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98689C7F1BBFC7A50005C6D3;
+			remoteInfo = "Swinject-tvOS";
+		};
+		CD5B9E881D832A84007ED05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98689C881BBFC7A60005C6D3;
+			remoteInfo = "Swinject-tvOSTests";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CD5B9E231D832A4F007ED05F /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		CD5B9E251D832A4F007ED05F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		CD5B9E261D832A4F007ED05F /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
+		CD5B9E271D832A4F007ED05F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		CD5B9E281D832A4F007ED05F /* Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		CD5B9E2A1D832A4F007ED05F /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		CD5B9E2B1D832A4F007ED05F /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		CD5B9E2C1D832A4F007ED05F /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
+		CD5B9E2E1D832A4F007ED05F /* iOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Application.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E2F1D832A4F007ED05F /* iOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Base.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E311D832A4F007ED05F /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E331D832A4F007ED05F /* Mac-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Application.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E341D832A4F007ED05F /* Mac-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Base.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E351D832A4F007ED05F /* Mac-DynamicLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-DynamicLibrary.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E361D832A4F007ED05F /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E371D832A4F007ED05F /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E391D832A4F007ED05F /* tvOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Application.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E3A1D832A4F007ED05F /* tvOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Base.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E3C1D832A4F007ED05F /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
+		CD5B9E521D832A84007ED05F /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
+		CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swinject.xcodeproj; path = Carthage/Checkouts/Swinject/Swinject.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		CD5B9E151D832813007ED05F = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E211D832A20007ED05F /* Configurations */,
+				CD5B9E521D832A84007ED05F /* Quick.xcodeproj */,
+				CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */,
+				CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		CD5B9E211D832A20007ED05F /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E221D832A4F007ED05F /* Base */,
+				CD5B9E2D1D832A4F007ED05F /* iOS */,
+				CD5B9E321D832A4F007ED05F /* Mac OS X */,
+				CD5B9E381D832A4F007ED05F /* tvOS */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+		CD5B9E221D832A4F007ED05F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E231D832A4F007ED05F /* Common.xcconfig */,
+				CD5B9E241D832A4F007ED05F /* Configurations */,
+				CD5B9E291D832A4F007ED05F /* Targets */,
+			);
+			name = Base;
+			path = Carthage/Checkouts/xcconfigs/Base;
+			sourceTree = "<group>";
+		};
+		CD5B9E241D832A4F007ED05F /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E251D832A4F007ED05F /* Debug.xcconfig */,
+				CD5B9E261D832A4F007ED05F /* Profile.xcconfig */,
+				CD5B9E271D832A4F007ED05F /* Release.xcconfig */,
+				CD5B9E281D832A4F007ED05F /* Test.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		CD5B9E291D832A4F007ED05F /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E2A1D832A4F007ED05F /* Application.xcconfig */,
+				CD5B9E2B1D832A4F007ED05F /* Framework.xcconfig */,
+				CD5B9E2C1D832A4F007ED05F /* StaticLibrary.xcconfig */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		CD5B9E2D1D832A4F007ED05F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E2E1D832A4F007ED05F /* iOS-Application.xcconfig */,
+				CD5B9E2F1D832A4F007ED05F /* iOS-Base.xcconfig */,
+				CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */,
+				CD5B9E311D832A4F007ED05F /* iOS-StaticLibrary.xcconfig */,
+			);
+			name = iOS;
+			path = Carthage/Checkouts/xcconfigs/iOS;
+			sourceTree = "<group>";
+		};
+		CD5B9E321D832A4F007ED05F /* Mac OS X */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E331D832A4F007ED05F /* Mac-Application.xcconfig */,
+				CD5B9E341D832A4F007ED05F /* Mac-Base.xcconfig */,
+				CD5B9E351D832A4F007ED05F /* Mac-DynamicLibrary.xcconfig */,
+				CD5B9E361D832A4F007ED05F /* Mac-Framework.xcconfig */,
+				CD5B9E371D832A4F007ED05F /* Mac-StaticLibrary.xcconfig */,
+			);
+			name = "Mac OS X";
+			path = "Carthage/Checkouts/xcconfigs/Mac OS X";
+			sourceTree = "<group>";
+		};
+		CD5B9E381D832A4F007ED05F /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E391D832A4F007ED05F /* tvOS-Application.xcconfig */,
+				CD5B9E3A1D832A4F007ED05F /* tvOS-Base.xcconfig */,
+				CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */,
+				CD5B9E3C1D832A4F007ED05F /* tvOS-StaticLibrary.xcconfig */,
+			);
+			name = tvOS;
+			path = Carthage/Checkouts/xcconfigs/tvOS;
+			sourceTree = "<group>";
+		};
+		CD5B9E3E1D832A6E007ED05F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E471D832A6E007ED05F /* Nimble.framework */,
+				CD5B9E491D832A6E007ED05F /* NimbleTests.xctest */,
+				CD5B9E4B1D832A6E007ED05F /* Nimble.framework */,
+				CD5B9E4D1D832A6E007ED05F /* NimbleTests.xctest */,
+				CD5B9E4F1D832A6E007ED05F /* Nimble.framework */,
+				CD5B9E511D832A6E007ED05F /* NimbleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD5B9E531D832A84007ED05F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E641D832A84007ED05F /* Quick.framework */,
+				CD5B9E661D832A84007ED05F /* Quick-OSXTests.xctest */,
+				CD5B9E681D832A84007ED05F /* QuickFocused-OSXTests.xctest */,
+				CD5B9E6A1D832A84007ED05F /* Quick.framework */,
+				CD5B9E6C1D832A84007ED05F /* Quick-iOSTests.xctest */,
+				CD5B9E6E1D832A84007ED05F /* QuickFocused-iOSTests.xctest */,
+				CD5B9E701D832A84007ED05F /* Quick.framework */,
+				CD5B9E721D832A84007ED05F /* Quick-tvOSTests.xctest */,
+				CD5B9E741D832A84007ED05F /* QuickFocused-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD5B9E561D832A84007ED05F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E7D1D832A84007ED05F /* Swinject.framework */,
+				CD5B9E7F1D832A84007ED05F /* SwinjectTests.xctest */,
+				CD5B9E811D832A84007ED05F /* Swinject.framework */,
+				CD5B9E831D832A84007ED05F /* SwinjectTests.xctest */,
+				CD5B9E851D832A84007ED05F /* Swinject.framework */,
+				CD5B9E871D832A84007ED05F /* Swinject.framework */,
+				CD5B9E891D832A84007ED05F /* SwinjectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		CD5B9E161D832813007ED05F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Swinject Contributors";
+			};
+			buildConfigurationList = CD5B9E191D832813007ED05F /* Build configuration list for PBXProject "SwinjectAutoregistration" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD5B9E151D832813007ED05F;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CD5B9E3E1D832A6E007ED05F /* Products */;
+					ProjectRef = CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */;
+				},
+				{
+					ProductGroup = CD5B9E531D832A84007ED05F /* Products */;
+					ProjectRef = CD5B9E521D832A84007ED05F /* Quick.xcodeproj */;
+				},
+				{
+					ProductGroup = CD5B9E561D832A84007ED05F /* Products */;
+					ProjectRef = CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CD5B9E471D832A6E007ED05F /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = CD5B9E461D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E491D832A6E007ED05F /* NimbleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NimbleTests.xctest;
+			remoteRef = CD5B9E481D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E4B1D832A6E007ED05F /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = CD5B9E4A1D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E4D1D832A6E007ED05F /* NimbleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NimbleTests.xctest;
+			remoteRef = CD5B9E4C1D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E4F1D832A6E007ED05F /* Nimble.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Nimble.framework;
+			remoteRef = CD5B9E4E1D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E511D832A6E007ED05F /* NimbleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NimbleTests.xctest;
+			remoteRef = CD5B9E501D832A6E007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E641D832A84007ED05F /* Quick.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Quick.framework;
+			remoteRef = CD5B9E631D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E661D832A84007ED05F /* Quick-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Quick-OSXTests.xctest";
+			remoteRef = CD5B9E651D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E681D832A84007ED05F /* QuickFocused-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "QuickFocused-OSXTests.xctest";
+			remoteRef = CD5B9E671D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E6A1D832A84007ED05F /* Quick.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Quick.framework;
+			remoteRef = CD5B9E691D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E6C1D832A84007ED05F /* Quick-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Quick-iOSTests.xctest";
+			remoteRef = CD5B9E6B1D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E6E1D832A84007ED05F /* QuickFocused-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "QuickFocused-iOSTests.xctest";
+			remoteRef = CD5B9E6D1D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E701D832A84007ED05F /* Quick.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Quick.framework;
+			remoteRef = CD5B9E6F1D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E721D832A84007ED05F /* Quick-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Quick-tvOSTests.xctest";
+			remoteRef = CD5B9E711D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E741D832A84007ED05F /* QuickFocused-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "QuickFocused-tvOSTests.xctest";
+			remoteRef = CD5B9E731D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E7D1D832A84007ED05F /* Swinject.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Swinject.framework;
+			remoteRef = CD5B9E7C1D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E7F1D832A84007ED05F /* SwinjectTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwinjectTests.xctest;
+			remoteRef = CD5B9E7E1D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E811D832A84007ED05F /* Swinject.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Swinject.framework;
+			remoteRef = CD5B9E801D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E831D832A84007ED05F /* SwinjectTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwinjectTests.xctest;
+			remoteRef = CD5B9E821D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E851D832A84007ED05F /* Swinject.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Swinject.framework;
+			remoteRef = CD5B9E841D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E871D832A84007ED05F /* Swinject.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Swinject.framework;
+			remoteRef = CD5B9E861D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD5B9E891D832A84007ED05F /* SwinjectTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwinjectTests.xctest;
+			remoteRef = CD5B9E881D832A84007ED05F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin XCBuildConfiguration section */
+		CD5B9E1A1D832813007ED05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		CD5B9E1B1D832813007ED05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD5B9E191D832813007ED05F /* Build configuration list for PBXProject "SwinjectAutoregistration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5B9E1A1D832813007ED05F /* Debug */,
+				CD5B9E1B1D832813007ED05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD5B9E161D832813007ED05F /* Project object */;
+}
