@@ -188,12 +188,21 @@
 		CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		CD5B9E521D832A84007ED05F /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swinject.xcodeproj; path = Carthage/Checkouts/Swinject/Swinject.xcodeproj; sourceTree = "<group>"; };
+		CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRegistration.swift; sourceTree = "<group>"; };
+		CD5B9E8D1D832BF9007ED05F /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		CD5B9E8F1D832BF9007ED05F /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		CD5B9EB21D832C81007ED05F /* watchOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Application.xcconfig"; sourceTree = "<group>"; };
+		CD5B9EB31D832C81007ED05F /* watchOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Base.xcconfig"; sourceTree = "<group>"; };
+		CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		CD5B9EB51D832C81007ED05F /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		CD5B9E151D832813007ED05F = {
 			isa = PBXGroup;
 			children = (
+				CD5B9E8B1D832BF9007ED05F /* Sources */,
+				CD5B9E8E1D832BF9007ED05F /* Tests */,
 				CD5B9E211D832A20007ED05F /* Configurations */,
 				CD5B9E521D832A84007ED05F /* Quick.xcodeproj */,
 				CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */,
@@ -204,6 +213,7 @@
 		CD5B9E211D832A20007ED05F /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				CD5B9EB11D832C81007ED05F /* watchOS */,
 				CD5B9E221D832A4F007ED05F /* Base */,
 				CD5B9E2D1D832A4F007ED05F /* iOS */,
 				CD5B9E321D832A4F007ED05F /* Mac OS X */,
@@ -322,6 +332,35 @@
 				CD5B9E891D832A84007ED05F /* SwinjectTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CD5B9E8B1D832BF9007ED05F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */,
+				CD5B9E8D1D832BF9007ED05F /* Operators.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CD5B9E8E1D832BF9007ED05F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9E8F1D832BF9007ED05F /* Tests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		CD5B9EB11D832C81007ED05F /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				CD5B9EB21D832C81007ED05F /* watchOS-Application.xcconfig */,
+				CD5B9EB31D832C81007ED05F /* watchOS-Base.xcconfig */,
+				CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */,
+				CD5B9EB51D832C81007ED05F /* watchOS-StaticLibrary.xcconfig */,
+			);
+			name = watchOS;
+			path = Carthage/Checkouts/xcconfigs/watchOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
