@@ -12,6 +12,9 @@
 		CD5B9EE01D833088007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9EE11D833088007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
 		CD5B9EE21D83308B007ED05F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* Tests.swift */; };
+		CD5B9EF81D8333A9007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
+		CD5B9EF91D8333A9007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
+		CD5B9EFA1D8333A9007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +239,7 @@
 		CD5B9ED81D832E18007ED05F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwinjectAutoregistration.h; sourceTree = "<group>"; };
 		CD5B9EDD1D832E2E007ED05F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD5B9EF01D83323F007ED05F /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +258,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD5B9EEC1D83323F007ED05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -262,11 +273,11 @@
 			children = (
 				CD5B9E8B1D832BF9007ED05F /* Sources */,
 				CD5B9E8E1D832BF9007ED05F /* Tests */,
+				CD5B9EC11D832D5A007ED05F /* Products */,
 				CD5B9E211D832A20007ED05F /* Configurations */,
 				CD5B9E521D832A84007ED05F /* Quick.xcodeproj */,
 				CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */,
 				CD5B9E3D1D832A6E007ED05F /* Nimble.xcodeproj */,
-				CD5B9EC11D832D5A007ED05F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -408,8 +419,8 @@
 		CD5B9E8E1D832BF9007ED05F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CD5B9EDD1D832E2E007ED05F /* Info.plist */,
 				CD5B9E8F1D832BF9007ED05F /* Tests.swift */,
+				CD5B9EDD1D832E2E007ED05F /* Info.plist */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -431,6 +442,7 @@
 			children = (
 				CD5B9EC01D832D5A007ED05F /* SwinjectAutoregistration.framework */,
 				CD5B9ECA1D832D5A007ED05F /* SwinjectAutoregistration-iOSTests.xctest */,
+				CD5B9EF01D83323F007ED05F /* .framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -443,6 +455,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9EDF1D832E32007ED05F /* SwinjectAutoregistration.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9EED1D83323F007ED05F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9EFA1D8333A9007ED05F /* SwinjectAutoregistration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +508,24 @@
 			productReference = CD5B9ECA1D832D5A007ED05F /* SwinjectAutoregistration-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CD5B9EEF1D83323F007ED05F /* SwinjectAutoregistration-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD5B9EF51D83323F007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-watchOS" */;
+			buildPhases = (
+				CD5B9EEB1D83323F007ED05F /* Sources */,
+				CD5B9EEC1D83323F007ED05F /* Frameworks */,
+				CD5B9EED1D83323F007ED05F /* Headers */,
+				CD5B9EEE1D83323F007ED05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwinjectAutoregistration-watchOS";
+			productName = "SwinjectAutoregistration-watchOS";
+			productReference = CD5B9EF01D83323F007ED05F /* .framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -502,6 +540,9 @@
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					CD5B9EC91D832D5A007ED05F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					CD5B9EEF1D83323F007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -534,6 +575,7 @@
 			targets = (
 				CD5B9EBF1D832D5A007ED05F /* SwinjectAutoregistration-iOS */,
 				CD5B9EC91D832D5A007ED05F /* SwinjectAutoregistration-iOSTests */,
+				CD5B9EEF1D83323F007ED05F /* SwinjectAutoregistration-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -710,6 +752,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD5B9EEE1D83323F007ED05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -727,6 +776,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9EE21D83308B007ED05F /* Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5B9EEB1D83323F007ED05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5B9EF81D8333A9007ED05F /* AutoRegistration.swift in Sources */,
+				CD5B9EF91D8333A9007ED05F /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +819,7 @@
 			baseConfigurationReference = CD5B9E251D832A4F007ED05F /* Debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Debug;
 		};
@@ -769,6 +828,7 @@
 			baseConfigurationReference = CD5B9E271D832A4F007ED05F /* Release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Release;
 		};
@@ -883,6 +943,22 @@
 			};
 			name = Release;
 		};
+		CD5B9EF61D83323F007ED05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Sources/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
+			};
+			name = Debug;
+		};
+		CD5B9EF71D83323F007ED05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Sources/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -908,6 +984,14 @@
 			buildConfigurations = (
 				CD5B9ED61D832D5A007ED05F /* Debug */,
 				CD5B9ED71D832D5A007ED05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CD5B9EF51D83323F007ED05F /* Build configuration list for PBXNativeTarget "SwinjectAutoregistration-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5B9EF61D83323F007ED05F /* Debug */,
+				CD5B9EF71D83323F007ED05F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
