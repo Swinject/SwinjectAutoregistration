@@ -1,0 +1,69 @@
+//
+//  Resolvable.swift
+//  Swinject
+//
+//  Created by Yoichi Tagaya on 8/18/15.
+//  Copyright (c) 2015 Swinject Contributors. All rights reserved.
+//
+
+//
+// NOTICE:
+//
+// Resolvable.swift is generated from Resolvable.erb by ERB.
+// Do NOT modify Container.Arguments.swift directly.
+// Instead, modify Resolvable.erb and run `script/gencode` at the project root directory to generate the code.
+//
+
+<% arg_count = 9 %>
+
+public protocol Resolvable {
+    /// Retrieves the instance with the specified service type.
+    ///
+    /// - Parameter serviceType: The service type to resolve.
+    ///
+    /// - Returns: The resolved service type instance, or nil if no service is found.
+    func resolve<Service>(serviceType: Service.Type) -> Service?
+
+    /// Retrieves the instance with the specified service type and registration name.
+    ///
+    /// - Parameters:
+    ///   - serviceType: The service type to resolve.
+    ///   - name:        The registration name.
+    ///
+    /// - Returns: The resolved service type instance, or nil if no service with the name is found.
+    func resolve<Service>(serviceType: Service.Type, name: String?) -> Service?
+
+<% (1..arg_count).each do |i| %>
+<%   arg_types = (1..i).map { |n| "Arg#{n}" }.join(", ") %>
+<%   arg_param_name = i == 1 ? "argument" : "arguments" %>
+<%   arg_param_type = i == 1 ? arg_types : "(" + arg_types + ")" %>
+<%   arg_param_description = i == 1 ? "#{i} argument" : "tuple of #{i} arguments" %>
+    /// Retrieves the instance with the specified service type and <%= arg_param_description %> to the factory closure.
+    ///
+    /// - Parameters:
+    ///   - serviceType: The service type to resolve.
+    ///   - <%= arg_param_name %>:   <%= arg_param_description.capitalize %> to pass to the factory closure.
+    ///
+    /// - Returns: The resolved service type instance, or nil if no registration for the service type
+    ///            and <%= arg_param_description %> is found.
+    func resolve<Service, <%= arg_types %>>(
+        serviceType: Service.Type,
+        <%= arg_param_name %>: <%= arg_param_type %>) -> Service?
+
+    /// Retrieves the instance with the specified service type, <%= arg_param_description %> to the factory closure and registration name.
+    ///
+    /// - Parameters:
+    ///   - serviceType: The service type to resolve.
+    ///   - name:        The registration name.
+    ///   - <%= arg_param_name %>:   <%= arg_param_description.capitalize %> to pass to the factory closure.
+    ///
+    /// - Returns: The resolved service type instance, or nil if no registration for the service type,
+    ///            <%= arg_param_description %> and name is found.
+    func resolve<Service, <%= arg_types %>>(
+        serviceType: Service.Type,
+        name: String?,
+        <%= arg_param_name %>: <%= arg_param_type %>) -> Service?
+
+<% end %>
+
+}
