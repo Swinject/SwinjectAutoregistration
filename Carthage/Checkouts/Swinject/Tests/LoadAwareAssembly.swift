@@ -13,7 +13,7 @@ class LoadAwareAssembly: AssemblyType {
     var onLoad: (ResolverType) -> Void
     var loaded = false
     
-    init(onLoad: (ResolverType) -> Void) {
+    init(onLoad: @escaping (ResolverType) -> Void) {
         self.onLoad = onLoad
     }
     

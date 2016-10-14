@@ -37,33 +37,21 @@ public class Assembler {
     /// Will create a new `Assembler` with the given `AssemblyType` instances to build a `Container`
     ///
     /// - parameter assemblies:         the list of assemblies to build the container from
-    /// - parameter propertyLoaders:    a list of property loaders to apply to the container
     /// - parameter container:          the baseline container
     ///
-    public init(assemblies: [AssemblyType], propertyLoaders: [PropertyLoaderType]? = nil, container: Container? = Container()) throws {
+    public init(assemblies: [AssemblyType], container: Container? = Container()) throws {
         self.container = container!
-        if let propertyLoaders = propertyLoaders {
-            for propertyLoader in propertyLoaders {
-                try self.container.applyPropertyLoader(propertyLoader)
-            }
-        }
-        runAssemblies(assemblies)
+        run(assemblies: assemblies)
     }
     
     /// Will create a new `Assembler` with the given `AssemblyType` instances to build a `Container`
     ///
     /// - parameter assemblies:         the list of assemblies to build the container from
     /// - parameter parentAssembler:    the baseline assembler
-    /// - parameter propertyLoaders:    a list of property loaders to apply to the container
     ///
-    public init(assemblies: [AssemblyType], parentAssembler: Assembler?, propertyLoaders: [PropertyLoaderType]? = nil) throws {
+    public init(assemblies: [AssemblyType], parentAssembler: Assembler?) throws {
         container = Container(parent: parentAssembler?.container)
-        if let propertyLoaders = propertyLoaders {
-            for propertyLoader in propertyLoaders {
-                try self.container.applyPropertyLoader(propertyLoader)
-            }
-        }
-        runAssemblies(assemblies)
+        run(assemblies: assemblies)
     }
     
     /// Will apply the assembly to the container. This is useful if you want to lazy load an assembly into the assembler's
@@ -75,8 +63,8 @@ public class Assembler {
     ///
     /// - parameter assembly: the assembly to apply to the container
     ///
-    public func applyAssembly(assembly: AssemblyType) {
-        runAssemblies([assembly])
+    public func apply(assembly: AssemblyType) {
+        run(assemblies: [assembly])
     }
     
     /// Will apply the assemblies to the container. This is useful if you want to lazy load several assemblies into the assembler's
@@ -87,32 +75,21 @@ public class Assembler {
     ///
     /// - parameter assemblies: the assemblies to apply to the container
     ///
-    public func applyAssemblies(assemblies: [AssemblyType]) {
-        runAssemblies(assemblies)
-    }
-    
-    /// Will apply a property loader to the container. This is useful if you want to lazy load your assemblies or build
-    /// your assembler manually
-    ///
-    /// - parameter propertyLoader: the property loader to apply to the assembler's container
-    ///
-    /// - throws: PropertyLoaderError
-    ///
-    public func applyPropertyLoader(propertyLoader: PropertyLoaderType) throws {
-        try self.container.applyPropertyLoader(propertyLoader)
+    public func apply(assemblies: [AssemblyType]) {
+        run(assemblies: assemblies)
     }
     
     // MARK: Private
     
-    private func runAssemblies(assemblies: [AssemblyType]) {
+    private func run(assemblies: [AssemblyType]) {
         // build the container from each assembly
         for assembly in assemblies {
-            assembly.assemble(self.container)
+            assembly.assemble(container: self.container)
         }
         
         // inform all of the assemblies that the container is loaded
         for assembly in assemblies {
-            assembly.loaded(self.resolver)
+            assembly.loaded(resolver: self.resolver)
         }
     }
 }

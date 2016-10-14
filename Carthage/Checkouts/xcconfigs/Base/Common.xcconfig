@@ -56,6 +56,9 @@ CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO
 // For example, this can catch issues when one incorrectly intermixes using NSNumbers and raw integers.
 CLANG_WARN_INT_CONVERSION = YES
 
+// Warn about implicit capture of self (e.g. direct ivar access)
+CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
+
 // Don't warn about repeatedly using a weak reference without assigning the weak reference to a strong reference. Too many false positives.
 CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = NO
 
@@ -177,3 +180,11 @@ WARNING_CFLAGS = -Wno-error=unknown-warning-option -Wno-gcc-compat -Wno-unused-c
 // the default. It warns if the same variable is declared in two binaries that
 // are linked together.
 GCC_NO_COMMON_BLOCKS = YES
+
+// This warnings detects when a function will recursively call itself on every
+// code path though that function. More information can be found here:
+// http://lists.llvm.org/pipermail/cfe-commits/Week-of-Mon-20131216/096004.html
+CLANG_WARN_INFINITE_RECURSION = YES
+
+// This warning detects suspicious uses of std::move.
+CLANG_WARN_SUSPICIOUS_MOVE = YES
