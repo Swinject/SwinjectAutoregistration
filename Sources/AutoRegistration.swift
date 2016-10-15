@@ -11,37 +11,51 @@
 
 public extension Container {
 
+    public var auto: AutoRegistration {
+        return AutoRegistration(container: self)
+    }
+
+}
+
+
+public struct AutoRegistration {
+
+private let container: Container
+
+init(container: Container){
+    self.container = container
+}
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service>(initializer initializer: () -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service>(service: Service.Type, name: String? = nil, initializer: () -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        initializer()
    } as (Resolvable) -> Service)
 }
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A>(initializer initializer: (A) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A>(service: Service.Type, name: String? = nil, initializer: (A) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve()
        checkResolved(initializer: initializer, services: a)
        return initializer(a!)
@@ -50,17 +64,17 @@ public func register<Service, A>(initializer initializer: (A) -> Service, servic
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, Arg1>(initializer initializer: (Arg1) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (Arg1) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let arg1: Arg1? = arg1
        checkResolved(initializer: initializer, services: arg1)
        return initializer(arg1!)
@@ -69,17 +83,17 @@ public func register<Service, Arg1>(initializer initializer: (Arg1) -> Service, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B>(initializer initializer: (A, B) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B>(service: Service.Type, name: String? = nil, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve()
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -88,17 +102,17 @@ public func register<Service, A, B>(initializer initializer: (A, B) -> Service, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, Arg1>(initializer initializer: (A, B) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -107,17 +121,17 @@ public func register<Service, A, B, Arg1>(initializer initializer: (A, B) -> Ser
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, Arg1, Arg2>(initializer initializer: (A, B) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -126,17 +140,17 @@ public func register<Service, A, B, Arg1, Arg2>(initializer initializer: (A, B) 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C>(initializer initializer: (A, B, C) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C>(service: Service.Type, name: String? = nil, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -145,17 +159,17 @@ public func register<Service, A, B, C>(initializer initializer: (A, B, C) -> Ser
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1>(initializer initializer: (A, B, C) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -164,17 +178,17 @@ public func register<Service, A, B, C, Arg1>(initializer initializer: (A, B, C) 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1, Arg2>(initializer initializer: (A, B, C) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -183,17 +197,17 @@ public func register<Service, A, B, C, Arg1, Arg2>(initializer initializer: (A, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -202,17 +216,17 @@ public func register<Service, A, B, C, Arg1, Arg2, Arg3>(initializer initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D>(initializer initializer: (A, B, C, D) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -221,17 +235,17 @@ public func register<Service, A, B, C, D>(initializer initializer: (A, B, C, D) 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1>(initializer initializer: (A, B, C, D) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -240,17 +254,17 @@ public func register<Service, A, B, C, D, Arg1>(initializer initializer: (A, B, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1, Arg2>(initializer initializer: (A, B, C, D) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -259,17 +273,17 @@ public func register<Service, A, B, C, D, Arg1, Arg2>(initializer initializer: (
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -278,17 +292,17 @@ public func register<Service, A, B, C, D, Arg1, Arg2, Arg3>(initializer initiali
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E>(initializer initializer: (A, B, C, D, E) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D, E>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -297,17 +311,17 @@ public func register<Service, A, B, C, D, E>(initializer initializer: (A, B, C, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1>(initializer initializer: (A, B, C, D, E) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, E, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -316,17 +330,17 @@ public func register<Service, A, B, C, D, E, Arg1>(initializer initializer: (A, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1, Arg2>(initializer initializer: (A, B, C, D, E) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, E, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -335,17 +349,17 @@ public func register<Service, A, B, C, D, E, Arg1, Arg2>(initializer initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D, E) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -354,17 +368,17 @@ public func register<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(initializer initi
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F>(initializer initializer: (A, B, C, D, E, F) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D, E, F>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -373,17 +387,17 @@ public func register<Service, A, B, C, D, E, F>(initializer initializer: (A, B, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1>(initializer initializer: (A, B, C, D, E, F) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, E, F, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -392,17 +406,17 @@ public func register<Service, A, B, C, D, E, F, Arg1>(initializer initializer: (
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1, Arg2>(initializer initializer: (A, B, C, D, E, F) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, E, F, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -411,17 +425,17 @@ public func register<Service, A, B, C, D, E, F, Arg1, Arg2>(initializer initiali
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D, E, F) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -430,17 +444,17 @@ public func register<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(initializer in
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G>(initializer initializer: (A, B, C, D, E, F, G) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D, E, F, G>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -449,17 +463,17 @@ public func register<Service, A, B, C, D, E, F, G>(initializer initializer: (A, 
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1>(initializer initializer: (A, B, C, D, E, F, G) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, E, F, G, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -468,17 +482,17 @@ public func register<Service, A, B, C, D, E, F, G, Arg1>(initializer initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2>(initializer initializer: (A, B, C, D, E, F, G) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -487,17 +501,17 @@ public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2>(initializer initi
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D, E, F, G) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -506,17 +520,17 @@ public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H>(initializer initializer: (A, B, C, D, E, F, G, H) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D, E, F, G, H>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve(); let h: H? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -525,17 +539,17 @@ public func register<Service, A, B, C, D, E, F, G, H>(initializer initializer: (
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1>(initializer initializer: (A, B, C, D, E, F, G, H) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, E, F, G, H, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1); let h: H? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -544,17 +558,17 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1>(initializer initiali
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(initializer initializer: (A, B, C, D, E, F, G, H) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -563,17 +577,17 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(initializer in
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D, E, F, G, H) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -582,17 +596,17 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(initiali
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self)`
+ Usage: `register(service: MyService.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
 
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I>(initializer initializer: (A, B, C, D, E, F, G, H, I) -> Service, service: Service.Type, name: String? = nil) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r in 
+public func register<Service, A, B, C, D, E, F, G, H, I>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve(); let h: H? = r.resolve(); let i: I? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -601,17 +615,17 @@ public func register<Service, A, B, C, D, E, F, G, H, I>(initializer initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, argument: Arg1.self)`
+ Usage: `register(service: MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - argument: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1>(initializer initializer: (A, B, C, D, E, F, G, H, I) -> Service, service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1 in 
+public func register<Service, A, B, C, D, E, F, G, H, I, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1); let h: H? = r.resolve(argument: arg1); let i: I? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -620,17 +634,17 @@ public func register<Service, A, B, C, D, E, F, G, H, I, Arg1>(initializer initi
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(initializer initializer: (A, B, C, D, E, F, G, H, I) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2); let i: I? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -639,17 +653,17 @@ public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(initializer
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
- Usage: `register(initializer: MyService.init, service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self)`
+ Usage: `register(service: MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
-    - initializer: Initializer of the registered service
     - service: Registered service type
     - name: Optional name of the service
     - arguments: Argument type(s) that will be resolved dynamically instead of resolving dependency
+    - initializer: Initializer of the registered service
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(initializer initializer: (A, B, C, D, E, F, G, H, I) -> Service, service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type) -> ServiceEntry<Service> {
-   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3); let i: I? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)

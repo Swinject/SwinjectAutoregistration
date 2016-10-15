@@ -66,68 +66,69 @@ class AutoregistrationSpec: QuickSpec {
             
             beforeEach {
                 container = Container()
-                container.register(initializer: DependencyA.init, service: DependencyA.self)
-                container.register(initializer: DependencyB.init, service: DependencyB.self)
-                container.register(initializer: DependencyC.init, service: DependencyC.self)
-                container.register(initializer: DependencyD.init, service: DependencyD.self)
-                container.register(initializer: DependencyE.init, service: DependencyE.self)
-                container.register(initializer: DependencyF.init, service: DependencyF.self)
-                container.register(initializer: DependencyG.init, service: DependencyG.self)
-                container.register(initializer: DependencyH.init, service: DependencyH.self)
-                container.register(initializer: DependencyI.init, service: DependencyI.self)
-                container.register(initializer: DependencyJ.init, service: DependencyJ.self)
+                
+                container.auto.register(DependencyA.self, initializer: DependencyA.init)
+                container.auto.register(DependencyB.self, initializer: DependencyB.init)
+                container.auto.register(DependencyC.self, initializer: DependencyC.init)
+                container.auto.register(DependencyD.self, initializer: DependencyD.init)
+                container.auto.register(DependencyE.self, initializer: DependencyE.init)
+                container.auto.register(DependencyF.self, initializer: DependencyF.init)
+                container.auto.register(DependencyG.self, initializer: DependencyG.init)
+                container.auto.register(DependencyH.self, initializer: DependencyH.init)
+                container.auto.register(DependencyI.self, initializer: DependencyI.init)
+                container.auto.register(DependencyJ.self, initializer: DependencyJ.init)
             }
             
             it("registers service with one dependency") {
-                container.register(initializer: Service1.init, service: Service1.self)
+                container.auto.register(Service1.self, initializer: Service1.init)
                 let service = container.resolve(Service1.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with two dependencies") {
-                container.register(initializer: Service2.init, service: Service2.self)
+                container.auto.register(Service2.self, initializer: Service2.init)
                 let service = container.resolve(Service2.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with three dependencies") {
-                container.register(initializer: Service3.init, service: Service3.self)
+                container.auto.register(Service3.self, initializer: Service3.init)
                 let service = container.resolve(Service3.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with four dependencies") {
-                container.register(initializer: Service4.init, service: Service4.self)
+                container.auto.register(Service4.self, initializer: Service4.init)
                 let service = container.resolve(Service4.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with five dependencies") {
-                container.register(initializer: Service5.init, service: Service5.self)
+                container.auto.register(Service5.self, initializer: Service5.init)
                 let service = container.resolve(Service5.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with six dependencies") {
-                container.register(initializer: Service6.init, service: Service6.self)
+                container.auto.register(Service6.self, initializer: Service6.init)
                 let service = container.resolve(Service6.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with seven dependencies") {
-                container.register(initializer: Service7.init, service: Service7.self)
+                container.auto.register(Service7.self, initializer: Service7.init)
                 let service = container.resolve(Service7.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with eight dependencies") {
-                container.register(initializer: Service8.init, service: Service8.self)
+                container.auto.register(Service8.self, initializer: Service8.init)
                 let service = container.resolve(Service8.self)
                 expect(service).notTo(beNil())
             }
             
             it("registers service with nine dependencies") {
-                container.register(initializer: Service9.init, service: Service9.self)
+                container.auto.register(Service9.self, initializer: Service9.init)
                 let service = container.resolve(Service9.self)
                 expect(service).notTo(beNil())
             }

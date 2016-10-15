@@ -1,4 +1,4 @@
-#!/usr/bin/env xcrun swift
+#!/usr/bin/env xcrun /Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/bin/swift
 
 // Generates a Swift file with implementation of function currying for a ridicolously high number of arguments
 
@@ -24,12 +24,12 @@ func registerComment(dependencies: Int, arguments: Int) -> String {
     return [
         "/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.",
         " ",
-        " Usage: `register(initializer: MyService.init, service: MyService.self\((arguments > 0) ? ", \(arguments == 1 ? "argument" : "arguments"): \(commaConcat(genericArguments.map{"\($0).self"}))" : ""))`",
+        " Usage: `register(service: MyService.self\((arguments > 0) ? ", \(arguments == 1 ? "argument" : "arguments"): \(commaConcat(genericArguments.map{"\($0).self"}))" : "")), initializer: MyService.init`",
         " - Parameters:",
-        "    - initializer: Initializer of the registered service",
         "    - service: Registered service type",
         "    - name: Optional name of the service",
         (arguments > 0) ? "    - \(arguments == 1 ? "argument" : "arguments"): Argument type(s) that will be resolved dynamically instead of resolving dependency" : "",
+        "    - initializer: Initializer of the registered service",
         " - Returns: The registered service entry \(arguments > 0 ? "with \(arguments) arguments" : "")",
         " - Important: Might fail if one of the dependencies is unresolvable.",
         " */"
@@ -95,8 +95,8 @@ func registerGenerator(dependenciesCount: Int, argumentsCount: Int, breakIntoVar
     
     let register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
-        "public func register<\(genericsDefinition)>(initializer initializer: (\(concatenatedParameters)) -> Service, service: Service.Type, name: String? = nil\(argumentsDefinition)) -> ServiceEntry<Service> {",
-        "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
+        "public func register<\(genericsDefinition)>(service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
+        "   return container.register(service.self, name: name, factory: { \(closureParameters) in ",
         initializer,
         "   } as (\(commaConcat(["Resolvable"] + genericArguments))) -> Service)",
         "}"
@@ -185,7 +185,16 @@ let checks = (1...dependenciesCount).map { dep in
 var output = [
     headers(outputPath),
     "\n\n import Swinject \n\n",
-    "public extension Container {\n\n",
+    "public extension Container {\n",
+    "    public var auto: AutoRegistration {",
+    "        return AutoRegistration(container: self)",
+    "    }",
+    "\n}\n\n",
+    "public struct AutoRegistration {\n",
+    "private let container: Container\n",
+    "init(container: Container){",
+    "    self.container = container",
+    "}\n",
         registers.joinWithSeparator("\n\n"),
     "\n\n}",
     "public extension Resolvable {\n\n",
@@ -195,7 +204,7 @@ var output = [
 ].joinWithSeparator("\n")
 
 let currentPath = NSURL(fileURLWithPath: NSFileManager.defaultManager().currentDirectoryPath)
-let swinjectPath = currentPath.URLByAppendingPathComponent(outputPath)
+let swinjectPath = currentPath.URLByAppendingPathComponent(outputPath)!
 
 do {
     try output.writeToURL(swinjectPath, atomically: true, encoding: NSUTF8StringEncoding)
