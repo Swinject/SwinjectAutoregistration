@@ -9,22 +9,7 @@
  import Swinject 
 
 
-public extension Container {
-
-    public var auto: AutoRegistration {
-        return AutoRegistration(container: self)
-    }
-
-}
-
-
-public struct AutoRegistration {
-
-private let container: Container
-
-init(container: Container){
-    self.container = container
-}
+extension Container {
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
  
@@ -37,8 +22,8 @@ init(container: Container){
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service>(service: Service.Type, name: String? = nil, initializer: () -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service>(service: Service.Type, name: String? = nil, initializer: () -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        initializer()
    } as (Resolvable) -> Service)
 }
@@ -54,8 +39,8 @@ public func register<Service>(service: Service.Type, name: String? = nil, initia
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A>(service: Service.Type, name: String? = nil, initializer: (A) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A>(service: Service.Type, name: String? = nil, initializer: (A) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve()
        checkResolved(initializer: initializer, services: a)
        return initializer(a!)
@@ -73,8 +58,8 @@ public func register<Service, A>(service: Service.Type, name: String? = nil, ini
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (Arg1) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (Arg1) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let arg1: Arg1? = arg1
        checkResolved(initializer: initializer, services: arg1)
        return initializer(arg1!)
@@ -92,8 +77,8 @@ public func register<Service, Arg1>(service: Service.Type, name: String? = nil, 
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B>(service: Service.Type, name: String? = nil, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B>(service: Service.Type, name: String? = nil, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve()
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -111,8 +96,8 @@ public func register<Service, A, B>(service: Service.Type, name: String? = nil, 
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -130,8 +115,8 @@ public func register<Service, A, B, Arg1>(service: Service.Type, name: String? =
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b)
        return initializer(a!, b!)
@@ -149,8 +134,8 @@ public func register<Service, A, B, Arg1, Arg2>(service: Service.Type, name: Str
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C>(service: Service.Type, name: String? = nil, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C>(service: Service.Type, name: String? = nil, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -168,8 +153,8 @@ public func register<Service, A, B, C>(service: Service.Type, name: String? = ni
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -187,8 +172,8 @@ public func register<Service, A, B, C, Arg1>(service: Service.Type, name: String
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -206,8 +191,8 @@ public func register<Service, A, B, C, Arg1, Arg2>(service: Service.Type, name: 
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c)
        return initializer(a!, b!, c!)
@@ -225,8 +210,8 @@ public func register<Service, A, B, C, Arg1, Arg2, Arg3>(service: Service.Type, 
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -244,8 +229,8 @@ public func register<Service, A, B, C, D>(service: Service.Type, name: String? =
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -263,8 +248,8 @@ public func register<Service, A, B, C, D, Arg1>(service: Service.Type, name: Str
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -282,8 +267,8 @@ public func register<Service, A, B, C, D, Arg1, Arg2>(service: Service.Type, nam
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d)
        return initializer(a!, b!, c!, d!)
@@ -301,8 +286,8 @@ public func register<Service, A, B, C, D, Arg1, Arg2, Arg3>(service: Service.Typ
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D, E>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -320,8 +305,8 @@ public func register<Service, A, B, C, D, E>(service: Service.Type, name: String
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, E, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -339,8 +324,8 @@ public func register<Service, A, B, C, D, E, Arg1>(service: Service.Type, name: 
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -358,8 +343,8 @@ public func register<Service, A, B, C, D, E, Arg1, Arg2>(service: Service.Type, 
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
        return initializer(a!, b!, c!, d!, e!)
@@ -377,8 +362,8 @@ public func register<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(service: Service.
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D, E, F>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -396,8 +381,8 @@ public func register<Service, A, B, C, D, E, F>(service: Service.Type, name: Str
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, E, F, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -415,8 +400,8 @@ public func register<Service, A, B, C, D, E, F, Arg1>(service: Service.Type, nam
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -434,8 +419,8 @@ public func register<Service, A, B, C, D, E, F, Arg1, Arg2>(service: Service.Typ
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
        return initializer(a!, b!, c!, d!, e!, f!)
@@ -453,8 +438,8 @@ public func register<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(service: Servi
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D, E, F, G>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -472,8 +457,8 @@ public func register<Service, A, B, C, D, E, F, G>(service: Service.Type, name: 
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, E, F, G, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -491,8 +476,8 @@ public func register<Service, A, B, C, D, E, F, G, Arg1>(service: Service.Type, 
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -510,8 +495,8 @@ public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2>(service: Service.
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
        return initializer(a!, b!, c!, d!, e!, f!, g!)
@@ -529,8 +514,8 @@ public func register<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(service: Se
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D, E, F, G, H>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve(); let h: H? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -548,8 +533,8 @@ public func register<Service, A, B, C, D, E, F, G, H>(service: Service.Type, nam
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1); let h: H? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -567,8 +552,8 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1>(service: Service.Typ
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -586,8 +571,8 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(service: Servi
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!)
@@ -605,8 +590,8 @@ public func register<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(service:
  - Returns: The registered service entry 
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, I>(service: Service.Type, name: String? = nil, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r in 
        let a: A? = r.resolve(); let b: B? = r.resolve(); let c: C? = r.resolve(); let d: D? = r.resolve(); let e: E? = r.resolve(); let f: F? = r.resolve(); let g: G? = r.resolve(); let h: H? = r.resolve(); let i: I? = r.resolve()
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -624,8 +609,8 @@ public func register<Service, A, B, C, D, E, F, G, H, I>(service: Service.Type, 
  - Returns: The registered service entry with 1 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1>(service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1 in 
        let a: A? = r.resolve(argument: arg1); let b: B? = r.resolve(argument: arg1); let c: C? = r.resolve(argument: arg1); let d: D? = r.resolve(argument: arg1); let e: E? = r.resolve(argument: arg1); let f: F? = r.resolve(argument: arg1); let g: G? = r.resolve(argument: arg1); let h: H? = r.resolve(argument: arg1); let i: I? = r.resolve(argument: arg1)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -643,8 +628,8 @@ public func register<Service, A, B, C, D, E, F, G, H, I, Arg1>(service: Service.
  - Returns: The registered service entry with 2 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2); let i: I? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)
@@ -662,8 +647,8 @@ public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(service: Se
  - Returns: The registered service entry with 3 arguments
  - Important: Might fail if one of the dependencies is unresolvable.
  */
-public func register<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
-   return container.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
+public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3); let i: I? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
        return initializer(a!, b!, c!, d!, e!, f!, g!, h!, i!)

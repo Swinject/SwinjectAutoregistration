@@ -95,8 +95,8 @@ func registerGenerator(dependenciesCount: Int, argumentsCount: Int, breakIntoVar
     
     let register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
-        "public func register<\(genericsDefinition)>(service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
-        "   return container.register(service.self, name: name, factory: { \(closureParameters) in ",
+        "public func autoregister<\(genericsDefinition)>(service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
+        "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
         initializer,
         "   } as (\(commaConcat(["Resolvable"] + genericArguments))) -> Service)",
         "}"
@@ -185,16 +185,7 @@ let checks = (1...dependenciesCount).map { dep in
 var output = [
     headers(outputPath),
     "\n\n import Swinject \n\n",
-    "public extension Container {\n",
-    "    public var auto: AutoRegistration {",
-    "        return AutoRegistration(container: self)",
-    "    }",
-    "\n}\n\n",
-    "public struct AutoRegistration {\n",
-    "private let container: Container\n",
-    "init(container: Container){",
-    "    self.container = container",
-    "}\n",
+    "extension Container {\n",
         registers.joinWithSeparator("\n\n"),
     "\n\n}",
     "public extension Resolvable {\n\n",
