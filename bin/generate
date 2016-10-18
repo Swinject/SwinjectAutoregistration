@@ -153,7 +153,7 @@ func checkGenerator(_ dependencies: Int) -> String {
     "fileprivate func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, \(servicesDefinition)){",
     "   let services: [Any?] = [\(commaConcat(genericParameters.map{ $0.lowercased() }))].filter{ $0 == nil }",
     "   if let _ = services.first {",
-    "       assertionFailure(\"Failed to resolve \\(\(printIf(genericParameters))), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
+    "       fatalError(\"Failed to resolve \\(\(printIf(genericParameters))), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
     "   }",
     "}"
     ]

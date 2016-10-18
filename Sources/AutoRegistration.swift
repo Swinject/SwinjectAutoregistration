@@ -715,62 +715,62 @@ public extension ResolverType {
 fileprivate func checkResolved<Service, A>(initializer: (A) -> Service, services  a: A?){
    let services: [Any?] = [a].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : "??")), initializer: (\(A.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : "??")), initializer: (\(A.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B>(initializer: (A, B) -> Service, services  a: A?, _ b: B?){
    let services: [Any?] = [a, b].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : "??"))), initializer: (\(A.self), \(B.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : "??"))), initializer: (\(A.self), \(B.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C>(initializer: (A, B, C) -> Service, services  a: A?, _ b: B?, _ c: C?){
    let services: [Any?] = [a, b, c].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : "??")))), initializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : "??")))), initializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D>(initializer: (A, B, C, D) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?){
    let services: [Any?] = [a, b, c, d].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : "??"))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : "??"))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D, E>(initializer: (A, B, C, D, E) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?){
    let services: [Any?] = [a, b, c, d, e].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : "??")))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : "??")))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D, E, F>(initializer: (A, B, C, D, E, F) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?){
    let services: [Any?] = [a, b, c, d, e, f].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : "??"))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : "??"))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D, E, F, G>(initializer: (A, B, C, D, E, F, G) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?){
    let services: [Any?] = [a, b, c, d, e, f, g].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : "??")))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : "??")))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D, E, F, G, H>(initializer: (A, B, C, D, E, F, G, H) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?){
    let services: [Any?] = [a, b, c, d, e, f, g, h].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : (h == nil ? "\(H.self)" : "??"))))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : (h == nil ? "\(H.self)" : "??"))))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
    }
 }
 
 fileprivate func checkResolved<Service, A, B, C, D, E, F, G, H, I>(initializer: (A, B, C, D, E, F, G, H, I) -> Service, services  a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?){
    let services: [Any?] = [a, b, c, d, e, f, g, h, i].filter{ $0 == nil }
    if let _ = services.first {
-       assertionFailure("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : (h == nil ? "\(H.self)" : (i == nil ? "\(I.self)" : "??")))))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
+       fatalError("Failed to resolve \((a == nil ? "\(A.self)" : (b == nil ? "\(B.self)" : (c == nil ? "\(C.self)" : (d == nil ? "\(D.self)" : (e == nil ? "\(E.self)" : (f == nil ? "\(F.self)" : (g == nil ? "\(G.self)" : (h == nil ? "\(H.self)" : (i == nil ? "\(I.self)" : "??")))))))))), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
    }
 }

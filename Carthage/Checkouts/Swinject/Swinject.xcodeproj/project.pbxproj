@@ -28,7 +28,7 @@
 		981577F21B675B7F00BF686B /* Circularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981577F01B675B7F00BF686B /* Circularity.swift */; };
 		981577F41B676BF700BF686B /* ResolutionPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981577F31B676BF700BF686B /* ResolutionPool.swift */; };
 		981577F51B676BF700BF686B /* ResolutionPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981577F31B676BF700BF686B /* ResolutionPool.swift */; };
-		981899C61B5FE63F00C702D0 /* .framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981899BC1B5FE63F00C702D0 /* .framework */; };
+		981899C61B5FE63F00C702D0 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981899BC1B5FE63F00C702D0 /* Swinject.framework */; };
 		981899E11B5FF88800C702D0 /* ContainerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981899E01B5FF88800C702D0 /* ContainerSpec.swift */; };
 		981899E21B5FF88800C702D0 /* ContainerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981899E01B5FF88800C702D0 /* ContainerSpec.swift */; };
 		981899E41B5FFE5800C702D0 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981899E31B5FFE5800C702D0 /* Container.swift */; };
@@ -37,7 +37,7 @@
 		981970201B6145D600EEB942 /* ObjectScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9819701E1B6145D600EEB942 /* ObjectScope.swift */; };
 		981A0D0F1BE5B93F0030DD85 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981A0D0E1BE5B93F0030DD85 /* AVKit.framework */; };
 		981A0D111BE5B9460030DD85 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981A0D101BE5B9460030DD85 /* AVKit.framework */; };
-		981ABE8C1B5FC9DF00294975 /* .framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981ABE811B5FC9DF00294975 /* .framework */; };
+		981ABE8C1B5FC9DF00294975 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981ABE811B5FC9DF00294975 /* Swinject.framework */; };
 		98383A641C1AF9B600733248 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98383A281C1AF75B00733248 /* Nimble.framework */; };
 		98383A651C1AF9B600733248 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98383A3C1C1AF76400733248 /* Quick.framework */; };
 		98383A661C1AF9C200733248 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98383A241C1AF75B00733248 /* Nimble.framework */; };
@@ -103,7 +103,7 @@
 		98689CBD1BBFD5110005C6D3 /* ServiceKeySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9884E2A91B60C51C00120259 /* ServiceKeySpec.swift */; };
 		98689CBE1BBFD5110005C6D3 /* ServiceEntrySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9855C5C71B689D9000DADB0B /* ServiceEntrySpec.swift */; };
 		98689CBF1BBFD5110005C6D3 /* ResolutionPoolSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9855C5C11B68721800DADB0B /* ResolutionPoolSpec.swift */; };
-		98689CD51BBFDEBC0005C6D3 /* .framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98689C7F1BBFC7A50005C6D3 /* .framework */; };
+		98689CD51BBFDEBC0005C6D3 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98689C7F1BBFC7A50005C6D3 /* Swinject.framework */; };
 		9878C6381B65C9E000CBEFEF /* AnimalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9878C6371B65C9E000CBEFEF /* AnimalType.swift */; };
 		9878C6391B65C9E000CBEFEF /* AnimalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9878C6371B65C9E000CBEFEF /* AnimalType.swift */; };
 		9878C63C1B65CA8700CBEFEF /* PersonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9878C63B1B65CA8700CBEFEF /* PersonType.swift */; };
@@ -301,14 +301,14 @@
 		90B0298A1C186D5300A6A521 /* LoadAwareAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoadAwareAssembly.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		981577F01B675B7F00BF686B /* Circularity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circularity.swift; sourceTree = "<group>"; };
 		981577F31B676BF700BF686B /* ResolutionPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionPool.swift; sourceTree = "<group>"; };
-		981899BC1B5FE63F00C702D0 /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		981899BC1B5FE63F00C702D0 /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		981899C51B5FE63F00C702D0 /* SwinjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwinjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		981899E01B5FF88800C702D0 /* ContainerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerSpec.swift; sourceTree = "<group>"; };
 		981899E31B5FFE5800C702D0 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		9819701E1B6145D600EEB942 /* ObjectScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectScope.swift; sourceTree = "<group>"; };
 		981A0D0E1BE5B93F0030DD85 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		981A0D101BE5B9460030DD85 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
-		981ABE811B5FC9DF00294975 /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		981ABE811B5FC9DF00294975 /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		981ABE861B5FC9DF00294975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		981ABE8B1B5FC9DF00294975 /* SwinjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwinjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		981ABE921B5FC9DF00294975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 		98689C771BBFC77F0005C6D3 /* tvOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Base.xcconfig"; sourceTree = "<group>"; };
 		98689C781BBFC77F0005C6D3 /* tvOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Framework.xcconfig"; sourceTree = "<group>"; };
 		98689C791BBFC77F0005C6D3 /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
-		98689C7F1BBFC7A50005C6D3 /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98689C7F1BBFC7A50005C6D3 /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98689C881BBFC7A60005C6D3 /* SwinjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwinjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9878C6371B65C9E000CBEFEF /* AnimalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalType.swift; sourceTree = "<group>"; };
 		9878C63B1B65CA8700CBEFEF /* PersonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonType.swift; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			files = (
 				98383A641C1AF9B600733248 /* Nimble.framework in Frameworks */,
 				98383A651C1AF9B600733248 /* Quick.framework in Frameworks */,
-				981899C61B5FE63F00C702D0 /* .framework in Frameworks */,
+				981899C61B5FE63F00C702D0 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +399,7 @@
 				981A0D0F1BE5B93F0030DD85 /* AVKit.framework in Frameworks */,
 				98383A661C1AF9C200733248 /* Nimble.framework in Frameworks */,
 				98383A671C1AF9C200733248 /* Quick.framework in Frameworks */,
-				981ABE8C1B5FC9DF00294975 /* .framework in Frameworks */,
+				981ABE8C1B5FC9DF00294975 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +424,7 @@
 				981A0D111BE5B9460030DD85 /* AVKit.framework in Frameworks */,
 				98383A681C1AF9CF00733248 /* Nimble.framework in Frameworks */,
 				98383A691C1AF9CF00733248 /* Quick.framework in Frameworks */,
-				98689CD51BBFDEBC0005C6D3 /* .framework in Frameworks */,
+				98689CD51BBFDEBC0005C6D3 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,12 +457,12 @@
 		981ABE821B5FC9DF00294975 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				981ABE811B5FC9DF00294975 /* .framework */,
+				981ABE811B5FC9DF00294975 /* Swinject.framework */,
 				981ABE8B1B5FC9DF00294975 /* SwinjectTests.xctest */,
-				981899BC1B5FE63F00C702D0 /* .framework */,
+				981899BC1B5FE63F00C702D0 /* Swinject.framework */,
 				981899C51B5FE63F00C702D0 /* SwinjectTests.xctest */,
 				985010C61BBE76D400A2CCFC /* Swinject.framework */,
-				98689C7F1BBFC7A50005C6D3 /* .framework */,
+				98689C7F1BBFC7A50005C6D3 /* Swinject.framework */,
 				98689C881BBFC7A60005C6D3 /* SwinjectTests.xctest */,
 			);
 			name = Products;
@@ -708,7 +708,7 @@
 			);
 			name = "Swinject-OSX";
 			productName = "Swinject-OSX";
-			productReference = 981899BC1B5FE63F00C702D0 /* .framework */;
+			productReference = 981899BC1B5FE63F00C702D0 /* Swinject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		981899C41B5FE63F00C702D0 /* Swinject-OSXTests */ = {
@@ -747,7 +747,7 @@
 			);
 			name = "Swinject-iOS";
 			productName = Swinject;
-			productReference = 981ABE811B5FC9DF00294975 /* .framework */;
+			productReference = 981ABE811B5FC9DF00294975 /* Swinject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		981ABE8A1B5FC9DF00294975 /* Swinject-iOSTests */ = {
@@ -803,7 +803,7 @@
 			);
 			name = "Swinject-tvOS";
 			productName = "Swinject-tvOS";
-			productReference = 98689C7F1BBFC7A50005C6D3 /* .framework */;
+			productReference = 98689C7F1BBFC7A50005C6D3 /* Swinject.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		98689C871BBFC7A60005C6D3 /* Swinject-tvOSTests */ = {
