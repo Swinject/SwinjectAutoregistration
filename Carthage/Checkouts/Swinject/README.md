@@ -11,6 +11,7 @@ Swinject
 [![License](https://img.shields.io/cocoapods/l/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![Platform](https://img.shields.io/cocoapods/p/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![Swift Version](https://img.shields.io/badge/Swift-2.2-F16D39.svg?style=flat)](https://developer.apple.com/swift)
+[![Swift Version](https://img.shields.io/badge/Swift-3.0-F16D39.svg?style=flat)](https://developer.apple.com/swift)
 
 Swinject is a lightweight [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) framework for Swift.
 
@@ -31,6 +32,10 @@ Dependency injection (DI) is a software design pattern that implements Inversion
 - [x] [Thread Safety](./Documentation/ThreadSafety.md)
 - [x] [Modular Components](./Documentation/Assembler.md)
 - [x] [Storyboard](./Documentation/Storyboard.md)
+
+## Extensions
+
+- **[Swinject-CodeGen](https://github.com/Swinject/Swinject-CodeGen)**: Type-safe code generation of `Container` from a CSV/YAML file defining dependencies.
 
 ## Requirements
 
@@ -198,11 +203,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```
 
 Notice that the example uses a convenience initializer taking a closure to register services to the new instance of `Container`.
-
-## Extensions
-
-- **[Swinject-CodeGen](https://github.com/Swinject/Swinject-CodeGen)**: Type-safe code generation of `Container` from a CSV/YAML file defining dependencies.
-
 
 ## Play in Playground!
 

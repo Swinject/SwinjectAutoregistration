@@ -11,7 +11,7 @@ import Foundation
 
 //Already declared in Swift
 //infix operator ~> { associativity left precedence 160 }
-postfix operator ~> {}
+postfix operator ~>
 
 /** Unary operator which automatically resolves the return type
  Usage: `SomeClass(dependencyA: r~>, dependencyB: r~>)`
@@ -93,8 +93,8 @@ public func ~> <Service, Arg1>(r: ResolverType, o: (service: Service.Type, name:
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, arguments: (Arg1, Arg2)) ) -> Service {
-    return r.resolve(o.0, arguments: o.arguments)!
+public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
+    return r.resolve(o.0, arguments: 0.1, 0.2)!
 }
 
 
@@ -109,8 +109,8 @@ public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, argument
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, name: String, arguments: (Arg1, Arg2)) ) -> Service {
-    return r.resolve(o.0, name: o.name, arguments: o.arguments)!
+public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, name: String, arguments: Arg1, Arg2) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.2, o.3)!
 }
 
 
@@ -125,8 +125,8 @@ public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, name: St
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, arguments: (Arg1, Arg2, Arg3)) ) -> Service {
-    return r.resolve(o.0, arguments: o.arguments)!
+public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, arguments: Arg1, Arg2, Arg3) ) -> Service {
+    return r.resolve(o.0, arguments: o.1, o.2, o.3)!
 }
 
 /** Binary operator ~> equivalent to `r.resolve(Service.Type, name: "ServiceName", arguments: (Arg1, Arg2, Arg3))!`
@@ -140,6 +140,6 @@ public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, ar
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, name: String, arguments: (Arg1, Arg2, Arg3)) ) -> Service {
-    return r.resolve(o.0, name: o.name, arguments: o.arguments)!
+public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, name: String, arguments: Arg1, Arg2, Arg3) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.2, o.3, o.4)!
 }

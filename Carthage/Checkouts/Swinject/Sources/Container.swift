@@ -9,9 +9,6 @@
 import Foundation
 
 
-/// represents the type that allows definition resolution and property retrieval
-public typealias ResolverType = protocol<Resolvable, PropertyRetrievable>
-
 /// The `Container` class represents a dependency injection container, which stores registrations of services
 /// and retrieves registered services with dependencies injected.
 ///
@@ -27,10 +24,9 @@ public typealias ResolverType = protocol<Resolvable, PropertyRetrievable>
 ///
 /// where `A` and `X` are protocols, `B` is a type conforming `A`, and `Y` is a type conforming `X` and depending on `A`.
 public final class Container {
-    private var services = [ServiceKey: ServiceEntryType]()
-    private let parent: Container?
-    private var resolutionPool = ResolutionPool()
-    private var properties = [String:AnyObject]()
+    fileprivate var services = [ServiceKey: ServiceEntryType]()
+    fileprivate let parent: Container?
+    fileprivate var resolutionPool = ResolutionPool()
     internal let lock: SpinLock // Used by SynchronizedResolver.
     
     /// Instantiates a `Container` with its parent `Container`. The parent is optional.
@@ -46,7 +42,7 @@ public final class Container {
     /// - Parameters:
     ///     - parent:             The optional parent `Container`.
     ///     - registeringClosure: The closure registering services to the new container instance.
-    public convenience init(parent: Container? = nil, @noescape registeringClosure: Container -> Void) {
+    public convenience init(parent: Container? = nil, registeringClosure: (Container) -> Void) {
         self.init(parent: parent)
         registeringClosure(self)
     }
@@ -60,7 +56,7 @@ public final class Container {
     ///
     /// - Parameters:
     ///   - serviceType: The service type to register.
-    ///   - name:        A registration name, which is used to differenciate from other registrations
+    ///   - name:        A registration name, which is used to differentiate from other registrations
     ///                  that have the same service and factory types.
     ///   - factory:     The closure to specify how the service type is resolved with the dependencies of the type.
     ///                  It is invoked when the `Container` needs to instantiate the instance.
@@ -68,55 +64,95 @@ public final class Container {
     ///                  and returns the instance of the component type for the service.
     ///
     /// - Returns: A registered `ServiceEntry` to configure more settings with method chaining.
+    @discardableResult
     public func register<Service>(
-        serviceType: Service.Type,
+        _ serviceType: Service.Type,
         name: String? = nil,
-        factory: ResolverType -> Service) -> ServiceEntry<Service>
+        factory: (ResolverType) -> Service) -> ServiceEntry<Service>
     {
-        return registerImpl(serviceType, factory: factory, name: name)
+        return _register(serviceType, factory: factory, name: name)
     }
 
-    internal func registerImpl<Service, Factory>(serviceType: Service.Type, factory: Factory, name: String?) -> ServiceEntry<Service> {
-        let key = ServiceKey(factoryType: factory.dynamicType, name: name)
+    /// This method is designed for the use to extend Swinject functionality.
+    /// Do NOT use this method unless you intend to write an extension or plugin to Swinject framework.
+    ///
+    /// - Parameters:
+    ///   - serviceType: The service type to register.
+    ///   - factory:     The closure to specify how the service type is resolved with the dependencies of the type.
+    ///                  It is invoked when the `Container` needs to instantiate the instance.
+    ///                  It takes a `ResolverType` to inject dependencies to the instance,
+    ///                  and returns the instance of the component type for the service.
+    ///   - name:        A registration name.
+    ///   - option:      A service key option for an extension/plugin.
+    ///
+    /// - Returns: A registered `ServiceEntry` to configure more settings with method chaining.
+    @discardableResult
+    public func _register<Service, Factory>(
+        _ serviceType: Service.Type,
+        factory: Factory,
+        name: String? = nil,
+        option: ServiceKeyOptionType? = nil) -> ServiceEntry<Service>
+    {
+        let key = ServiceKey(factoryType: type(of: factory), name: name, option: option)
         let entry = ServiceEntry(serviceType: serviceType, factory: factory)
         services[key] = entry
         return entry
     }
     
     /// Returns a synchronized view of the container for thread safety.
-    /// The returned container is `Resolvable` type. Call this method after you finish all service registrations to the original container.
+    /// The returned container is `ResolverType` type. Call this method after you finish all service registrations to the original container.
     ///
-    /// - Returns: A synchronized container as `Resolvable`.
-    public func synchronize() -> Resolvable {
+    /// - Returns: A synchronized container as `ResolverType`.
+    public func synchronize() -> ResolverType {
         return SynchronizedResolver(container: self)
-    }
-    
-    ///
-    /// Will apply the property loaded to the container. The loader will be invoked and the properties will be merged
-    /// with the existing properties owned by this container. The order in which loaders are applied matters as you can
-    /// apply multi property loaders to a single container so properties loaded from each loader will be merged. Therefore
-    /// if loader A contains property "test.key" and loader B contains property "test.key" then if A is loaded, then B
-    /// is loaded the value for "test.key" will come from loader B.
-    ///
-    /// - parameter loader: the loader to load properties into the container
-    ///
-    public func applyPropertyLoader(loader: PropertyLoaderType) throws {
-        let props = try loader.load()
-        for (key, value) in props {
-            properties[key] = value
-        }
     }
 }
 
-// MARK: - Resolvable
-extension Container: Resolvable {
+// MARK: - _ResolverType
+extension Container: _ResolverType {
+    public func _resolve<Service, Factory>(name: String?, option: ServiceKeyOptionType? = nil, invoker: (Factory) -> Service) -> Service? {
+        resolutionPool.incrementDepth()
+        defer { resolutionPool.decrementDepth() }
+        
+        var resolvedInstance: Service?
+        let key = ServiceKey(factoryType: Factory.self, name: name, option: option)
+        if let (entry, fromParent) = getEntry(key) as (ServiceEntry<Service>, Bool)? {
+            switch entry.objectScope {
+            case .none, .graph:
+                resolvedInstance = resolve(entry: entry, key: key, invoker: invoker)
+            case .container:
+                let ownEntry: ServiceEntry<Service>
+                if fromParent {
+                    ownEntry = entry.copyExceptInstance()
+                    services[key] = ownEntry
+                } else {
+                    ownEntry = entry
+                }
+                
+                if ownEntry.instance == nil {
+                    ownEntry.instance = resolve(entry: entry, key: key, invoker: invoker) as Any
+                }
+                resolvedInstance = ownEntry.instance as? Service
+            case .hierarchy:
+                if entry.instance == nil {
+                    entry.instance = resolve(entry: entry, key: key, invoker: invoker) as Any
+                }
+                resolvedInstance = entry.instance as? Service
+            }
+        }
+        return resolvedInstance
+    }
+}
+
+// MARK: - ResolverType
+extension Container: ResolverType {
     /// Retrieves the instance with the specified service type.
     ///
     /// - Parameter serviceType: The service type to resolve.
     ///
     /// - Returns: The resolved service type instance, or nil if no registration for the service type is found in the `Container`.
     public func resolve<Service>(
-        serviceType: Service.Type) -> Service?
+        _ serviceType: Service.Type) -> Service?
     {
         return resolve(serviceType, name: nil)
     }
@@ -131,49 +167,14 @@ extension Container: Resolvable {
     ///
     /// - Returns: The resolved service type instance, or nil if no registration for the service type and name is found in the `Container`.
     public func resolve<Service>(
-        serviceType: Service.Type,
+        _ serviceType: Service.Type,
         name: String?) -> Service?
     {
-        typealias FactoryType = ResolverType -> Service
-        return resolveImpl(name) { (factory: FactoryType) in factory(self) }
+        typealias FactoryType = (ResolverType) -> Service
+        return _resolve(name: name) { (factory: FactoryType) in factory(self) }
     }
     
-    internal func resolveImpl<Service, Factory>(name: String?, invoker: Factory -> Service) -> Service? {
-        resolutionPool.incrementDepth()
-        defer {
-            resolutionPool.decrementDepth()
-        }
-        
-        var resolvedInstance: Service?
-        let key = ServiceKey(factoryType: Factory.self, name: name)
-        if let (entry, fromParent) = getEntry(key) as (ServiceEntry<Service>, Bool)? {
-            switch entry.objectScope {
-            case .None, .Graph:
-                resolvedInstance = resolveEntry(entry, key: key, invoker: invoker)
-            case .Container:
-                let ownEntry: ServiceEntry<Service>
-                if fromParent {
-                    ownEntry = entry.copyExceptInstance()
-                    services[key] = ownEntry
-                } else {
-                    ownEntry = entry
-                }
-                
-                if ownEntry.instance == nil {
-                    ownEntry.instance = resolveEntry(entry, key: key, invoker: invoker) as Any
-                }
-                resolvedInstance = ownEntry.instance as? Service
-            case .Hierarchy:
-                if entry.instance == nil {
-                    entry.instance = resolveEntry(entry, key: key, invoker: invoker) as Any
-                }
-                resolvedInstance = entry.instance as? Service
-            }
-        }
-        return resolvedInstance
-    }
-    
-    private func getEntry<Service>(key: ServiceKey) -> (ServiceEntry<Service>, Bool)? {
+    fileprivate func getEntry<Service>(_ key: ServiceKey) -> (ServiceEntry<Service>, Bool)? {
         var fromParent = false
         var entry = services[key] as? ServiceEntry<Service>
         if entry == nil, let parent = self.parent {
@@ -185,8 +186,8 @@ extension Container: Resolvable {
         return entry.map { ($0, fromParent) }
     }
     
-    private func resolveEntry<Service, Factory>(entry: ServiceEntry<Service>, key: ServiceKey, invoker: Factory -> Service) -> Service {
-        let usesPool = entry.objectScope != .None
+    fileprivate func resolve<Service, Factory>(entry: ServiceEntry<Service>, key: ServiceKey, invoker: (Factory) -> Service) -> Service {
+        let usesPool = entry.objectScope != .none
         if usesPool, let pooledInstance = resolutionPool[key] as? Service {
             return pooledInstance
         }
@@ -207,19 +208,11 @@ extension Container: Resolvable {
     }
 }
 
-// MARK: - PropertyRetrievable
-extension Container: PropertyRetrievable {
-    
-    /// Retrieves a property for the given name where the receiving property is optional. This is a limitation of
-    /// how you can reflect a Optional<Foo> class type where you cannot determine the inner type is Foo without parsing
-    /// the string description (yuck). So in order to inject into an optioanl property, you need to specify the type
-    /// so we can properly cast the object
-    ///
-    /// - Parameter key: The name for the property
-    /// - Parameter type: The type of the property
-    ///
-    /// - Returns: The value for the property name
-    public func property<Property>(name: String) -> Property? {
-        return properties[name] as? Property
+// MARK: CustomStringConvertible
+extension Container: CustomStringConvertible {
+    public var description: String {
+        return "["
+            + services.map { "\n    { \($1.describeWithKey($0)) }" }.sorted().joined(separator: ",")
+        + "\n]"
     }
 }

@@ -31,7 +31,7 @@ class ContainerSpec: QuickSpec {
                 
                 let noname = container.resolve(AnimalType.self) as! Cat
                 let mimi = container.resolve(AnimalType.self, argument: "Mimi") as! Cat
-                let mew = container.resolve(AnimalType.self, arguments: ("Mew", true)) as! Cat
+                let mew = container.resolve(AnimalType.self, arguments: "Mew", true) as! Cat
                 expect(noname.name).to(beNil())
                 expect(mimi.name) == "Mimi"
                 expect(mew.name) == "Mew"
@@ -81,7 +81,7 @@ class ContainerSpec: QuickSpec {
             }
         }
         describe("Scope") {
-            let registerCatAndPetOwnerDependingOnFood: Container -> Void = {
+            let registerCatAndPetOwnerDependingOnFood: (Container) -> Void = {
                 $0.register(AnimalType.self) {
                     let cat = Cat()
                     cat.favoriteFood = $0.resolve(FoodType.self)
@@ -97,119 +97,119 @@ class ContainerSpec: QuickSpec {
             context("in no scope") {
                 it("does not have a shared object in a container.") {
                     container.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.None)
+                        .inObjectScope(.none)
                     
                     let cat1 = container.resolve(AnimalType.self) as! Cat
                     let cat2 = container.resolve(AnimalType.self) as! Cat
-                    expect(cat1) !== cat2
+                    expect(cat1 !== cat2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("resolves a service to new objects in a graph") {
                     registerCatAndPetOwnerDependingOnFood(container)
                     container.register(FoodType.self) { _ in Sushi() }
-                        .inObjectScope(.None)
+                        .inObjectScope(.none)
                     
                     let owner = container.resolve(PersonType.self) as! PetOwner
                     let ownersSushi = owner.favoriteFood as! Sushi
                     let catsSushi = (owner.pet as! Cat).favoriteFood as! Sushi
-                    expect(ownersSushi) !== catsSushi
+                    expect(ownersSushi !== catsSushi).to(beTrue()) // Workaround for crash in Nimble.
                 }
             }
             context("in graph scope") {
                 it("does not have a shared object in a container.") {
                     container.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.Graph)
+                        .inObjectScope(.graph)
                     
                     let cat1 = container.resolve(AnimalType.self) as! Cat
                     let cat2 = container.resolve(AnimalType.self) as! Cat
-                    expect(cat1) !== cat2
+                    expect(cat1 !== cat2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("resolves a service to the same object in a graph") {
                     registerCatAndPetOwnerDependingOnFood(container)
                     container.register(FoodType.self) { _ in Sushi() }
-                        .inObjectScope(.Graph)
+                        .inObjectScope(.graph)
                     
                     let owner = container.resolve(PersonType.self) as! PetOwner
                     let ownersSushi = owner.favoriteFood as! Sushi
                     let catsSushi = (owner.pet as! Cat).favoriteFood as! Sushi
-                    expect(ownersSushi) === catsSushi
+                    expect(ownersSushi === catsSushi).to(beTrue()) // Workaround for crash in Nimble.
                 }
             }
             context("in container scope") {
                 it("shares an object in the own container.") {
                     container.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.Container)
+                        .inObjectScope(.container)
                     
                     let cat1 = container.resolve(AnimalType.self) as! Cat
                     let cat2 = container.resolve(AnimalType.self) as! Cat
-                    expect(cat1) === cat2
+                    expect(cat1 === cat2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("does not share an object from a parent container to its child.") {
                     let parent = Container()
                     parent.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.Container)
+                        .inObjectScope(.container)
                     parent.register(AnimalType.self, name: "dog") { _ in Dog() }
-                        .inObjectScope(.Container)
+                        .inObjectScope(.container)
                     let child = Container(parent: parent)
                     
                     // Case resolving on the parent first.
                     let cat1 = parent.resolve(AnimalType.self) as! Cat
                     let cat2 = child.resolve(AnimalType.self) as! Cat
-                    expect(cat1) !== cat2
+                    expect(cat1 !== cat2).to(beTrue()) // Workaround for crash in Nimble.
                     
                     // Case resolving on the child first.
                     let dog1 = child.resolve(AnimalType.self, name: "dog") as! Dog
                     let dog2 = parent.resolve(AnimalType.self, name: "dog") as! Dog
-                    expect(dog1) !== dog2
+                    expect(dog1 !== dog2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("resolves a service to the same object in a graph") {
                     registerCatAndPetOwnerDependingOnFood(container)
                     container.register(FoodType.self) { _ in Sushi() }
-                        .inObjectScope(.Container)
+                        .inObjectScope(.container)
                     
                     let owner = container.resolve(PersonType.self) as! PetOwner
                     let ownersSushi = owner.favoriteFood as! Sushi
                     let catsSushi = (owner.pet as! Cat).favoriteFood as! Sushi
-                    expect(ownersSushi) === catsSushi
+                    expect(ownersSushi === catsSushi).to(beTrue()) // Workaround for crash in Nimble.
                 }
             }
             context("in hierarchy scope") {
                 it("shares an object in the own container.") {
                     container.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.Hierarchy)
+                        .inObjectScope(.hierarchy)
                     
                     let cat1 = container.resolve(AnimalType.self) as! Cat
                     let cat2 = container.resolve(AnimalType.self) as! Cat
-                    expect(cat1) === cat2
+                    expect(cat1 === cat2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("shares an object from a parent container to its child.") {
                     let parent = Container()
                     parent.register(AnimalType.self) { _ in Cat() }
-                        .inObjectScope(.Hierarchy)
+                        .inObjectScope(.hierarchy)
                     parent.register(AnimalType.self, name: "dog") { _ in Dog() }
-                        .inObjectScope(.Hierarchy)
+                        .inObjectScope(.hierarchy)
                     let child = Container(parent: parent)
                     
                     // Case resolving on the parent first.
                     let cat1 = parent.resolve(AnimalType.self) as! Cat
                     let cat2 = child.resolve(AnimalType.self) as! Cat
-                    expect(cat1) === cat2
+                    expect(cat1 === cat2).to(beTrue()) // Workaround for crash in Nimble.
                     
                     // Case resolving on the child first.
                     let dog1 = child.resolve(AnimalType.self, name: "dog") as! Dog
                     let dog2 = parent.resolve(AnimalType.self, name: "dog") as! Dog
-                    expect(dog1) === dog2
+                    expect(dog1 === dog2).to(beTrue()) // Workaround for crash in Nimble.
                 }
                 it("resolves a service in the parent container to the same object in a graph") {
                     let parent = Container()
                     parent.register(FoodType.self) { _ in Sushi() }
-                        .inObjectScope(.Hierarchy)
+                        .inObjectScope(.hierarchy)
                     let child = Container(parent: parent)
                     registerCatAndPetOwnerDependingOnFood(child)
                     
                     let owner = child.resolve(PersonType.self) as! PetOwner
                     let ownersSushi = owner.favoriteFood as! Sushi
                     let catsSushi = (owner.pet as! Cat).favoriteFood as! Sushi
-                    expect(ownersSushi) === catsSushi
+                    expect(ownersSushi === catsSushi).to(beTrue()) // Workaround for crash in Nimble.
                 }
             }
         }
@@ -279,7 +279,7 @@ class ContainerSpec: QuickSpec {
         }
         describe("Value type resolution") {
             it("resolves struct instances ignoring object scopes.") {
-                let runInObjectScope: ObjectScope -> Void = { scope in
+                let runInObjectScope: (ObjectScope) -> Void = { scope in
                     container.removeAll()
                     container.register(AnimalType.self) { _ in Turtle(name: "Ninja") }
                         .inObjectScope(scope)
@@ -290,13 +290,13 @@ class ContainerSpec: QuickSpec {
                     expect(turtle2.name) == "Ninja"
                 }
                 
-                runInObjectScope(.None)
-                runInObjectScope(.Graph)
-                runInObjectScope(.Container)
-                runInObjectScope(.Hierarchy)
+                runInObjectScope(.none)
+                runInObjectScope(.graph)
+                runInObjectScope(.container)
+                runInObjectScope(.hierarchy)
             }
             it("resolves struct instances defined in the parent container ignoring object scopes.") {
-                let runInObjectScope: ObjectScope -> Void = { scope in
+                let runInObjectScope: (ObjectScope) -> Void = { scope in
                     container.removeAll()
                     container.register(AnimalType.self) { _ in Turtle(name: "Ninja") }
                         .inObjectScope(scope)
@@ -309,10 +309,27 @@ class ContainerSpec: QuickSpec {
                     expect(turtle2.name) == "Ninja"
                 }
                 
-                runInObjectScope(.None)
-                runInObjectScope(.Graph)
-                runInObjectScope(.Container)
-                runInObjectScope(.Hierarchy)
+                runInObjectScope(.none)
+                runInObjectScope(.graph)
+                runInObjectScope(.container)
+                runInObjectScope(.hierarchy)
+            }
+            it("resolves only once if object scope is container or hierarchy to simulate singleton (instantiation only once).") {
+                let runInObjectScope: (ObjectScope, Int) -> Void = { scope, expectation in
+                    var invokedCount = 0
+                    container.register(AnimalType.self) { _ in
+                        invokedCount += 1
+                        return Turtle(name: "Ninja")
+                    }.inObjectScope(scope)
+                    _ = container.resolve(AnimalType.self)!
+                    _ = container.resolve(AnimalType.self)!
+                    expect(invokedCount) == expectation
+                }
+                
+                runInObjectScope(.none, 2)
+                runInObjectScope(.graph, 2)
+                runInObjectScope(.container, 1)
+                runInObjectScope(.hierarchy, 1)
             }
         }
         describe("Class as a service type") {
@@ -341,194 +358,62 @@ class ContainerSpec: QuickSpec {
             }
         }
         
-        describe("JSON properties") {
-            it("can load properties from a single loader") {
-                let loader = JsonPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "first")
-                try! container.applyPropertyLoader(loader)
-                
-                container.register(Properties.self) { r in
-                    let properties = Properties()
-                    properties.stringValue = r.property("test.string")!
-                    properties.optionalStringValue = r.property("test.string")
-                    properties.implicitStringValue = r.property("test.string")
-                    
-                    properties.intValue = r.property("test.int")!
-                    properties.optionalIntValue = r.property("test.int")
-                    properties.implicitIntValue = r.property("test.int")
-                    
-                    properties.doubleValue = r.property("test.double")!
-                    properties.optionalDoubleValue = r.property("test.double")
-                    properties.implicitDoubleValue = r.property("test.double")
-                    
-                    properties.arrayValue = r.property("test.array")!
-                    properties.optionalArrayValue = r.property("test.array")
-                    properties.implicitArrayValue = r.property("test.array")
-                    
-                    properties.dictValue = r.property("test.dict")!
-                    properties.optionalDictValue = r.property("test.dict")
-                    properties.implicitDictValue = r.property("test.dict")
-                    
-                    properties.boolValue = r.property("test.bool")!
-                    properties.optionalBoolValue = r.property("test.bool")
-                    properties.implicitBoolValue = r.property("test.bool")
-                    
-                    return properties
-                }
-                
-                let properties = container.resolve(Properties.self)!
-                expect(properties.stringValue) == "first"
-                expect(properties.optionalStringValue) == "first"
-                expect(properties.implicitStringValue) == "first"
-                
-                expect(properties.intValue) == 100
-                expect(properties.optionalIntValue) == 100
-                expect(properties.implicitIntValue) == 100
-                
-                expect(properties.doubleValue) == 30.50
-                expect(properties.optionalDoubleValue) == 30.50
-                expect(properties.implicitDoubleValue) == 30.50
-                
-                expect(properties.arrayValue.count) == 2
-                expect(properties.arrayValue[0]) == "item1"
-                expect(properties.arrayValue[1]) == "item2"
-                expect(properties.optionalArrayValue!.count) == 2
-                expect(properties.optionalArrayValue![0]) == "item1"
-                expect(properties.optionalArrayValue![1]) == "item2"
-                expect(properties.implicitArrayValue.count) == 2
-                expect(properties.implicitArrayValue![0]) == "item1"
-                expect(properties.implicitArrayValue![1]) == "item2"
-                
-                expect(properties.dictValue.count) == 2
-                expect(properties.dictValue["key1"]) == "item1"
-                expect(properties.dictValue["key2"]) == "item2"
-                expect(properties.optionalDictValue!.count) == 2
-                expect(properties.optionalDictValue!["key1"]) == "item1"
-                expect(properties.optionalDictValue!["key2"]) == "item2"
-                expect(properties.implicitDictValue.count) == 2
-                expect(properties.implicitDictValue!["key1"]) == "item1"
-                expect(properties.implicitDictValue!["key2"]) == "item2"
-                
-                expect(properties.boolValue) == true
-                expect(properties.optionalBoolValue) == true
-                expect(properties.implicitBoolValue) == true
-                
+        describe("CustomStringConvertible") {
+            it("describes empty description without service registrations.") {
+                expect(container.description) == "[\n]"
             }
-            
-            it("can load properties from multiple loader") {
-                let loader = JsonPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "first")
-                let loader2 = JsonPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "second")
-                try! container.applyPropertyLoader(loader)
-                try! container.applyPropertyLoader(loader2)
+            it("describes a registration.") {
+                container.register(AnimalType.self) { _ in Cat() }
                 
-                container.register(Properties.self) { r in
-                    let properties = Properties()
-                    properties.stringValue = r.property("test.string")! // from loader2
-                    properties.intValue = r.property("test.int")! // from loader
-                    
-                    return properties
-                }
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Factory: (ResolverType) -> AnimalType, ObjectScope: graph }\n"
+                    + "]"
+            }
+            it("describes a registration with name.") {
+                container.register(AnimalType.self, name: "My Cat") { _ in Cat() }
                 
-                let properties = container.resolve(Properties.self)!
-                expect(properties.stringValue) == "second"
-                expect(properties.intValue) == 100
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Name: \"My Cat\", Factory: (ResolverType) -> AnimalType, ObjectScope: graph }\n"
+                    + "]"
+            }
+            it("describes a registration with arguments.") {
+                container.register(AnimalType.self) { _, arg1, arg2 in Cat(name: arg1, sleeping: arg2) }
                 
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Factory: ((ResolverType, String, Bool)) -> AnimalType, ObjectScope: graph }\n"
+                    + "]"
+            }
+            it("describes a registration with a specified object scope.") {
+                container.register(AnimalType.self) { _ in Cat() }
+                    .inObjectScope(.container)
+                
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Factory: (ResolverType) -> AnimalType, ObjectScope: container }\n"
+                    + "]"
+            }
+            it("describes a registration with initCompleted.") {
+                container.register(AnimalType.self) { _ in Cat() }
+                    .initCompleted { _, _ in }
+                
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Factory: (ResolverType) -> AnimalType, ObjectScope: graph, InitCompleted: Specified }\n"
+                    + "]"
+            }
+            it("describes multiple registrations.") {
+                container.register(AnimalType.self, name: "1") { _ in Cat() }
+                container.register(AnimalType.self, name: "2") { _ in Cat() }
+                
+                expect(container.description) ==
+                    "[\n"
+                    + "    { Service: AnimalType, Name: \"1\", Factory: (ResolverType) -> AnimalType, ObjectScope: graph },\n"
+                    + "    { Service: AnimalType, Name: \"2\", Factory: (ResolverType) -> AnimalType, ObjectScope: graph }\n"
+                    + "]"
             }
         }
-        
-        describe("Plist properties") {
-            it("can load properties from a single loader") {
-                let loader = PlistPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "first")
-                try! container.applyPropertyLoader(loader)
-                
-                container.register(Properties.self) { r in
-                    let properties = Properties()
-                    properties.stringValue = r.property("test.string")!
-                    properties.optionalStringValue = r.property("test.string")
-                    properties.implicitStringValue = r.property("test.string")
-                    
-                    properties.intValue = r.property("test.int")!
-                    properties.optionalIntValue = r.property("test.int")
-                    properties.implicitIntValue = r.property("test.int")
-                    
-                    properties.doubleValue = r.property("test.double")!
-                    properties.optionalDoubleValue = r.property("test.double")
-                    properties.implicitDoubleValue = r.property("test.double")
-                    
-                    properties.arrayValue = r.property("test.array")!
-                    properties.optionalArrayValue = r.property("test.array")
-                    properties.implicitArrayValue = r.property("test.array")
-                    
-                    properties.dictValue = r.property("test.dict")!
-                    properties.optionalDictValue = r.property("test.dict")
-                    properties.implicitDictValue = r.property("test.dict")
-                    
-                    properties.boolValue = r.property("test.bool")!
-                    properties.optionalBoolValue = r.property("test.bool")
-                    properties.implicitBoolValue = r.property("test.bool")
-                    
-                    return properties
-                }
-                
-                let properties = container.resolve(Properties.self)!
-                expect(properties.stringValue) == "first"
-                expect(properties.optionalStringValue) == "first"
-                expect(properties.implicitStringValue) == "first"
-                
-                expect(properties.intValue) == 100
-                expect(properties.optionalIntValue) == 100
-                expect(properties.implicitIntValue) == 100
-                
-                expect(properties.doubleValue) == 30.50
-                expect(properties.optionalDoubleValue) == 30.50
-                expect(properties.implicitDoubleValue) == 30.50
-                
-                expect(properties.arrayValue.count) == 2
-                expect(properties.arrayValue[0]) == "item1"
-                expect(properties.arrayValue[1]) == "item2"
-                expect(properties.optionalArrayValue!.count) == 2
-                expect(properties.optionalArrayValue![0]) == "item1"
-                expect(properties.optionalArrayValue![1]) == "item2"
-                expect(properties.implicitArrayValue.count) == 2
-                expect(properties.implicitArrayValue![0]) == "item1"
-                expect(properties.implicitArrayValue![1]) == "item2"
-                
-                expect(properties.dictValue.count) == 2
-                expect(properties.dictValue["key1"]) == "item1"
-                expect(properties.dictValue["key2"]) == "item2"
-                expect(properties.optionalDictValue!.count) == 2
-                expect(properties.optionalDictValue!["key1"]) == "item1"
-                expect(properties.optionalDictValue!["key2"]) == "item2"
-                expect(properties.implicitDictValue.count) == 2
-                expect(properties.implicitDictValue!["key1"]) == "item1"
-                expect(properties.implicitDictValue!["key2"]) == "item2"
-                
-                expect(properties.boolValue) == true
-                expect(properties.optionalBoolValue) == true
-                expect(properties.implicitBoolValue) == true
-                
-            }
-            
-            it("can load properties from multiple loader") {
-                let loader = PlistPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "first")
-                let loader2 = PlistPropertyLoader(bundle: NSBundle(forClass: self.dynamicType.self), name: "second")
-                try! container.applyPropertyLoader(loader)
-                try! container.applyPropertyLoader(loader2)
-                
-                container.register(Properties.self) { r in
-                    let properties = Properties()
-                    properties.stringValue = r.property("test.string")! // from loader2
-                    properties.intValue = r.property("test.int")! // from loader
-                    
-                    return properties
-                }
-                
-                let properties = container.resolve(Properties.self)!
-                expect(properties.stringValue) == "second"
-                expect(properties.intValue) == 100
-                
-            }
-            
-        }
-
     }
 }
