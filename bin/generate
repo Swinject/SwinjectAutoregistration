@@ -99,7 +99,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
         "public func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
         "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
         initializer,
-        "   } as (\(commaConcat(["ResolverType"] + genericArguments))) -> Service)",
+        "   } as (\(commaConcat(["Resolver"] + genericArguments))) -> Service)",
         "}"
     ]
 
@@ -183,7 +183,7 @@ var output = [
     "extension Container {\n",
         registers.joined(separator: "\n\n"),
     "\n\n}",
-    "public extension ResolverType {\n\n",
+    "public extension Resolver {\n\n",
         resolvers.joined(separator: "\n\n"),
     "}\n\n",
     checks.joined(separator: "\n\n")

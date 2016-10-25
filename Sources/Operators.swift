@@ -20,7 +20,7 @@ postfix operator ~>
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public postfix func ~> <Service>(r: ResolverType) -> Service {
+public postfix func ~> <Service>(r: Resolver) -> Service {
     return r.resolve(Service.self)!
 }
 
@@ -34,7 +34,7 @@ public postfix func ~> <Service>(r: ResolverType) -> Service {
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service>(r: ResolverType, service: Service.Type) -> Service {
+public func ~> <Service>(r: Resolver, service: Service.Type) -> Service {
     return r.resolve(service)!
 }
 
@@ -48,7 +48,7 @@ public func ~> <Service>(r: ResolverType, service: Service.Type) -> Service {
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service>(r: ResolverType, o: (service: Service.Type, name: String)) -> Service {
+public func ~> <Service>(r: Resolver, o: (service: Service.Type, name: String)) -> Service {
     return r.resolve(o.service, name: o.name)!
 }
 
@@ -63,7 +63,7 @@ public func ~> <Service>(r: ResolverType, o: (service: Service.Type, name: Strin
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1>(r: ResolverType, o: (service: Service.Type, argument: Arg1) ) -> Service {
+public func ~> <Service, Arg1>(r: Resolver, o: (service: Service.Type, argument: Arg1) ) -> Service {
     return r.resolve(o.service, argument: o.argument)!
 }
 
@@ -78,7 +78,7 @@ public func ~> <Service, Arg1>(r: ResolverType, o: (service: Service.Type, argum
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1>(r: ResolverType, o: (service: Service.Type, name: String, argument: Arg1) ) -> Service {
+public func ~> <Service, Arg1>(r: Resolver, o: (service: Service.Type, name: String, argument: Arg1) ) -> Service {
     return r.resolve(o.service, name: o.name, argument: o.argument)!
 }
 
@@ -93,7 +93,7 @@ public func ~> <Service, Arg1>(r: ResolverType, o: (service: Service.Type, name:
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
+public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
     return r.resolve(o.0, arguments: 0.1, 0.2)!
 }
 
@@ -109,7 +109,7 @@ public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, argument
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, name: String, arguments: Arg1, Arg2) ) -> Service {
+public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2) ) -> Service {
     return r.resolve(o.0, name: o.1, arguments: o.2, o.3)!
 }
 
@@ -125,7 +125,7 @@ public func ~> <Service, Arg1, Arg2>(r: ResolverType, o: (Service.Type, name: St
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, arguments: Arg1, Arg2, Arg3) ) -> Service {
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2, Arg3) ) -> Service {
     return r.resolve(o.0, arguments: o.1, o.2, o.3)!
 }
 
@@ -140,6 +140,6 @@ public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, ar
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: ResolverType, o: (Service.Type, name: String, arguments: Arg1, Arg2, Arg3) ) -> Service {
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2, Arg3) ) -> Service {
     return r.resolve(o.0, name: o.1, arguments: o.2, o.3, o.4)!
 }
