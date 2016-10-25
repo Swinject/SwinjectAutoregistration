@@ -13,7 +13,7 @@ SwinjectAutoregistration is an extension of Swinject to automatically inject dep
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SwinjectAutoregistration/Classes/**/*'
+  s.source_files = 'Sources/**/*'
   
   s.dependency 'Swinject', '~> 2.0.0-beta.2'
 end
