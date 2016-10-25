@@ -10,8 +10,7 @@ Swinject
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![License](https://img.shields.io/cocoapods/l/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
 [![Platform](https://img.shields.io/cocoapods/p/Swinject.svg?style=flat)](http://cocoapods.org/pods/Swinject)
-[![Swift Version](https://img.shields.io/badge/Swift-2.2-F16D39.svg?style=flat)](https://developer.apple.com/swift)
-[![Swift Version](https://img.shields.io/badge/Swift-3.0-F16D39.svg?style=flat)](https://developer.apple.com/swift)
+[![Swift Version](https://img.shields.io/badge/Swift-2.2--3.0-F16D39.svg?style=flat)](https://developer.apple.com/swift)
 
 Swinject is a lightweight [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) framework for Swift.
 
@@ -28,19 +27,24 @@ Dependency injection (DI) is a software design pattern that implements Inversion
 - [x] Support of both Reference and [Value Types](./Documentation/Misc.md#value-types)
 - [x] [Self-registration (Self-binding)](./Documentation/Misc.md#self-registration-self-binding)
 - [x] [Container Hierarchy](./Documentation/ContainerHierarchy.md)
-- [x] [Property Injection from Resource files](./Documentation/Properties.md)
 - [x] [Thread Safety](./Documentation/ThreadSafety.md)
 - [x] [Modular Components](./Documentation/Assembler.md)
-- [x] [Storyboard](./Documentation/Storyboard.md)
 
 ## Extensions
 
+- **[SwinjectPropertyLoader](https://github.com/Swinject/SwinjectPropertyLoader)**: Loading property values from resources.
+- **[SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)**: Automatic dependency injection via Storyboard.
 - **[Swinject-CodeGen](https://github.com/Swinject/Swinject-CodeGen)**: Type-safe code generation of `Container` from a CSV/YAML file defining dependencies.
 
 ## Requirements
 
 - iOS 8.0+ / Mac OS X 10.10+ / watchOS 2.0+ / tvOS 9.0+
-- Xcode 7.0+
+- Swift 2.2 or 2.3
+  - Xcode 7.0+
+- Swift 3
+  - Xcode 8.0+
+- Carthage 0.18+ (if you use)
+- CocoaPods 1.1.1+ (if you use)
 
 ## Installation
 
@@ -50,8 +54,20 @@ Swinject is available through [Carthage](https://github.com/Carthage/Carthage) o
 
 To install Swinject with Carthage, add the following line to your `Cartfile`.
 
-    github "Swinject/Swinject" ~> 1.1.0
+#### Swift 2.2 or 2.3
 
+```
+github "Swinject/Swinject" ~> 1.1.4
+```
+
+#### Swift 3.0
+
+```
+github "Swinject/Swinject" "2.0.0-beta.2"
+
+# Uncomment if you use SwinjectStoryboard
+# github "Swinject/SwinjectStoryboard" "1.0.0-beta.2"
+```
 
 Then run `carthage update --no-use-binaries` command or just `carthage update`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
 
@@ -60,12 +76,27 @@ Then run `carthage update --no-use-binaries` command or just `carthage update`. 
 
 To install Swinject with CocoaPods, add the following lines to your `Podfile`.
 
+#### Swift 2.2 or 2.3
+
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
 use_frameworks!
 
-pod 'Swinject', '~> 1.1.0'
+pod 'Swinject', '~> 1.1.4'
+```
+
+#### Swift 3.0
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
+use_frameworks!
+
+pod 'Swinject', '2.0.0-beta.2'
+
+# Uncomment if you use SwinjectStoryboard
+# pod 'SwinjectStoryboard', '1.0.0-beta.2'
 ```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
@@ -147,7 +178,14 @@ class PersonViewController: UIViewController {
 
 ### With SwinjectStoryboard
 
-Services should be registered in an extension of `SwinjectStoryboard` if you use `SwinjectStoryboard`. Refer to [the document of SwinjectStoryboard](./Documentation/Storyboard.md) for its details.
+Import SwinjectStoryboard at the top of your swift source file if you use Swinject v2 in Swift 3.
+
+```swift
+// Only Swinject v2 in Swift 3.
+import SwinjectStoryboard
+```
+
+Services should be registered in an extension of `SwinjectStoryboard` if you use `SwinjectStoryboard`. Refer to [the project page of SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard) for its details.
 
 ```swift
 extension SwinjectStoryboard {
@@ -241,11 +279,6 @@ The DI container features of Swinject are inspired by:
 and highly inspired by:
 
 - [Funq](http://funq.codeplex.com) - [Daniel Cazzulino](http://www.codeplex.com/site/users/view/dcazzulino) and [the project team](http://funq.codeplex.com/team/view).
-
-SwinjectStoryboard is inspired by:
-
-- [Typhoon](http://typhoonframework.org) - [Jasper Blues](https://github.com/jasperblues), [Aleksey Garbarev](https://github.com/alexgarbarev) and [contributors](https://github.com/appsquickly/Typhoon/graphs/contributors).
-- [BlindsidedStoryboard](https://github.com/briancroom/BlindsidedStoryboard) - [Brian Croom](https://github.com/briancroom).
 
 ## License
 

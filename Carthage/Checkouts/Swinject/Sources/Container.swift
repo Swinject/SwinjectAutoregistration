@@ -27,14 +27,20 @@ public final class Container {
     fileprivate var services = [ServiceKey: ServiceEntryType]()
     fileprivate let parent: Container?
     fileprivate var resolutionPool = ResolutionPool()
+    fileprivate let debugHelper: DebugHelper
     internal let lock: SpinLock // Used by SynchronizedResolver.
+
+    internal init(parent: Container? = nil, debugHelper: DebugHelper) {
+        self.parent = parent
+        self.debugHelper = debugHelper
+        self.lock = parent.map { $0.lock } ?? SpinLock()
+    }
     
     /// Instantiates a `Container` with its parent `Container`. The parent is optional.
     ///
     /// - Parameter parent: The optional parent `Container`.
-    public init(parent: Container? = nil) {
-        self.parent = parent
-        self.lock = parent.map { $0.lock } ?? SpinLock()
+    public convenience init(parent: Container? = nil) {
+        self.init(parent: parent, debugHelper: LoggingDebugHelper())
     }
     
     /// Instantiates a `Container` with its parent `Container` and a closure registering services. The parent is optional.
@@ -60,7 +66,7 @@ public final class Container {
     ///                  that have the same service and factory types.
     ///   - factory:     The closure to specify how the service type is resolved with the dependencies of the type.
     ///                  It is invoked when the `Container` needs to instantiate the instance.
-    ///                  It takes a `ResolverType` to inject dependencies to the instance,
+    ///                  It takes a `Resolver` to inject dependencies to the instance,
     ///                  and returns the instance of the component type for the service.
     ///
     /// - Returns: A registered `ServiceEntry` to configure more settings with method chaining.
@@ -68,7 +74,7 @@ public final class Container {
     public func register<Service>(
         _ serviceType: Service.Type,
         name: String? = nil,
-        factory: (ResolverType) -> Service) -> ServiceEntry<Service>
+        factory: (Resolver) -> Service) -> ServiceEntry<Service>
     {
         return _register(serviceType, factory: factory, name: name)
     }
@@ -80,7 +86,7 @@ public final class Container {
     ///   - serviceType: The service type to register.
     ///   - factory:     The closure to specify how the service type is resolved with the dependencies of the type.
     ///                  It is invoked when the `Container` needs to instantiate the instance.
-    ///                  It takes a `ResolverType` to inject dependencies to the instance,
+    ///                  It takes a `Resolver` to inject dependencies to the instance,
     ///                  and returns the instance of the component type for the service.
     ///   - name:        A registration name.
     ///   - option:      A service key option for an extension/plugin.
@@ -100,16 +106,16 @@ public final class Container {
     }
     
     /// Returns a synchronized view of the container for thread safety.
-    /// The returned container is `ResolverType` type. Call this method after you finish all service registrations to the original container.
+    /// The returned container is `Resolver` type. Call this method after you finish all service registrations to the original container.
     ///
-    /// - Returns: A synchronized container as `ResolverType`.
-    public func synchronize() -> ResolverType {
+    /// - Returns: A synchronized container as `Resolver`.
+    public func synchronize() -> Resolver {
         return SynchronizedResolver(container: self)
     }
 }
 
-// MARK: - _ResolverType
-extension Container: _ResolverType {
+// MARK: - _Resolver
+extension Container: _Resolver {
     public func _resolve<Service, Factory>(name: String?, option: ServiceKeyOptionType? = nil, invoker: (Factory) -> Service) -> Service? {
         resolutionPool.incrementDepth()
         defer { resolutionPool.decrementDepth() }
@@ -140,12 +146,27 @@ extension Container: _ResolverType {
                 resolvedInstance = entry.instance as? Service
             }
         }
+
+        if resolvedInstance == nil {
+            debugHelper.resolutionFailed(
+                serviceType: Service.self,
+                key: key,
+                availableRegistrations: getRegistrations()
+            )
+        }
+
         return resolvedInstance
+    }
+
+    private func getRegistrations() -> [ServiceKey: ServiceEntryType] {
+        var registrations = parent?.getRegistrations() ?? [:]
+        services.forEach { key, value in registrations[key] = value }
+        return registrations
     }
 }
 
-// MARK: - ResolverType
-extension Container: ResolverType {
+// MARK: - Resolver
+extension Container: Resolver {
     /// Retrieves the instance with the specified service type.
     ///
     /// - Parameter serviceType: The service type to resolve.
@@ -170,7 +191,7 @@ extension Container: ResolverType {
         _ serviceType: Service.Type,
         name: String?) -> Service?
     {
-        typealias FactoryType = (ResolverType) -> Service
+        typealias FactoryType = (Resolver) -> Service
         return _resolve(name: name) { (factory: FactoryType) in factory(self) }
     }
     
@@ -200,9 +221,9 @@ extension Container: ResolverType {
             }
             resolutionPool[key] = resolvedInstance as Any
         }
-        
-        if let completed = entry.initCompleted as? (ResolverType, Service) -> () {
-            resolutionPool.appendPendingCompletion({completed(self, resolvedInstance)})
+
+        if let completed = entry.initCompleted as? (Resolver, Service) -> () {
+            completed(self, resolvedInstance)
         }
         return resolvedInstance
     }
