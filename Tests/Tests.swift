@@ -135,11 +135,11 @@ class AutoregistrationSpec: QuickSpec {
 
             //TODO: Find a way how to test that assertion was thrown
             //This should fail because we generate register functions only for 10 dependencies
-//            it("registers service with ten dependencies") {
-//                container.register(initializer: Service10.init, service: Service10.self)
-//                let service = container.resolve(Service10.self)
-//                expect(service).notTo(beNil())
-//            }
+            xit("registers service with ten dependencies") {
+                container.autoregister(Service10.self, initializer: Service10.init)
+                let service = container.resolve(Service10.self)
+                expect(service).notTo(beNil())
+            }
         }
     }
 }
