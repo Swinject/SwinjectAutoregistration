@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 SwinjectAutoregistration is an extension of Swinject to automatically inject dependency into registered services.
                        DESC
 
-  s.homepage         = 'https://gitlab.ack.ee/Ackee/ACKSwinject'
+  s.homepage         = 'https://github.com/Swinject/SwinjectAutoregistration'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = 'Swinject Contributors'
   s.source           = { :git => 'https://github.com/Swinject/SwinjectAutoregistration', :tag => s.version.to_s }
