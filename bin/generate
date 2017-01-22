@@ -103,7 +103,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     ]
     
     if argumentsCount > 1 {
-        register += ["   if !hasUnique(arguments: [\(commaConcat(genericArgumentsVars))]) { fatalError(\"AutoRegistration of service with same type arguments (\(commaConcat(genericArgumentsVars.map{ "\\(\($0))" }))) is not supported)\") }"]
+        register += ["   precondition(hasUnique(arguments: [\(commaConcat(genericArgumentsVars))]), \"AutoRegistration of service with same type arguments (\(commaConcat(genericArgumentsVars.map{ "\\(\($0))" }))) is not supported\")"]
     }
     
     register += [

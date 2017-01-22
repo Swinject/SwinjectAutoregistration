@@ -171,31 +171,31 @@ class AutoregistrationSpec: QuickSpec {
                 expect(service).notTo(beNil())
             }
             
-            xit("fails to pass arguments of the same type") {
-                container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
-                let service = container.resolve(SameArgumentsService.self, arguments: "NameA", 15, "NameB")
-                expect(service?.nameA) == "NameA"
-                expect(service?.nameB) == "NameB"
+            it("throws assertion when same type arguments are passed") {
+                expect { () -> Void in
+                    container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
+                }.to(throwAssertion())
             }
             
-            //TODO: Find a way how to test that assertion was thrown
-            //This should fail because we generate register functions only for 10 dependencies
-            xit("fails to register service with ten dependencies") {
-                container.autoregister(Service10.self, initializer: Service10.init)
-                let service = container.resolve(Service10.self)
-                expect(service).notTo(beNil())
+            it("throws assertion when trying to resolve service with ten dependencies") {
+                expect { () -> Void in
+                    container.autoregister(Service10.self, initializer: Service10.init)
+                    _ = container.resolve(Service10.self)
+                }.to(throwAssertion())
             }
             
-            xit("fails to register service with optional dependency") {
-                container.autoregister(OptionalService.self, initializer: OptionalService.init)
-                let service = container.resolve(OptionalService.self)
-                expect(service).notTo(beNil())
+            it("throws assertion when trying to resolve service with optional dependency") {
+                expect { () -> Void in
+                    container.autoregister(OptionalService.self, initializer: OptionalService.init)
+                    _ = container.resolve(OptionalService.self)
+                }.to(throwAssertion())
             }
             
-            xit("fails to register service with unwrapped dependency") {
-                container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
-                let service = container.resolve(UnwrappedService.self)
-                expect(service).notTo(beNil())
+            it("throws assertion when trying to resolve service with unwrapped dependency") {
+                expect { () -> Void in
+                    container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
+                    _ = container.resolve(UnwrappedService.self)
+                }.to(throwAssertion())
             }
         }
     }
