@@ -14,15 +14,11 @@ func unresolvedService<A>(_ a: A?) -> String? {
    return ( a == nil ? "\(A.self)" : nil )
 }
 
-func optionalService<A>(_ a: A?) -> String? {
-    return (isOptional(A.self) ? "\(A.self)" : nil )
-}
-
 func checkResolved<Service, A>(initializer: (A) -> Service, services a: A?){
    let unresolved = ( [a] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a))!), initializer: (\(A.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a)!), initializer: (\(A.self)) -> \(Service.self)")
    }
 }
 
@@ -30,15 +26,11 @@ func unresolvedService<A, B>(_ a: A?, _ b: B?) -> String? {
    return unresolvedService(a) ?? ( b == nil ? "\(B.self)" : nil )
 }
 
-func optionalService<A, B>(_ a: A?, _ b: B?) -> String? {
-    return optionalService(a) ?? (isOptional(B.self) ? "\(B.self)" : nil )
-}
-
 func checkResolved<Service, A, B>(initializer: (A, B) -> Service, services a: A?, _ b: B?){
    let unresolved = ( [a, b] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b))!), initializer: (\(A.self), \(B.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b)!), initializer: (\(A.self), \(B.self)) -> \(Service.self)")
    }
 }
 
@@ -46,15 +38,11 @@ func unresolvedService<A, B, C>(_ a: A?, _ b: B?, _ c: C?) -> String? {
    return unresolvedService(a, b) ?? ( c == nil ? "\(C.self)" : nil )
 }
 
-func optionalService<A, B, C>(_ a: A?, _ b: B?, _ c: C?) -> String? {
-    return optionalService(a, b) ?? (isOptional(C.self) ? "\(C.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C>(initializer: (A, B, C) -> Service, services a: A?, _ b: B?, _ c: C?){
    let unresolved = ( [a, b, c] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c))!), initializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c)!), initializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
    }
 }
 
@@ -62,15 +50,11 @@ func unresolvedService<A, B, C, D>(_ a: A?, _ b: B?, _ c: C?, _ d: D?) -> String
    return unresolvedService(a, b, c) ?? ( d == nil ? "\(D.self)" : nil )
 }
 
-func optionalService<A, B, C, D>(_ a: A?, _ b: B?, _ c: C?, _ d: D?) -> String? {
-    return optionalService(a, b, c) ?? (isOptional(D.self) ? "\(D.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D>(initializer: (A, B, C, D) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?){
    let unresolved = ( [a, b, c, d] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
    }
 }
 
@@ -78,15 +62,11 @@ func unresolvedService<A, B, C, D, E>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E
    return unresolvedService(a, b, c, d) ?? ( e == nil ? "\(E.self)" : nil )
 }
 
-func optionalService<A, B, C, D, E>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?) -> String? {
-    return optionalService(a, b, c, d) ?? (isOptional(E.self) ? "\(E.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D, E>(initializer: (A, B, C, D, E) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?){
    let unresolved = ( [a, b, c, d, e] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d, e).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d, e))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d, e)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
    }
 }
 
@@ -94,15 +74,11 @@ func unresolvedService<A, B, C, D, E, F>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e
    return unresolvedService(a, b, c, d, e) ?? ( f == nil ? "\(F.self)" : nil )
 }
 
-func optionalService<A, B, C, D, E, F>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?) -> String? {
-    return optionalService(a, b, c, d, e) ?? (isOptional(F.self) ? "\(F.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D, E, F>(initializer: (A, B, C, D, E, F) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?){
    let unresolved = ( [a, b, c, d, e, f] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d, e, f).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d, e, f))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d, e, f)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
    }
 }
 
@@ -110,15 +86,11 @@ func unresolvedService<A, B, C, D, E, F, G>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, 
    return unresolvedService(a, b, c, d, e, f) ?? ( g == nil ? "\(G.self)" : nil )
 }
 
-func optionalService<A, B, C, D, E, F, G>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?) -> String? {
-    return optionalService(a, b, c, d, e, f) ?? (isOptional(G.self) ? "\(G.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D, E, F, G>(initializer: (A, B, C, D, E, F, G) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?){
    let unresolved = ( [a, b, c, d, e, f, g] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d, e, f, g).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
    }
 }
 
@@ -126,15 +98,11 @@ func unresolvedService<A, B, C, D, E, F, G, H>(_ a: A?, _ b: B?, _ c: C?, _ d: D
    return unresolvedService(a, b, c, d, e, f, g) ?? ( h == nil ? "\(H.self)" : nil )
 }
 
-func optionalService<A, B, C, D, E, F, G, H>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?) -> String? {
-    return optionalService(a, b, c, d, e, f, g) ?? (isOptional(H.self) ? "\(H.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D, E, F, G, H>(initializer: (A, B, C, D, E, F, G, H) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?){
    let unresolved = ( [a, b, c, d, e, f, g, h] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d, e, f, g, h).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g, h))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g, h)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
    }
 }
 
@@ -142,14 +110,10 @@ func unresolvedService<A, B, C, D, E, F, G, H, I>(_ a: A?, _ b: B?, _ c: C?, _ d
    return unresolvedService(a, b, c, d, e, f, g, h) ?? ( i == nil ? "\(I.self)" : nil )
 }
 
-func optionalService<A, B, C, D, E, F, G, H, I>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?) -> String? {
-    return optionalService(a, b, c, d, e, f, g, h) ?? (isOptional(I.self) ? "\(I.self)" : nil )
-}
-
 func checkResolved<Service, A, B, C, D, E, F, G, H, I>(initializer: (A, B, C, D, E, F, G, H, I) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let optional = optionalService(a, b, c, d, e, f, g, h, i).flatMap { optionalMessage($0) } ?? ""
-       fatalError("\(optional)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g, h, i))!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
+       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: "\n")
+       fatalError("\(warningsMessage)Failed to resolve \(unresolvedService(a, b, c, d, e, f, g, h, i)!), initializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
    }
 }

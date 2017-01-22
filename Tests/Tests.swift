@@ -58,6 +58,14 @@ class AutoregistrationSpec: QuickSpec {
         init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ){}
     }
     
+    class OptionalService {
+        init(a: DependencyA?){}
+    }
+    
+    class UnwrappedService {
+        init(a: DependencyA!){}
+    }
+    
     
     override func spec() {
         describe("autoregistration") {
@@ -135,9 +143,21 @@ class AutoregistrationSpec: QuickSpec {
 
             //TODO: Find a way how to test that assertion was thrown
             //This should fail because we generate register functions only for 10 dependencies
-            xit("registers service with ten dependencies") {
+            xit("fails to register service with ten dependencies") {
                 container.autoregister(Service10.self, initializer: Service10.init)
                 let service = container.resolve(Service10.self)
+                expect(service).notTo(beNil())
+            }
+            
+            xit("fails to register service with optional dependency") {
+                container.autoregister(OptionalService.self, initializer: OptionalService.init)
+                let service = container.resolve(OptionalService.self)
+                expect(service).notTo(beNil())
+            }
+            
+            xit("fails to register service with unwrapped dependency") {
+                container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
+                let service = container.resolve(UnwrappedService.self)
                 expect(service).notTo(beNil())
             }
         }

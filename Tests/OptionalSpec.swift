@@ -65,6 +65,6 @@ class OptionalSpec: QuickSpec {
                 expect(optional) == "Optional<Int>"
             }
         }
-	}
+    }
 	
 }

@@ -10,6 +10,10 @@
  import Swinject 
 
 
+let maxDependencies = 9
+let maxArguments = 3
+
+
 public extension Container {
 
 /** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.

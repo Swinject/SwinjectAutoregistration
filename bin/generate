@@ -142,23 +142,19 @@ func checkGenerator(_ dependencies: Int) -> String {
     
     let servicesDefinition = dependencies == 0 ? "" : "\(commaConcat(genericParameters.enumerated().map{ "\($0 >= 1 ? "_" : "") \($1.lowercased()): \($1)?" }))"
     let recursiveUnresolvedCall = dependencies > 1 ? "unresolvedService(\(commaConcat(genericParameters.dropLast().map { $0.lowercased() }))) ?? " : ""
-    let recursiveOptionalCall = dependencies > 1 ? "optionalService(\(commaConcat(genericParameters.dropLast().map { $0.lowercased() }))) ?? " : ""
     let lowercasedServicesString = commaConcat(genericParameters.map{ $0.lowercased() })
+    
     
     let check = [
     "func unresolvedService<\(generics)>(_\(servicesDefinition)) -> String? {",
     "   return \(recursiveUnresolvedCall)( \(genericParameters.last!.lowercased()) == nil ? \"\\(\(genericParameters.last!).self)\" : nil )",
     "}",
     "",
-    "func optionalService<\(generics)>(_\(servicesDefinition)) -> String? {",
-    "    return \(recursiveOptionalCall)(isOptional(\(genericParameters.last!).self) ? \"\\(\(genericParameters.last!).self)\" : nil )",
-    "}",
-    "",
     "func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, services\(servicesDefinition)){",
     "   let unresolved = ( [\(lowercasedServicesString)] as [Any?] ).filter { $0 == nil }",
     "   if unresolved.count > 0 {",
-    "       let optional = optionalService(\(lowercasedServicesString)).flatMap { optionalMessage($0) } ?? \"\"",
-    "       fatalError(\"\\(optional)Failed to resolve \\(unresolvedService(\(lowercasedServicesString)))!), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
+    "       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: \"\\n\")",
+    "       fatalError(\"\\(warningsMessage)Failed to resolve \\(unresolvedService(\(lowercasedServicesString))!), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
     "   }",
     "}"
     ]
@@ -197,6 +193,9 @@ let registers = (0...dependenciesCount).map { dep in
 
 
 var autoregistrationOutput = [
+    "let maxDependencies = \(dependenciesCount)",
+    "let maxArguments = \(argumentsCount)",
+    "\n",
     "public extension Container {\n",
         registers.joined(separator: "\n\n"),
     "\n\n}",
