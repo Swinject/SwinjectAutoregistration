@@ -37,7 +37,7 @@
 		CD5B9EDF1D832E32007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5B9EE01D833088007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9EE11D833088007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
-		CD5B9EE21D83308B007ED05F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* Tests.swift */; };
+		CD5B9EE21D83308B007ED05F /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* AutoregistrationSpec.swift */; };
 		CD5B9EF81D8333A9007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9EF91D8333A9007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
 		CD5B9EFA1D8333A9007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,7 +45,7 @@
 		CD5B9F1F1D83368E007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5B9F201D833697007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9F211D833697007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
-		CD5B9F221D83369A007ED05F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* Tests.swift */; };
+		CD5B9F221D83369A007ED05F /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* AutoregistrationSpec.swift */; };
 		CD5B9F5B1D833772007ED05F /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9E7D1D832A84007ED05F /* Swinject.framework */; };
 		CD5B9F5C1D83377C007ED05F /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9E851D832A84007ED05F /* Swinject.framework */; };
 		CD5B9F5F1D8337B4007ED05F /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9E6A1D832A84007ED05F /* Quick.framework */; };
@@ -58,7 +58,7 @@
 		CD5B9F701D8338FC007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
 		CD5B9F711D8338FC007ED05F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8D1D832BF9007ED05F /* Operators.swift */; };
 		CD5B9F721D833900007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CD5B9F731D83390C007ED05F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* Tests.swift */; };
+		CD5B9F731D83390C007ED05F /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8F1D832BF9007ED05F /* AutoregistrationSpec.swift */; };
 		CD5B9F761D833A15007ED05F /* SwinjectAutoregistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9F281D833711007ED05F /* SwinjectAutoregistration.framework */; };
 		CD5B9F781D833A27007ED05F /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9E641D832A84007ED05F /* Quick.framework */; };
 /* End PBXBuildFile section */
@@ -319,7 +319,6 @@
 		AC4AC9481E33C71D00E6355A /* TypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeParser.swift; sourceTree = "<group>"; };
 		AC4AC94A1E33C75200E6355A /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		AC4AC9521E33CF0600E6355A /* WarningsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningsSpec.swift; sourceTree = "<group>"; };
-		AC6A0E241E2FF6DD00EF441C /* OptionalSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalSpec.swift; sourceTree = "<group>"; };
 		CD5B9E231D832A4F007ED05F /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		CD5B9E251D832A4F007ED05F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		CD5B9E261D832A4F007ED05F /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
@@ -346,7 +345,7 @@
 		CD5B9E551D832A84007ED05F /* Swinject.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swinject.xcodeproj; path = Carthage/Checkouts/Swinject/Swinject.xcodeproj; sourceTree = "<group>"; };
 		CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRegistration.swift; sourceTree = "<group>"; };
 		CD5B9E8D1D832BF9007ED05F /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		CD5B9E8F1D832BF9007ED05F /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		CD5B9E8F1D832BF9007ED05F /* AutoregistrationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoregistrationSpec.swift; sourceTree = "<group>"; };
 		CD5B9EB21D832C81007ED05F /* watchOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Application.xcconfig"; sourceTree = "<group>"; };
 		CD5B9EB31D832C81007ED05F /* watchOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Base.xcconfig"; sourceTree = "<group>"; };
 		CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
@@ -593,9 +592,8 @@
 		CD5B9E8E1D832BF9007ED05F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CD5B9E8F1D832BF9007ED05F /* Tests.swift */,
+				CD5B9E8F1D832BF9007ED05F /* AutoregistrationSpec.swift */,
 				CD5B9EDD1D832E2E007ED05F /* Info.plist */,
-				AC6A0E241E2FF6DD00EF441C /* OptionalSpec.swift */,
 				AC4AC9521E33CF0600E6355A /* WarningsSpec.swift */,
 				AC4AC9071E32964C00E6355A /* TypeParserTests.swift */,
 			);
@@ -1103,7 +1101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4AC9081E32964C00E6355A /* TypeParserTests.swift in Sources */,
-				CD5B9EE21D83308B007ED05F /* Tests.swift in Sources */,
+				CD5B9EE21D83308B007ED05F /* AutoregistrationSpec.swift in Sources */,
 				AC4AC9531E33CF0600E6355A /* WarningsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1141,7 +1139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4AC9171E3297E000E6355A /* TypeParserTests.swift in Sources */,
-				CD5B9F221D83369A007ED05F /* Tests.swift in Sources */,
+				CD5B9F221D83369A007ED05F /* AutoregistrationSpec.swift in Sources */,
 				AC4AC9541E33D04C00E6355A /* WarningsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1165,7 +1163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4AC9181E3297E100E6355A /* TypeParserTests.swift in Sources */,
-				CD5B9F731D83390C007ED05F /* Tests.swift in Sources */,
+				CD5B9F731D83390C007ED05F /* AutoregistrationSpec.swift in Sources */,
 				AC4AC9551E33D04D00E6355A /* WarningsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
