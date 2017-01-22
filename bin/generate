@@ -96,10 +96,17 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     
     let closureParameters = commaConcat(["r"] + genericArgumentsVars)
     
-    let register = [
+    var register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
         "@discardableResult",
         "public func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
+    ]
+    
+    if argumentsCount > 1 {
+        register += ["   if !hasUnique(arguments: [\(commaConcat(genericArgumentsVars))]) { fatalError(\"AutoRegistration of service with same type arguments (\(commaConcat(genericArgumentsVars.map{ "\\(\($0))" }))) is not supported)\") }"]
+    }
+    
+    register += [
         "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
         initializer,
         "   } as (\(commaConcat(["ResolverType"] + genericArguments))) -> Service)",

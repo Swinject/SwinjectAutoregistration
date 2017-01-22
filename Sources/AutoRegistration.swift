@@ -127,6 +127,7 @@ public func autoregister<Service, A, B, Arg1>(_ service: Service.Type, name: Str
  */
 @discardableResult
 public func autoregister<Service, A, B, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b)
@@ -187,6 +188,7 @@ public func autoregister<Service, A, B, C, Arg1>(_ service: Service.Type, name: 
  */
 @discardableResult
 public func autoregister<Service, A, B, C, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c)
@@ -207,6 +209,7 @@ public func autoregister<Service, A, B, C, Arg1, Arg2>(_ service: Service.Type, 
  */
 @discardableResult
 public func autoregister<Service, A, B, C, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c)
@@ -267,6 +270,7 @@ public func autoregister<Service, A, B, C, D, Arg1>(_ service: Service.Type, nam
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d)
@@ -287,6 +291,7 @@ public func autoregister<Service, A, B, C, D, Arg1, Arg2>(_ service: Service.Typ
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d)
@@ -347,6 +352,7 @@ public func autoregister<Service, A, B, C, D, E, Arg1>(_ service: Service.Type, 
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
@@ -367,6 +373,7 @@ public func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(_ service: Service.
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D, E) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e)
@@ -427,6 +434,7 @@ public func autoregister<Service, A, B, C, D, E, F, Arg1>(_ service: Service.Typ
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
@@ -447,6 +455,7 @@ public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(_ service: Servi
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D, E, F) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f)
@@ -507,6 +516,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, Arg1>(_ service: Service.
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
@@ -527,6 +537,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2>(_ service: Se
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D, E, F, G) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g)
@@ -587,6 +598,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1>(_ service: Servi
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
@@ -607,6 +619,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(_ service:
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D, E, F, G, H) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h)
@@ -667,6 +680,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1>(_ service: Se
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2 in 
        let a: A? = r.resolve(arguments: arg1, arg2); let b: B? = r.resolve(arguments: arg1, arg2); let c: C? = r.resolve(arguments: arg1, arg2); let d: D? = r.resolve(arguments: arg1, arg2); let e: E? = r.resolve(arguments: arg1, arg2); let f: F? = r.resolve(arguments: arg1, arg2); let g: G? = r.resolve(arguments: arg1, arg2); let h: H? = r.resolve(arguments: arg1, arg2); let i: I? = r.resolve(arguments: arg1, arg2)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)
@@ -687,6 +701,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(_ servi
  */
 @discardableResult
 public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping (A, B, C, D, E, F, G, H, I) -> Service) -> ServiceEntry<Service> {
+   if !hasUnique(arguments: [arg1, arg2, arg3]) { fatalError("AutoRegistration of service with same type arguments (\(arg1), \(arg2), \(arg3)) is not supported)") }
    return self.register(service.self, name: name, factory: { r, arg1, arg2, arg3 in 
        let a: A? = r.resolve(arguments: arg1, arg2, arg3); let b: B? = r.resolve(arguments: arg1, arg2, arg3); let c: C? = r.resolve(arguments: arg1, arg2, arg3); let d: D? = r.resolve(arguments: arg1, arg2, arg3); let e: E? = r.resolve(arguments: arg1, arg2, arg3); let f: F? = r.resolve(arguments: arg1, arg2, arg3); let g: G? = r.resolve(arguments: arg1, arg2, arg3); let h: H? = r.resolve(arguments: arg1, arg2, arg3); let i: I? = r.resolve(arguments: arg1, arg2, arg3)
        checkResolved(initializer: initializer, services: a, b, c, d, e, f, g, h, i)

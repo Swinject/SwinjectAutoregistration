@@ -66,6 +66,12 @@ class AutoregistrationSpec: QuickSpec {
         init(a: DependencyA!){}
     }
     
+    class SameArgumentsService {
+        let nameA: String; let nameB: String
+        init(a: DependencyA, nameA: String, age: Int, nameB: String){
+            self.nameA = nameA; self.nameB = nameB
+        }
+    }
     
     override func spec() {
         describe("autoregistration") {
@@ -140,7 +146,38 @@ class AutoregistrationSpec: QuickSpec {
                 let service = container.resolve(Service9.self)
                 expect(service).notTo(beNil())
             }
-
+            
+            it("registers service with one dynamic argument") {
+                container.autoregister(Service2.self, argument: DependencyB.self, initializer: Service2.init)
+                let service = container.resolve(Service2.self, argument: DependencyB())
+                expect(service).notTo(beNil())
+            }
+            
+            it("registers service with two dynamic arguments") {
+                container.autoregister(Service3.self, arguments: DependencyB.self, DependencyC.self, initializer: Service3.init)
+                let service = container.resolve(Service3.self, arguments: DependencyB(), DependencyC())
+                expect(service).notTo(beNil())
+            }
+            
+            it("registers service with three dynamic arguments") {
+                container.autoregister(Service4.self, arguments: DependencyB.self, DependencyC.self, DependencyD.self, initializer: Service4.init)
+                let service = container.resolve(Service4.self, arguments: DependencyB(), DependencyC(), DependencyD())
+                expect(service).notTo(beNil())
+            }
+            
+            it("registers with arguments interchangeably") {
+                container.autoregister(Service4.self, arguments: DependencyC.self, DependencyD.self, DependencyB.self, initializer: Service4.init)
+                let service = container.resolve(Service4.self, arguments: DependencyC(), DependencyD(), DependencyB())
+                expect(service).notTo(beNil())
+            }
+            
+            xit("fails to pass arguments of the same type") {
+                container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
+                let service = container.resolve(SameArgumentsService.self, arguments: "NameA", 15, "NameB")
+                expect(service?.nameA) == "NameA"
+                expect(service?.nameB) == "NameB"
+            }
+            
             //TODO: Find a way how to test that assertion was thrown
             //This should fail because we generate register functions only for 10 dependencies
             xit("fails to register service with ten dependencies") {
