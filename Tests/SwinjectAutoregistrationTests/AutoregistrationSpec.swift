@@ -214,6 +214,7 @@ class AutoregistrationSpec: QuickSpec {
                 expect(logs.count) == 1
             }
             
+            #if !os(Linux)
             it("does not loose any logs while multithreading"){
                 var logs: [String] = []
                 Container.loggingFunction = { logs.append($0) }
@@ -239,6 +240,8 @@ class AutoregistrationSpec: QuickSpec {
                 
                 expect(logs.count).toEventually(equal(resolutionsCount))
             }
+            #endif
+
         }
     }
 }

@@ -7,9 +7,45 @@
 //
 
 import Foundation
+#if !os(Linux)
+    extension Scanner {
+        func scanString(string: String) -> String? {
+            var value: NSString?
+            if self.scanString(string, into: &value), let value = value as? String {
+                return value
+            }
+            return nil
+        }
+        
+        func scanCharactersFromSet(_ set: CharacterSet) -> String? {
+            var value: NSString?
+            if self.scanCharacters(from: set, into: &value), let value = value as? String {
+                return value
+            }
+            return nil
+        }
+    }
+    
+    extension NSMutableCharacterSet {
+        func insert(charactersIn range: Range<UnicodeScalar>) {
+            let nsRange = NSRange(location: Int(range.lowerBound.value), length: Int(range.upperBound.value - range.lowerBound.value))
+            self.addCharacters(in: nsRange)
+        }
+        
+        func insert(charactersIn string: String) {
+            self.addCharacters(in: string)
+        }
+        
+        func formUnion(_ set: CharacterSet) {
+            self.formUnion(with: set)
+        }
+    }
+#endif
 
-private func ..<(start: Int, end: Int) -> NSRange {
-    return NSRange(location: start, length: end - start + 1)
+
+
+private func ..<(start: Int, end: Int) -> Range<UnicodeScalar> {
+    return UnicodeScalar(start)! ..< UnicodeScalar(end)!
 }
 
 /// Simple top-down parser for type description based on swift grammatic:
@@ -61,7 +97,7 @@ class TypeParser {
         let genericTypes = parseGenericArgumentClause() ?? []
         var subTypeIdentifier: TypeIdentifier? = nil
         
-        if scanner.scanString(".", into: nil), let typeIdentifier = parseTypeIdentifier() {
+        if scanner.scanString(string: ".") != nil, let typeIdentifier = parseTypeIdentifier() {
             subTypeIdentifier = typeIdentifier
         }
         
@@ -70,16 +106,16 @@ class TypeParser {
     }
     
     func parseGenericArgumentClause() -> [Type]? {
-        guard scanner.scanString("<", into: nil) else { return nil }
+        guard scanner.scanString(string: "<") != nil else { return nil }
         guard let type = parseType() else { return nil }
         
         var types: [Type] = [type]
         
-        while scanner.scanString(",", into: nil), let type = parseType(){
+        while scanner.scanString(string: ",") != nil, let type = parseType(){
             types.append(type)
         }
         
-        guard scanner.scanString(">", into: nil) else { return nil }
+        guard scanner.scanString(string: ">") != nil else { return nil }
         return types
     }
     
@@ -90,7 +126,7 @@ class TypeParser {
         
         var protocolTypes: [TypeIdentifier] = [protocolType]
         
-        while scanner.scanString("&", into: nil), let protocolType = parseTypeIdentifier() {
+        while scanner.scanString(string: "&") != nil, let protocolType = parseTypeIdentifier() {
             protocolTypes.append(protocolType)
         }
         
@@ -100,17 +136,17 @@ class TypeParser {
     }
     
     func parseTupleType() -> [Type]? {
-        guard scanner.scanString("(", into: nil) else { return nil }
+        guard scanner.scanString(string: "(") != nil else { return nil }
         
         var types: [Type] = []
         
         if let type = parseType() { types.append(type) }
         
-        while scanner.scanString(",", into: nil), let type = parseType() {
+        while scanner.scanString(string: ",") != nil, let type = parseType() {
             types.append(type)
         }
         
-        guard scanner.scanString(")", into: nil) else { return nil }
+        guard scanner.scanString(string: ")") != nil else { return nil }
         
         return types
     }
@@ -120,10 +156,10 @@ class TypeParser {
         
         guard let parameters = parseTupleType() else { return nil }
         
-        let `throws` = scanner.scanString("throws", into: nil)
+        let `throws` = scanner.scanString(string: "throws") != nil
         // - rethrows is not allowed for closures
         
-        guard scanner.scanString("->", into: nil) else { scanner.scanLocation = originalLocation; return nil }
+        guard scanner.scanString(string: "->") != nil else { scanner.scanLocation = originalLocation; return nil }
         
         guard let returnType = parseType() else { scanner.scanLocation = originalLocation; return nil }
         
@@ -132,14 +168,16 @@ class TypeParser {
     }
     
     func parseIdentifier() -> String? {
-        
-        let head = NSMutableCharacterSet()
-        
         // See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/swift/grammar/identifier-head
         
         //Identifier head
-        head.formUnion(with: CharacterSet.letters)
-        head.addCharacters(in: "_")
+        #if os(Linux)
+            var head = CharacterSet()
+        #else
+            let head = NSMutableCharacterSet()
+        #endif
+        head.formUnion(CharacterSet.letters)
+        head.insert(charactersIn: "_")
         
         let ranges = [
             0x00A8 ..< 0x00A8, 0x00AA ..< 0x00AA,  0x00AD ..< 0x00AD, 0x00AF ..< 0x00AF, 0x00B2..<0x00B5, 0x00B7..<0x00BA,
@@ -158,22 +196,24 @@ class TypeParser {
             0x90000..<0x9FFFD, 0xA0000..<0xAFFFD, 0xB0000..<0xBFFFD, 0xC0000..<0xCFFFD,
             0xD0000..<0xDFFFD, 0xE0000..<0xEFFFD]
         
-        ranges.forEach { head.addCharacters(in: $0) }
+        ranges.forEach { head.insert(charactersIn: $0) }
         
         //Identifier characters
-        let characters = head.copy() as! NSMutableCharacterSet
-        characters.addCharacters(in: "0123456789")
+        #if os(Linux)
+            var characters = head
+        #else
+            let characters = head.copy() as! NSMutableCharacterSet
+        #endif
+        characters.insert(charactersIn: "0123456789")
+        
         
         let charactersRanges =  [0x0300..<0x036F, 0x1DC0..<0x1DFF, 0x20D0..<0x20FF, 0xFE20..<0xFE2F]
-        charactersRanges.forEach { characters.addCharacters(in: $0) }
+        charactersRanges.forEach { characters.insert(charactersIn: $0) }
         
-        var headString: NSString?
-        var charactersString: NSString?
+        guard let headString = scanner.scanCharactersFromSet(head as CharacterSet) else { return nil }
         
-        guard scanner.scanCharacters(from: head as CharacterSet, into: &headString) else { return nil }
-        
-        scanner.scanCharacters(from: characters as CharacterSet, into: &charactersString)
-        return "\(headString!)\(charactersString ?? "")"
+        let charactersString = scanner.scanCharactersFromSet(characters as CharacterSet)
+        return "\(headString)\(charactersString ?? "")"
     }
     
 }

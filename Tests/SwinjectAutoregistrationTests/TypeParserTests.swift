@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import Quick
+import Nimble
 
 protocol ProtocolA{}
 protocol ProtocolB{}
@@ -21,7 +23,7 @@ class `protocol` {}
 
 @testable import SwinjectAutoregistration
 
-class TypeParserTests: XCTestCase {
+class TypeParserSpec: QuickSpec {
     
     //Helpers
     func identifier(_ name: String, generics: [Type] = []) -> Type {
@@ -32,138 +34,141 @@ class TypeParserTests: XCTestCase {
         return Type.identifier(TypeIdentifier(name: name, genericTypes: generics.map { identifier($0) }))
     }
     
-    
-    func testScansTypeIdentifier() {
-        let string = "\(_x0😪name²〡yﷰ.self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, identifier(string))
+    override func spec() {
+        describe("autoregistration") {
+            
+            it("scans type identifier") {
+                let string = "\(_x0😪name²〡yﷰ.self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.identifier(string))
+            }
+            
+            it("doesnt scan non type identifier") {
+                let string = "1Array"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, nil)
+            }
+            
+            
+            it("scans subtype identifier") {
+                let string = "\(ClassA.Nested.self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.identifier("Nested"))
+            }
+            
+            it("scans array type") {
+                let string = "\([String].self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.generic_identifier("Array", generics: ["String"]))
+            }
+            
+            it("scans generic type with multiple arguments") {
+                let string = "\([Int: String].self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.generic_identifier("Dictionary", generics: ["Int", "String"]))
+            }
+            
+            it("scans tuple type") {
+                let string = "\((name: String, count: Int).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, Type.tuple([self.identifier("String"), self.identifier("Int")]))
+            }
+            
+            it("scans tuple of tuples") {
+                let string = "\(((String, Int, Double), [String]).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, Type.tuple([Type.tuple([self.identifier("String"), self.identifier("Int"), self.identifier("Double")]), self.generic_identifier("Array", generics: ["String"])]))
+            }
+            
+            it("scans closure type") {
+                let string = "\(((String, Int) -> String).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([self.identifier("String"), self.identifier("Int")])], returnType: self.identifier("String"), throws: false))
+            }
+            
+            it("scans nested function type") {
+                let string = "\((((String) -> String, Int) -> String).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                //Type print adds one unneccessary tuple to the output
+                XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([Type.closure(parameters: [self.identifier("String")], returnType: self.identifier("String"), throws: false), self.identifier("Int")])], returnType: self.identifier("String"), throws: false))
+            }
+            
+            it("scans no parameter function type") {
+                let string = "\(((Void) -> Void).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                let void = Type.tuple([]) // Void is empty tuple
+                XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: false))
+            }
+            
+            it("scans throwing function type") {
+                let string = "\(((Void) throws -> Void).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                let void = Type.tuple([]) // Void is empty tuple
+                XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: true))
+            }
+            
+            it("scans implicitly unwrapped optional") {
+                let string = "\((String!).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.generic_identifier("ImplicitlyUnwrappedOptional", generics: ["String"]))
+            }
+            
+            it("scans optional") {
+                let string = "\((Int?).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.generic_identifier("Optional", generics: ["Int"]))
+            }
+            
+            it("scans protocol composition type") {
+                let string = "\((ProtocolA & ProtocolB).self)"
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, Type.protocolComposition([TypeIdentifier(name: "ProtocolA"), TypeIdentifier(name: "ProtocolB")]))
+            }
+            
+            it("scans metatypes") {
+                let string = "\((ProtocolA.Type.Type).self)" // Very meta
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, Type.identifier(TypeIdentifier(name: "ProtocolA", subTypeIdentifier: TypeIdentifier(name: "Type", subTypeIdentifier: TypeIdentifier(name: "Type")))))
+            }
+            
+            it("scans backticked type") {
+                let string = "\((`protocol`).self)" 
+                let parser = TypeParser(string: string)
+                let type = parser.parseType()
+                
+                XCTAssertEqual(type, self.identifier(string))
+            }
+        }
     }
-    
-    func testDoesntScanNonTypeIdentifier() {
-        let string = "1Array"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, nil)
-    }
-    
-    
-    func testScanSubTypeIdentifier() {
-        let string = "\(ClassA.Nested.self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, identifier("Nested"))
-    }
-    
-    func testScansArrayType() {
-        let string = "\([String].self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, generic_identifier("Array", generics: ["String"]))
-    }
-    
-    func testScansGenericTypeWithMultipleArguments() {
-        let string = "\([Int: String].self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, generic_identifier("Dictionary", generics: ["Int", "String"]))
-    }
-    
-    func testScansTupleType() {
-        let string = "\((name: String, count: Int).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, Type.tuple([identifier("String"), identifier("Int")]))
-    }
-    
-    func testScansTupleOfTuples() {
-        let string = "\(((String, Int, Double), [String]).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, Type.tuple([Type.tuple([identifier("String"), identifier("Int"), identifier("Double")]), generic_identifier("Array", generics: ["String"])]))
-    }
-    
-    func testScansClosureType() {
-        let string = "\(((String, Int) -> String).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([identifier("String"), identifier("Int")])], returnType: identifier("String"), throws: false))
-    }
-    
-    func testScansNestedFunctionType() {
-        let string = "\((((String) -> String, Int) -> String).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        //Type print adds one unneccessary tuple to the output
-        XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([Type.closure(parameters: [identifier("String")], returnType: identifier("String"), throws: false), identifier("Int")])], returnType: identifier("String"), throws: false))
-    }
-    
-    func testScansNoParameterFunctionType() {
-        let string = "\(((Void) -> Void).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        let void = Type.tuple([]) // Void is empty tuple
-        XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: false))
-    }
-    
-    func testScansThrowingFunctionType() {
-        let string = "\(((Void) throws -> Void).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        let void = Type.tuple([]) // Void is empty tuple
-        XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: true))
-    }
-    
-    func testScansImplicitlyUnwrappedOptional() {
-        let string = "\((String!).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, generic_identifier("ImplicitlyUnwrappedOptional", generics: ["String"]))
-    }
-    
-    func testScansOptional() {
-        let string = "\((Int?).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, generic_identifier("Optional", generics: ["Int"]))
-    }
-    
-    func testScansProtocolCompositionType() {
-        let string = "\((ProtocolA & ProtocolB).self)"
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, Type.protocolComposition([TypeIdentifier(name: "ProtocolA"), TypeIdentifier(name: "ProtocolB")]))
-    }
-    
-    func testScansMetatypes() {
-        let string = "\((ProtocolA.Type.Type).self)" // Very meta
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, Type.identifier(TypeIdentifier(name: "ProtocolA", subTypeIdentifier: TypeIdentifier(name: "Type", subTypeIdentifier: TypeIdentifier(name: "Type")))))
-    }
-    
-    func testScansBacktickedType() {
-        let string = "\((`protocol`).self)" 
-        let parser = TypeParser(string: string)
-        let type = parser.parseType()
-        
-        XCTAssertEqual(type, identifier(string))
-    }
-    
     
 }
