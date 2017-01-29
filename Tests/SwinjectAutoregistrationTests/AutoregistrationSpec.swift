@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import SwinjectAutoregistration
 import Swinject
+import Foundation
 
 class AutoregistrationSpec: QuickSpec {
     
