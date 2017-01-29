@@ -22,7 +22,7 @@ matrix:
     - env: JOB="POD_LINT"
       script:
         - pod lib lint
-    - env: JOB="XCODE" DEST="OS=8.4,name=iPhone 5" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test"
+    - env: JOB="XCODE" DEST="OS=8.4,name=iPhone 5s" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test"
     - env: JOB="XCODE" DEST="OS=9.3,name=iPhone 6" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test"
     - env: JOB="XCODE" DEST="OS=10.1,name=iPhone 7 Plus" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test"
     - env: JOB="XCODE" DEST="arch=x86_64" SCHEME="SwinjectAutoregistration-OSX" SDK="macosx" ACTION="test"

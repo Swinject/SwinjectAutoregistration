@@ -23,6 +23,7 @@ matrix:
         - swift test
     - env: JOB="POD_LINT"
       script:
+        - pod repo update
         - pod lib lint
     - env: JOB="XCODE" DEST="OS=8.4,name=iPhone 5s" SCHEME="Swinject-iOS" SDK="iphonesimulator" ACTION="test"
     - env: JOB="XCODE" DEST="OS=9.3,name=iPhone 6" SCHEME="Swinject-iOS" SDK="iphonesimulator" ACTION="test"
