@@ -5,7 +5,7 @@
 //  Created by Tomas Kohout on 20/01/2017.
 //  Copyright © 2017 Swinject Contributors. All rights reserved.
 //
-
+#if !os(Linux)
 import XCTest
 import Quick
 import Nimble
@@ -172,3 +172,4 @@ class TypeParserSpec: QuickSpec {
     }
     
 }
+#endif

@@ -27,6 +27,10 @@ enum Warning {
 /// Shows warnings based on information parsed from initializers description
 
 func warnings<Service, Parameters>(forInitializer initializer: (Parameters) -> Service) -> [Warning] {
+    #if os(Linux)
+        //Warnings are not supported on Linux
+        return []
+    #endif
     let parser = TypeParser(string: String(describing: Parameters.self))
     guard let type = parser.parseType() else { return [] }
     

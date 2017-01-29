@@ -172,6 +172,7 @@ class AutoregistrationSpec: QuickSpec {
                 expect(service).notTo(beNil())
             }
             
+            #if !os(Linux)
             it("throws assertion when same type arguments are passed") {
                 expect { () -> Void in
                     container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
@@ -198,6 +199,7 @@ class AutoregistrationSpec: QuickSpec {
                     _ = container.resolve(UnwrappedService.self)
                 }.to(throwAssertion())
             }
+            #endif
             
             it("does not erase logging function"){
                 var logs: [String] = []

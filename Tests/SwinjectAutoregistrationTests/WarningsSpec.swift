@@ -1,3 +1,4 @@
+#if !os(Linux)
 import Quick
 import Nimble
 
@@ -82,7 +83,6 @@ class WarningsSpec: QuickSpec {
     
     override func spec() {
         describe("warnings checker") {
-            //fails on linux
             it("does show warning for service with more than 9 dependencies"){
                 let w = warnings(forInitializer: Service10.init)
                 expect(w.first) == Warning.tooManyDependencies(10)
@@ -98,19 +98,16 @@ class WarningsSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            //fails on linux
             it("does show warning for service with optional dependency"){
                 let w = warnings(forInitializer: OptionalService.init)
                 expect(w.first) == Warning.optional("DependencyB")
             }
             
-            //fails on linux
             it("does show warning for service with implicitly unwrapped dependency"){
                 let w = warnings(forInitializer: UnwrappedService.init)
                 expect(w.first) == Warning.implicitlyUnwrappedOptional("DependencyA")
             }
             
-            //fails on linux
             it("does show multiple warnings"){
                 let w = warnings(forInitializer: BadService.init)
                 expect(w.count) == 5
@@ -133,7 +130,6 @@ class WarningsSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            //fails on linux
             it("does show warning for optional closure"){
                 let w = warnings(forInitializer: OptionalNestedClosureService.init)
                 expect(w.count) == 1
@@ -143,3 +139,4 @@ class WarningsSpec: QuickSpec {
 	}
 	
 }
+#endif

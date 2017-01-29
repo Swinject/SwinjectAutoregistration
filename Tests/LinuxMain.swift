@@ -12,7 +12,7 @@ import Quick
 @testable import SwinjectAutoregistrationTests
 
 Quick.QCKMain([
-    AutoregistrationSpec.self,
-    WarningsSpec.self,
-    TypeParserSpec.self
+    AutoregistrationSpec.self
+//    WarningsSpec.self,
+//    TypeParserSpec.self
 ])
