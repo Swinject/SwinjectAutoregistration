@@ -1,3 +1,4 @@
+import Dispatch
 import Foundation
 @testable import Nimble
 import XCTest
@@ -58,14 +59,12 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
-#if _runtime(_ObjC)
     func deferToMainQueue(action: @escaping () -> Void) {
         DispatchQueue.main.async {
             Thread.sleep(forTimeInterval: 0.01)
             action()
         }
     }
-#endif
 
 public class NimbleHelper : NSObject {
     public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
@@ -82,11 +81,18 @@ public class NimbleHelper : NSObject {
 }
 
 extension Date {
-    init(dateTimeString:String) {
+    init(dateTimeString: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let date = dateFormatter.date(from: dateTimeString)!
         self.init(timeInterval:0, since:date)
+    }
+}
+
+extension NSDate {
+    convenience init(dateTimeString: String) {
+        let date = Date(dateTimeString: dateTimeString)
+        self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
     }
 }

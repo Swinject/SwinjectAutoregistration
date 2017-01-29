@@ -87,9 +87,9 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     if breakIntoVariables {
         let services = genericParameters.enumerated().map { "let \($1.lowercased()): \($1)? = \(resolvers[$0])" }
         initializer =
-            "       " + services.joined(separator: "; ") + "\n" +
-            "       checkResolved(initializer: initializer, services: \(commaConcat(genericParameters.map{$0.lowercased()})))\n" +
-            "       return initializer(\(commaConcat(genericParameters.map{ "\($0.lowercased())!" })))"
+            "           " + services.joined(separator: "; ") + "\n" +
+            "           checkResolved(initializer: initializer, services: \(commaConcat(genericParameters.map{$0.lowercased()})))\n" +
+            "           return initializer(\(commaConcat(genericParameters.map{ "\($0.lowercased())!" })))\n"
     } else {
         initializer = "       initializer(\(commaConcat(resolvers.map{"\($0)\(isArgumentInjection ? "" : "!")"})))"
     }
@@ -103,13 +103,13 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     ]
     
     if argumentsCount > 1 {
-        register += ["   precondition(hasUnique(arguments: [\(commaConcat(genericArgumentsVars))]), \"AutoRegistration of service with same type arguments (\(commaConcat(genericArgumentsVars.map{ "\\(\($0))" }))) is not supported\")"]
+        register += ["   precondition(hasUnique(arguments: [\(commaConcat(genericArgumentsVars))]), \"Autoregistration of service with dynamic arguments of the same type (\(commaConcat(genericArgumentsVars.map{ "\\(\($0))" }))) is not supported\")"]
     }
     
     register += [
         "   return self.register(service.self, name: name, factory: { \(closureParameters) in ",
         initializer,
-        "   } as (\(commaConcat(["ResolverType"] + genericArguments))) -> Service)",
+        "   } as (\(commaConcat(["Resolver"] + genericArguments))) -> Service)",
         "}"
     ]
 
@@ -160,8 +160,8 @@ func checkGenerator(_ dependencies: Int) -> String {
     "func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, services\(servicesDefinition)){",
     "   let unresolved = ( [\(lowercasedServicesString)] as [Any?] ).filter { $0 == nil }",
     "   if unresolved.count > 0 {",
-    "       let warningsMessage = warnings(forInitializer: initializer).map { $0.message }.joined(separator: \"\\n\")",
-    "       fatalError(\"\\(warningsMessage)Failed to resolve \\(unresolvedService(\(lowercasedServicesString))!), initializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
+    "       let warningsMessage = warnings(forInitializer: initializer).map { \"\\($0.message)\\n\" }.joined()",
+    "       fatalError(\"SwinjectAutoregistration: Resolution failed.\\n\\(warningsMessage)Unresolved service: \\(unresolvedService(\(lowercasedServicesString))!)\\nInitializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
     "   }",
     "}"
     ]
@@ -213,7 +213,7 @@ let resolvers = (0...argumentsCount).map { arg in
 }
 
 let resolverOutput = [
-    "extension ResolverType {\n\n",
+    "extension Resolver {\n\n",
     resolvers.joined(separator: "\n\n"),
     "}\n\n"
 ]

@@ -12,17 +12,14 @@ enum Warning {
     case optional(String)
     case implicitlyUnwrappedOptional(String)
     case tooManyDependencies(Int)
-    case sameTypeDynamicArguments([String])
     var message: String {
         switch self {
         case .optional(let name):
-            return "⚠ AutoRegistration of optional dependency (\(name))? is not supported. Split to multiple initializers or use regular `register` method. "
+            return "⚠ Autoregistration of optional dependency (\(name))? is not supported. Split to multiple initializers or use regular `register` method. "
         case .implicitlyUnwrappedOptional(let name):
-            return "⚠ AutoRegistration of implicitly unwrapped optional dependency (\(name))! is not supported. Use regular `register` method. "
+            return "⚠ Autoregistration of implicitly unwrapped optional dependency (\(name))! is not supported. Use regular `register` method. "
         case .tooManyDependencies(let dependencyCount):
-            return "⚠ AutoRegistration is limited to maximum of \(maxDependencies) dependencies, tried to resolve \(dependencyCount). Use regular `register` method instead. "
-        case .sameTypeDynamicArguments(let args):
-            return "⚠ AutoRegistration of service with same type arguments (\(args.joined(separator: ", "))) is not supported)"
+            return "⚠ Autoregistration is limited to maximum of \(maxDependencies) dependencies, tried to resolve \(dependencyCount). Use regular `register` method instead. "
         }
     }
 }

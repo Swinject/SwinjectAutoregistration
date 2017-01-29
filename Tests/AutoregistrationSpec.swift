@@ -197,6 +197,47 @@ class AutoregistrationSpec: QuickSpec {
                     _ = container.resolve(UnwrappedService.self)
                 }.to(throwAssertion())
             }
+            
+            it("does not erase logging function"){
+                var logs: [String] = []
+                Container.loggingFunction = { logs.append($0) }
+                
+                container.autoregister(Service1.self, initializer: Service1.init)
+                let service = container.resolve(Service1.self)
+                
+                expect(service).notTo(beNil())
+                expect(logs.count) == 0
+                
+                let unresolvableService = container.resolve(String.self)
+                expect(unresolvableService).to(beNil())
+                expect(logs.count) == 1
+            }
+            
+            it("does not loose any logs while multithreading"){
+                var logs: [String] = []
+                Container.loggingFunction = { logs.append($0) }
+                
+                container.autoregister(Service1.self, initializer: Service1.init)
+                
+                let resolutionsCount = 1000
+                
+                let queue = DispatchQueue(label: "queue", attributes: .concurrent)
+                
+                queue.async {
+                    (0..<resolutionsCount).forEach { _ in
+                        _ = container.synchronize().resolve(Service1.self)
+                    }
+                }
+                
+                queue.async {
+                    (0..<resolutionsCount).forEach { _ in
+                        //Fails every time
+                        _ = container.synchronize().resolve(String.self)
+                    }
+                }
+                
+                expect(logs.count).toEventually(equal(resolutionsCount))
+            }
         }
     }
 }

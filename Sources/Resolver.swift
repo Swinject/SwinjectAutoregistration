@@ -10,7 +10,7 @@
  import Swinject 
 
 
-extension ResolverType {
+extension Resolver {
 
 
     func resolve<Service>() -> Service? {
