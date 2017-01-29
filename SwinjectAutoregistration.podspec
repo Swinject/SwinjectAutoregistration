@@ -9,7 +9,7 @@ SwinjectAutoregistration is an extension of Swinject that allows to automaticall
   s.homepage         = 'https://github.com/Swinject/SwinjectAutoregistration'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = 'Swinject Contributors'
-  s.source           = { :git => 'https://github.com/Swinject/SwinjectAutoregistration', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Swinject/SwinjectAutoregistration.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
