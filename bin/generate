@@ -160,8 +160,8 @@ func checkGenerator(_ dependencies: Int) -> String {
     "func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, services\(servicesDefinition)){",
     "   let unresolved = ( [\(lowercasedServicesString)] as [Any?] ).filter { $0 == nil }",
     "   if unresolved.count > 0 {",
-    "       let warningsMessage = warnings(forInitializer: initializer).map { \"\\($0.message)\\n\" }.joined()",
-    "       fatalError(\"SwinjectAutoregistration: Resolution failed.\\n\\(warningsMessage)Unresolved service: \\(unresolvedService(\(lowercasedServicesString))!)\\nInitializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
+    "       let errorMessage = resolutionErrors(forInitializer: initializer).map { \"\\($0.message)\\n\" }.joined()",
+    "       fatalError(\"SwinjectAutoregistration: Resolution failed.\\n\\(errorMessage)Unresolved service: \\(unresolvedService(\(lowercasedServicesString))!)\\nInitializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
     "   }",
     "}"
     ]

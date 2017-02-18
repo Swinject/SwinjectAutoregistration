@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Warning {
+enum ResolutionError {
     case optional(String)
     case implicitlyUnwrappedOptional(String)
     case tooManyDependencies(Int)
@@ -26,7 +26,7 @@ enum Warning {
 
 /// Shows warnings based on information parsed from initializers description
 
-func warnings<Service, Parameters>(forInitializer initializer: (Parameters) -> Service) -> [Warning] {
+func resolutionErrors<Service, Parameters>(forInitializer initializer: (Parameters) -> Service) -> [ResolutionError] {
     #if os(Linux)
         //Warnings are not supported on Linux
         return []
@@ -46,7 +46,7 @@ func warnings<Service, Parameters>(forInitializer initializer: (Parameters) -> S
         return []
     }
     
-    var warnings: [Warning]  = []
+    var warnings: [ResolutionError]  = []
     
     
     if dependencies.count > maxDependencies {

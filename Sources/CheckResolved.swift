@@ -17,8 +17,8 @@ func unresolvedService<A>(_ a: A?) -> String? {
 func checkResolved<Service, A>(initializer: (A) -> Service, services a: A?){
    let unresolved = ( [a] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a)!)\nInitializer: (\(A.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a)!)\nInitializer: (\(A.self)) -> \(Service.self)")
    }
 }
 
@@ -29,8 +29,8 @@ func unresolvedService<A, B>(_ a: A?, _ b: B?) -> String? {
 func checkResolved<Service, A, B>(initializer: (A, B) -> Service, services a: A?, _ b: B?){
    let unresolved = ( [a, b] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b)!)\nInitializer: (\(A.self), \(B.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b)!)\nInitializer: (\(A.self), \(B.self)) -> \(Service.self)")
    }
 }
 
@@ -41,8 +41,8 @@ func unresolvedService<A, B, C>(_ a: A?, _ b: B?, _ c: C?) -> String? {
 func checkResolved<Service, A, B, C>(initializer: (A, B, C) -> Service, services a: A?, _ b: B?, _ c: C?){
    let unresolved = ( [a, b, c] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c)!)\nInitializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c)!)\nInitializer: (\(A.self), \(B.self), \(C.self)) -> \(Service.self)")
    }
 }
 
@@ -53,8 +53,8 @@ func unresolvedService<A, B, C, D>(_ a: A?, _ b: B?, _ c: C?, _ d: D?) -> String
 func checkResolved<Service, A, B, C, D>(initializer: (A, B, C, D) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?){
    let unresolved = ( [a, b, c, d] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self)) -> \(Service.self)")
    }
 }
 
@@ -65,8 +65,8 @@ func unresolvedService<A, B, C, D, E>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E
 func checkResolved<Service, A, B, C, D, E>(initializer: (A, B, C, D, E) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?){
    let unresolved = ( [a, b, c, d, e] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d, e)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d, e)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self)) -> \(Service.self)")
    }
 }
 
@@ -77,8 +77,8 @@ func unresolvedService<A, B, C, D, E, F>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e
 func checkResolved<Service, A, B, C, D, E, F>(initializer: (A, B, C, D, E, F) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?){
    let unresolved = ( [a, b, c, d, e, f] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self)) -> \(Service.self)")
    }
 }
 
@@ -89,8 +89,8 @@ func unresolvedService<A, B, C, D, E, F, G>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, 
 func checkResolved<Service, A, B, C, D, E, F, G>(initializer: (A, B, C, D, E, F, G) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?){
    let unresolved = ( [a, b, c, d, e, f, g] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self)) -> \(Service.self)")
    }
 }
 
@@ -101,8 +101,8 @@ func unresolvedService<A, B, C, D, E, F, G, H>(_ a: A?, _ b: B?, _ c: C?, _ d: D
 func checkResolved<Service, A, B, C, D, E, F, G, H>(initializer: (A, B, C, D, E, F, G, H) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?){
    let unresolved = ( [a, b, c, d, e, f, g, h] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g, h)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g, h)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self)) -> \(Service.self)")
    }
 }
 
@@ -113,7 +113,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I>(_ a: A?, _ b: B?, _ c: C?, _ d
 func checkResolved<Service, A, B, C, D, E, F, G, H, I>(initializer: (A, B, C, D, E, F, G, H, I) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
-       let warningsMessage = warnings(forInitializer: initializer).map { "\($0.message)\n" }.joined()
-       fatalError("SwinjectAutoregistration: Resolution failed.\n\(warningsMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g, h, i)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
+       let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
+       fatalError("SwinjectAutoregistration: Resolution failed.\n\(errorMessage)Unresolved service: \(unresolvedService(a, b, c, d, e, f, g, h, i)!)\nInitializer: (\(A.self), \(B.self), \(C.self), \(D.self), \(E.self), \(F.self), \(G.self), \(H.self), \(I.self)) -> \(Service.self)")
    }
 }

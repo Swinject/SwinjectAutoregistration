@@ -4,9 +4,9 @@ import Nimble
 
 @testable import SwinjectAutoregistration
 
-extension Warning: Equatable {}
+extension ResolutionError: Equatable {}
 
-public func ==(lhs: Warning, rhs: Warning) -> Bool {
+public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     switch (lhs, rhs){
     case (.optional(let lname), .optional(let rname)):
         return lname == rname
@@ -19,7 +19,7 @@ public func ==(lhs: Warning, rhs: Warning) -> Bool {
     }
 }
 
-class WarningsSpec: QuickSpec {
+class ResolutionErrorSpec: QuickSpec {
 	
     class DependencyA {}
     class DependencyB {}
@@ -84,54 +84,54 @@ class WarningsSpec: QuickSpec {
     override func spec() {
         describe("warnings checker") {
             it("does show warning for service with more than 9 dependencies"){
-                let w = warnings(forInitializer: Service10.init)
-                expect(w.first) == Warning.tooManyDependencies(10)
+                let w = resolutionErrors(forInitializer: Service10.init)
+                expect(w.first) == ResolutionError.tooManyDependencies(10)
             }
             
             it("doesnt show warning for single dependency"){
-                let w = warnings(forInitializer: Service1.init)
+                let w = resolutionErrors(forInitializer: Service1.init)
                 expect(w.count) == 0
             }
 
             it("doesnt show warning for service with 9 dependencies"){
-                let w = warnings(forInitializer: Service9.init)
+                let w = resolutionErrors(forInitializer: Service9.init)
                 expect(w.count) == 0
             }
             
             it("does show warning for service with optional dependency"){
-                let w = warnings(forInitializer: OptionalService.init)
-                expect(w.first) == Warning.optional("DependencyB")
+                let w = resolutionErrors(forInitializer: OptionalService.init)
+                expect(w.first) == ResolutionError.optional("DependencyB")
             }
             
             it("does show warning for service with implicitly unwrapped dependency"){
-                let w = warnings(forInitializer: UnwrappedService.init)
-                expect(w.first) == Warning.implicitlyUnwrappedOptional("DependencyA")
+                let w = resolutionErrors(forInitializer: UnwrappedService.init)
+                expect(w.first) == ResolutionError.implicitlyUnwrappedOptional("DependencyA")
             }
             
             it("does show multiple warnings"){
-                let w = warnings(forInitializer: BadService.init)
+                let w = resolutionErrors(forInitializer: BadService.init)
                 expect(w.count) == 5
             }
             
             // This fails
             // Single argument tuple looks exactly the same as multiple arguments when printed
             xit("doesnt show warning for single argument tuple of optionals"){
-                let w = warnings(forInitializer: OptionalSingleTupleService.init)
+                let w = resolutionErrors(forInitializer: OptionalSingleTupleService.init)
                 expect(w.count) == 0
             }
             
             it("doesnt show warning for mutiple argument tuples of optionals"){
-                let w = warnings(forInitializer: OptionalMutipleTupleService.init)
+                let w = resolutionErrors(forInitializer: OptionalMutipleTupleService.init)
                 expect(w.count) == 0
             }
             
             it("doesnt show warning for nested closures"){
-                let w = warnings(forInitializer: NestedClosureService.init)
+                let w = resolutionErrors(forInitializer: NestedClosureService.init)
                 expect(w.count) == 0
             }
             
             it("does show warning for optional closure"){
-                let w = warnings(forInitializer: OptionalNestedClosureService.init)
+                let w = resolutionErrors(forInitializer: OptionalNestedClosureService.init)
                 expect(w.count) == 1
             }
             
