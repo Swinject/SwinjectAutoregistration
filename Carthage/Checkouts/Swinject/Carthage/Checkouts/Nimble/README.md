@@ -6,7 +6,6 @@ or Objective-C expressions. Inspired by
 
 ```swift
 // Swift
-
 expect(1 + 1).to(equal(2))
 expect(1.2).to(beCloseTo(1.1, within: 0.1))
 expect(3) > 2
@@ -37,12 +36,14 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Comparisons](#comparisons)
   - [Types/Classes](#typesclasses)
   - [Truthiness](#truthiness)
+  - [Swift Assertions](#swift-assertions)
   - [Swift Error Handling](#swift-error-handling)
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
   - [Strings](#strings)
   - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
   - [Verify collection count](#verify-collection-count)
+  - [Verify a notification was posted](#verifying-a-notification-was-posted)
   - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
@@ -328,6 +329,9 @@ cases, use the `timeout` parameter:
 
 // Waits three seconds for ocean to contain "starfish":
 expect(ocean).toEventually(contain("starfish"), timeout: 3)
+
+// Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.
+expect(someValue).toEventually(equal(100), timeout: 5.5, pollInterval: 0.2)
 ```
 
 ```objc
@@ -406,7 +410,8 @@ Nimble has full support for Objective-C. However, there are two things
 to keep in mind when using Nimble in Objective-C:
 
 1. All parameters passed to the `expect` function, as well as matcher
-   functions like `equal`, must be Objective-C objects:
+   functions like `equal`, must be Objective-C objects or can be converted into
+   an `NSObject` equivalent:
 
    ```objc
    // Objective-C
@@ -415,6 +420,17 @@ to keep in mind when using Nimble in Objective-C:
 
    expect(@(1 + 1)).to(equal(@2));
    expect(@"Hello world").to(contain(@"world"));
+
+   // Boxed as NSNumber *
+   expect(2).to(equal(2));
+   expect(1.2).to(beLessThan(2.0));
+   expect(true).to(beTruthy());
+
+   // Boxed as NSString *
+   expect("Hello world").to(equal("Hello world"));
+
+   // Boxed as NSRange
+   expect(NSMakeRange(1, 10)).to(equal(NSMakeRange(1, 10)));
    ```
 
 2. To make an expectation on an expression that does not return a value,
@@ -426,6 +442,28 @@ to keep in mind when using Nimble in Objective-C:
 
    expectAction(^{ [exception raise]; }).to(raiseException());
    ```
+
+The following types are currently converted to an `NSObject` type:
+
+ - **C Numeric types** are converted to `NSNumber *`
+ - `NSRange` is converted to `NSValue *`
+ - `char *` is converted to `NSString *`
+
+For the following matchers:
+
+- `equal`
+- `beGreaterThan`
+- `beGreaterThanOrEqual`
+- `beLessThan`
+- `beLessThanOrEqual`
+- `beCloseTo`
+- `beTrue`
+- `beFalse`
+- `beTruthy`
+- `beFalsy`
+- `haveCount`
+
+If you would like to see more, [file an issue](https://github.com/Quick/Nimble/issues).
 
 ## Disabling Objective-C Shorthand
 
@@ -681,6 +719,39 @@ expect(actual).to(beFalse());
 expect(actual).to(beNil());
 ```
 
+## Swift Assertions
+
+If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library.
+
+```swift
+// Swift
+
+// Passes if somethingThatThrows() throws an assertion, such as calling fatalError() or precondition fails:
+expect { () -> Void in fatalError() }.to(throwAssertion())
+expect { precondition(false) }.to(throwAssertion())
+
+// Passes if throwing a NSError is not equal to throwing an assertion:
+expect { throw NSError(domain: "test", code: 0, userInfo: nil) }.toNot(throwAssertion())
+
+// Passes if the post assertion code is not run:
+var reachedPoint1 = false
+var reachedPoint2 = false
+expect {
+    reachedPoint1 = true
+    precondition(false, "condition message")
+    reachedPoint2 = true
+}.to(throwAssertion())
+
+expect(reachedPoint1) == true
+expect(reachedPoint2) == false
+```
+
+Notes:
+
+* This feature is only available in Swift.
+* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices, only simulators_.
+* The tvOS simulator is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
+
 ## Swift Error Handling
 
 If you're using Swift 2.0+, you can use the `throwError` matcher to check if an error is thrown.
@@ -906,6 +977,8 @@ uses another matcher is available here.
 ## Verify collection count
 
 ```swift
+// Swift
+
 // passes if actual collection's count is equal to expected
 expect(actual).to(haveCount(expected))
 
@@ -914,6 +987,8 @@ expect(actual).notTo(haveCount(expected))
 ```
 
 ```objc
+// Objective-C
+
 // passes if actual collection's count is equal to expected
 expect(actual).to(haveCount(expected))
 
@@ -924,6 +999,30 @@ expect(actual).notTo(haveCount(expected))
 For Swift the actual value must be a `Collection` such as array, dictionary or set.
 
 For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
+
+## Foundation
+
+### Verifying a Notification was posted
+
+```swift
+// Swift
+let testNotification = Notification(name: "Foo", object: nil)
+
+// passes if the closure in expect { ... } posts a notification to the default
+// notification center.
+expect {
+    NotificationCenter.default.postNotification(testNotification)
+}.to(postNotifications(equal([testNotification]))
+
+// passes if the closure in expect { ... } posts a notification to a given
+// notification center
+let notificationCenter = NotificationCenter()
+expect {
+    notificationCenter.postNotification(testNotification)
+}.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
+```
+
+> This matcher is only available in Swift.
 
 ## Matching a value to any of a group of matchers
 
@@ -948,10 +1047,10 @@ expect(actual).to(satisfyAnyOf(beLessThan(@10), beGreaterThan(@20)))
 expect(@6).to(satisfyAnyOf(equal(@2), equal(@3), equal(@4), equal(@5), equal(@6), equal(@7)))
 ```
 
-Note: This matcher allows you to chain any number of matchers together. This provides flexibility, 
-      but if you find yourself chaining many matchers together in one test, consider whether you  
-      could instead refactor that single test into multiple, more precisely focused tests for 
-      better coverage. 
+Note: This matcher allows you to chain any number of matchers together. This provides flexibility,
+      but if you find yourself chaining many matchers together in one test, consider whether you
+      could instead refactor that single test into multiple, more precisely focused tests for
+      better coverage.
 
 # Writing Your Own Matchers
 
@@ -964,7 +1063,11 @@ value and return a `MatcherFunc` closure. Take `equal`, for example:
 public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
   return MatcherFunc { actualExpression, failureMessage in
     failureMessage.postfixMessage = "equal <\(expectedValue)>"
-    return actualExpression.evaluate() == expectedValue
+    if let actualValue = try actualExpression.evaluate() {
+    	return actualValue == expectedValue
+    } else {
+    	return false
+    }
   }
 }
 ```
@@ -1158,7 +1261,7 @@ extension NMBObjCMatcher {
 > Nimble can be used on its own, or in conjunction with its sister
   project, [Quick](https://github.com/Quick/Quick). To install both
   Quick and Nimble, follow [the installation instructions in the Quick
-  README](https://github.com/Quick/Quick#how-to-install-quick).
+  Documentation](https://github.com/Quick/Quick/blob/master/Documentation/en-us/InstallingQuick.md).
 
 Nimble can currently be installed in one of two ways: using CocoaPods, or with
 git submodules.
@@ -1193,7 +1296,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
   use_frameworks!
-  pod 'Nimble', '~> 4.0.0'
+  pod 'Nimble', '~> 5.0.0'
 end
 ```
 

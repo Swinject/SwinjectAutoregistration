@@ -9,8 +9,10 @@
 import Foundation
 
 // A generic-type-free protocol to be the type of values in a strongly-typed collection.
-internal protocol ServiceEntryType: Any {
+internal protocol ServiceEntryProtocol: Any {
     func describeWithKey(_ serviceKey: ServiceKey) -> String
+    var objectScope: ObjectScopeProtocol { get }
+    var storage: InstanceStorage { get }
 }
 
 /// The `ServiceEntry<Service>` class represents an entry of a registered service type.
@@ -19,9 +21,11 @@ public final class ServiceEntry<Service> {
     fileprivate let serviceType: Service.Type
     internal let factory: FunctionType
 
-    internal var objectScope = ObjectScope.graph
+    internal var objectScope: ObjectScopeProtocol = ObjectScope.graph
+    internal lazy var storage: InstanceStorage = { [unowned self] in
+        self.objectScope.makeStorage()
+    }()
     internal var initCompleted: FunctionType?
-    internal var instance: Any?
 
     internal init(serviceType: Service.Type, factory: FunctionType) {
         self.serviceType = serviceType
@@ -37,13 +41,25 @@ public final class ServiceEntry<Service> {
 
     /// Specifies the object scope to resolve the service.
     ///
+    /// - Parameter scope: The `ObjectScopeProtocol` value.
+    ///
+    /// - Returns: `self` to add another configuration fluently.
+    @discardableResult
+    public func inObjectScope(_ objectScope: ObjectScopeProtocol) -> Self {
+        self.objectScope = objectScope
+        return self
+    }
+
+    /// Specifies the object scope to resolve the service.
+    /// Performs the same functionality as `inObjectScope(_: ObjectScopeProtocol) -> Self`,
+    /// but provides more convenient usage syntax.
+    ///
     /// - Parameter scope: The `ObjectScope` value.
     ///
     /// - Returns: `self` to add another configuration fluently.
     @discardableResult
     public func inObjectScope(_ objectScope: ObjectScope) -> Self {
-        self.objectScope = objectScope
-        return self
+        return inObjectScope(objectScope as ObjectScopeProtocol)
     }
 
     /// Adds the callback to setup the instance after its `init` completes.
@@ -54,23 +70,19 @@ public final class ServiceEntry<Service> {
     ///
     /// - Returns: `self` to add another configuration fluently.
     @discardableResult
-    public func initCompleted(_ completed: @escaping (ResolverType, Service) -> ()) -> Self {
+    public func initCompleted(_ completed: @escaping (Resolver, Service) -> ()) -> Self {
         initCompleted = completed
         return self
     }
 }
 
-extension ServiceEntry: ServiceEntryType {
+extension ServiceEntry: ServiceEntryProtocol {
     internal func describeWithKey(_ serviceKey: ServiceKey) -> String {
-        // The protocol order in "protocol<>" is non-deterministic.
-        let nameDescription = serviceKey.name.map { ", Name: \"\($0)\"" } ?? ""
-        let optionDescription = serviceKey.option.map { ", \($0)" } ?? ""
-        let initCompletedDescription = initCompleted.map { _ in ", InitCompleted: Specified" } ?? ""
-        return "Service: \(serviceType)"
-            + nameDescription
-            + optionDescription
-            + ", Factory: \(type(of: factory))"
-            + ", ObjectScope: \(objectScope)"
-            + initCompletedDescription
+        return description(
+            serviceType: serviceType,
+            serviceKey: serviceKey,
+            objectScope: objectScope,
+            initCompleted: initCompleted
+        )
     }
 }
