@@ -69,7 +69,7 @@ class PetOwner: Person {
 
 The `autoregister` function is given the `PetOwner` initializer `init(pet:Animal)`. From its signature Swinject knows that it needs a dependency `Animal` and resolves it from the container. Nothing else is needed.
 
-Autoregistration becomes really useful when used to register services with many dependendencies. Compare autoregistration code:
+Autoregistration becomes especially useful when used to register services with many dependencies. Compare autoregistration code:
 
 ```swift
 container.autoregister(MyService.self, initializer: MyService.init)
