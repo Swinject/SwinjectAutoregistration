@@ -51,8 +51,8 @@ Here is a simple example to auto-register a pet owner
 
 ```swift
 let container = Container()
-container.register(Animal.self) { _ in Cat(name: "Mimi") }
-container.autoregister(PersonType.self, initializer: PetOwner.init)
+container.register(Animal.self) { _ in Cat(name: "Mimi") } // Regular register method
+container.autoregister(PersonType.self, initializer: PetOwner.init) // Autoregistration
 ```
 
 where PetOwner looks like this:
@@ -67,13 +67,25 @@ class PetOwner: Person {
 }
 ```
 
-That's it. The `autoregister` function is given the `PetOwner` initializer `init(pet:Animal)`. From its signature Swinject knows that it needs a dependency `Animal` and resolves it from the container. Nothing else is needed. For comparison, this is equivalent code in pure Swinject:
+The `autoregister` function is given the `PetOwner` initializer `init(pet:Animal)`. From its signature Swinject knows that it needs a dependency `Animal` and resolves it from the container. Nothing else is needed.
+
+Autoregistration becomes really useful when used to register services with many dependendencies. Compare autoregistration code:
 
 ```swift
-container.register(PersonType.self) { r in
-    PetOwner(pet: r.resolve(AnimalType.self)!)
+container.autoregister(MyService.self, initializer: MyService.init)
+```
+
+with equivalent code in pure Swinject:
+
+```swift
+container.register(MyService.self) { r in 
+	MyService(dependencyA: r.resolve(DependencyA.self)!, dependencyB: r.resolve(DependencyB.self)!, dependencyC: r.resolve(DependencyC.self)!, dependencyD: r.resolve(DependencyD.self)!)
 }
 ```
+
+Another advantage is that if you add more dependencies during the development the registration code doesn't have to be rewritten. 
+
+
 #### Registration with name
 Service can be also given name - same as with the regular register method.
 
@@ -120,7 +132,7 @@ container.autoregister(PersonType.self, arguments: AnimalType.self, String.self,
 
 Wondering how does that work? Generics are heavily leveraged for the auto-registration. For registering service with two dependencies something similar to a following function is used:
 
-```
+```swift
 public func autoregister<Service, A, B>(_ service: Service.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, factory: { r in 
        return initializer(r.resolve(A.self)!, r.resolve(B.self)!)
