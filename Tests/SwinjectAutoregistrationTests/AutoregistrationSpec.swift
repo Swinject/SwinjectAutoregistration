@@ -59,6 +59,14 @@ class AutoregistrationSpec: QuickSpec {
         init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ){}
     }
     
+    class Service20 {
+        init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ){}
+    }
+    
+    class Service21 {
+        init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ, u: DependencyA){}
+    }
+    
     class OptionalService {
         init(a: DependencyA?){}
     }
@@ -148,6 +156,12 @@ class AutoregistrationSpec: QuickSpec {
                 expect(service).notTo(beNil())
             }
             
+            it("registers service with twenty dependencies") {
+                container.autoregister(Service20.self, initializer: Service20.init)
+                let service = container.resolve(Service20.self)
+                expect(service).notTo(beNil())
+            }
+            
             it("registers service with one dynamic argument") {
                 container.autoregister(Service2.self, argument: DependencyB.self, initializer: Service2.init)
                 let service = container.resolve(Service2.self, argument: DependencyB())
@@ -179,10 +193,10 @@ class AutoregistrationSpec: QuickSpec {
                 }.to(throwAssertion())
             }
             
-            it("throws assertion when trying to resolve service with ten dependencies") {
+            it("throws assertion when trying to resolve service with too many dependencies") {
                 expect { () -> Void in
-                    container.autoregister(Service10.self, initializer: Service10.init)
-                    _ = container.resolve(Service10.self)
+                    container.autoregister(Service21.self, initializer: Service21.init)
+                    _ = container.resolve(Service21.self)
                 }.to(throwAssertion())
             }
             

@@ -68,7 +68,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     let genericArguments = (1..<(argumentsCount+1)).map{ "\(genericArgumentPrefix)\($0)" } // ["Arg1", "Arg2", "Arg3"]
     let genericArgumentsVars = genericArguments.map { $0.lowercased() } // ["arg1", "arg2", "arg3"]
     
-    var resolvers = genericParameters.map { _ in "r.resolve(\( argumentsCount > 0 ? "\(argParameterName): \(commaConcat(genericArgumentsVars))" : ""))" }
+    var resolvers = genericParameters.map { _ in "res.resolve(\( argumentsCount > 0 ? "\(argParameterName): \(commaConcat(genericArgumentsVars))" : ""))" }
     
     var genericsDefinition = commaConcat(["Service"] + genericParameters + genericArguments)
     
@@ -94,7 +94,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
         initializer = "       initializer(\(commaConcat(resolvers.map{"\($0)\(isArgumentInjection ? "" : "!")"})))"
     }
     
-    let closureParameters = commaConcat(["r"] + genericArgumentsVars)
+    let closureParameters = commaConcat(["res"] + genericArgumentsVars)
     
     var register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
@@ -150,7 +150,17 @@ func checkGenerator(_ dependencies: Int) -> String {
     let servicesDefinition = dependencies == 0 ? "" : "\(commaConcat(genericParameters.enumerated().map{ "\($0 >= 1 ? "_" : "") \($1.lowercased()): \($1)?" }))"
     let recursiveUnresolvedCall = dependencies > 1 ? "unresolvedService(\(commaConcat(genericParameters.dropLast().map { $0.lowercased() }))) ?? " : ""
     let lowercasedServicesString = commaConcat(genericParameters.map{ $0.lowercased() })
+    let maxGroupSize: Int = 10
+    let serviceGroups: [[String]] = genericParameters.map{ $0.lowercased() }.enumerated().reduce([]){ accum, s in
+        var accum = accum
+        let (index, service) = s
+        let groupIndex = Int(index/maxGroupSize)
+        if groupIndex >= accum.count { accum.append([]) }
+        accum[groupIndex].append(service)
+        return accum
+    }
     
+    let serviceArrayString = serviceGroups.map { "[\(commaConcat($0))] as [Any?]"}.joined(separator: " + ")
     
     let check = [
     "func unresolvedService<\(generics)>(_\(servicesDefinition)) -> String? {",
@@ -158,7 +168,7 @@ func checkGenerator(_ dependencies: Int) -> String {
     "}",
     "",
     "func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, services\(servicesDefinition)){",
-    "   let unresolved = ( [\(lowercasedServicesString)] as [Any?] ).filter { $0 == nil }",
+    "   let unresolved = ( \(serviceArrayString) ).filter { $0 == nil }",
     "   if unresolved.count > 0 {",
     "       let errorMessage = resolutionErrors(forInitializer: initializer).map { \"\\($0.message)\\n\" }.joined()",
     "       fatalError(\"SwinjectAutoregistration: Resolution failed.\\n\\(errorMessage)Unresolved service: \\(unresolvedService(\(lowercasedServicesString))!)\\nInitializer: (\(commaConcat(genericParameters.map{ "\\(\($0).self)" }))) -> \\(Service.self)\")",
