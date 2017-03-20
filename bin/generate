@@ -47,10 +47,19 @@ extension Array {
 
 func genericType(for position: Int) -> String {
     let max = genericServices.count
+    var generic: String
     switch position {
-    case _ where position < max: return genericServices[position % max]
-    default: return genericServices[position / max - 1] + genericServices[position % max]
+    case _ where position < max: generic = genericServices[position % max]
+    default: generic = genericServices[position / max - 1] + genericServices[position % max]
     }
+    
+    let toEscape = ["as", "in"]
+    
+    if toEscape.contains(generic.lowercased()) {
+        generic = "`\(generic)`"
+    }
+    
+    return generic
 }
 
 
