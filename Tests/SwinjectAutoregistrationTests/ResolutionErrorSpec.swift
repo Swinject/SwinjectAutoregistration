@@ -48,8 +48,8 @@ class ResolutionErrorSpec: QuickSpec {
         init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI){}
     }
     
-    class Service10 {
-        init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ){}
+    class Service21 {
+        init(a: DependencyA, b: DependencyB, c: DependencyC, d: DependencyD, e: DependencyE, f: DependencyF, g: DependencyG, h: DependencyH, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ, u: DependencyA){}
     }
     
     class OptionalService {
@@ -61,7 +61,7 @@ class ResolutionErrorSpec: QuickSpec {
     }
     
     class BadService {
-        init(a: DependencyA, b: DependencyB, c: DependencyC!, d: DependencyD?, e: DependencyE!, f: DependencyF, g: DependencyG, h: DependencyH?, i: DependencyI, j: DependencyJ){}
+        init(a: DependencyA, b: DependencyB, c: DependencyC!, d: DependencyD?, e: DependencyE!, f: DependencyF, g: DependencyG, h: DependencyH?, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ, u: DependencyA){}
     }
     
     class OptionalSingleTupleService {
@@ -83,9 +83,9 @@ class ResolutionErrorSpec: QuickSpec {
     
     override func spec() {
         describe("warnings checker") {
-            it("does show warning for service with more than 9 dependencies"){
-                let w = resolutionErrors(forInitializer: Service10.init)
-                expect(w.first) == ResolutionError.tooManyDependencies(10)
+            it("does show warning for service with too many dependencies"){
+                let w = resolutionErrors(forInitializer: Service21.init)
+                expect(w.first) == ResolutionError.tooManyDependencies(21)
             }
             
             it("doesnt show warning for single dependency"){
