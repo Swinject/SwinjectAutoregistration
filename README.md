@@ -140,7 +140,7 @@ public func autoregister<Service, A, B>(_ service: Service.Type, initializer: (A
 }
 ```
 
-The initializer is a function like any other. By passing it as a parameter its dependencies can be infered as `(A, B)` and automatically resolved. These functions are generated for up to 9 dependencies. Checkout the [code](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Sources/AutoRegistration.swift) for more info.
+The initializer is a function like any other. By passing it as a parameter its dependencies can be infered as `(A, B)` and automatically resolved. These functions are generated for up to 20 dependencies. Checkout the [code](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Sources/AutoRegistration.swift) for more info.
 
 ### Operators ###
 This extension also aims to reduce the amount of boilerplate while improving readability of the registration code. For that reason the operator `~>` is introduced. 
