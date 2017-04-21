@@ -1296,6 +1296,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E251D832A4F007ED05F /* Debug.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-D DEBUG -Xfrontend -debug-time-function-bodies";
@@ -1307,6 +1308,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E271D832A4F007ED05F /* Release.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SWIFT_VERSION = 3.0;
