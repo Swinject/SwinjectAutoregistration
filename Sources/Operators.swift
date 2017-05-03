@@ -94,7 +94,7 @@ public func ~> <Service, Arg1>(r: Resolver, o: (service: Service.Type, name: Str
  - Important: Fails on unresolvable service.
  */
 public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
-    return r.resolve(o.0, arguments: 0.1, 0.2)!
+    return r.resolve(o.0, arguments: o.1, o.2)!
 }
 
 
