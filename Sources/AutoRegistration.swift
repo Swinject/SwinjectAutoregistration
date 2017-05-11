@@ -16,7 +16,7 @@ let maxArguments = 3
 
 public extension Container {
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -34,7 +34,7 @@ public func autoregister<Service>(_ service: Service.Type, name: String? = nil, 
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -55,7 +55,7 @@ public func autoregister<Service, A>(_ service: Service.Type, name: String? = ni
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -76,7 +76,7 @@ public func autoregister<Service, Arg1>(_ service: Service.Type, name: String? =
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -97,7 +97,7 @@ public func autoregister<Service, A, B>(_ service: Service.Type, name: String? =
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -118,7 +118,7 @@ public func autoregister<Service, A, B, Arg1>(_ service: Service.Type, name: Str
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -140,7 +140,7 @@ public func autoregister<Service, A, B, Arg1, Arg2>(_ service: Service.Type, nam
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -161,7 +161,7 @@ public func autoregister<Service, A, B, C>(_ service: Service.Type, name: String
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -182,7 +182,7 @@ public func autoregister<Service, A, B, C, Arg1>(_ service: Service.Type, name: 
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -204,7 +204,7 @@ public func autoregister<Service, A, B, C, Arg1, Arg2>(_ service: Service.Type, 
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -226,7 +226,7 @@ public func autoregister<Service, A, B, C, Arg1, Arg2, Arg3>(_ service: Service.
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -247,7 +247,7 @@ public func autoregister<Service, A, B, C, D>(_ service: Service.Type, name: Str
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -268,7 +268,7 @@ public func autoregister<Service, A, B, C, D, Arg1>(_ service: Service.Type, nam
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -290,7 +290,7 @@ public func autoregister<Service, A, B, C, D, Arg1, Arg2>(_ service: Service.Typ
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -312,7 +312,7 @@ public func autoregister<Service, A, B, C, D, Arg1, Arg2, Arg3>(_ service: Servi
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -333,7 +333,7 @@ public func autoregister<Service, A, B, C, D, E>(_ service: Service.Type, name: 
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -354,7 +354,7 @@ public func autoregister<Service, A, B, C, D, E, Arg1>(_ service: Service.Type, 
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -376,7 +376,7 @@ public func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(_ service: Service.
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -398,7 +398,7 @@ public func autoregister<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(_ service: Se
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -419,7 +419,7 @@ public func autoregister<Service, A, B, C, D, E, F>(_ service: Service.Type, nam
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -440,7 +440,7 @@ public func autoregister<Service, A, B, C, D, E, F, Arg1>(_ service: Service.Typ
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -462,7 +462,7 @@ public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(_ service: Servi
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -484,7 +484,7 @@ public func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(_ service:
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -505,7 +505,7 @@ public func autoregister<Service, A, B, C, D, E, F, G>(_ service: Service.Type, 
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -526,7 +526,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, Arg1>(_ service: Service.
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -548,7 +548,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2>(_ service: Se
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -570,7 +570,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, Arg1, Arg2, Arg3>(_ servi
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -591,7 +591,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H>(_ service: Service.Typ
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -612,7 +612,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1>(_ service: Servi
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -634,7 +634,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2>(_ service:
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -656,7 +656,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, Arg1, Arg2, Arg3>(_ se
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -677,7 +677,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I>(_ service: Service.
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -698,7 +698,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1>(_ service: Se
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -720,7 +720,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2>(_ servi
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -742,7 +742,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, Arg1, Arg2, Arg3>(_
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -763,7 +763,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J>(_ service: Servi
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -784,7 +784,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, Arg1>(_ service:
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -806,7 +806,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, Arg1, Arg2>(_ se
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -828,7 +828,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, Arg1, Arg2, Arg3
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -849,7 +849,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K>(_ service: Se
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -870,7 +870,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, Arg1>(_ servi
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -892,7 +892,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, Arg1, Arg2>(_
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -914,7 +914,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, Arg1, Arg2, A
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -935,7 +935,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L>(_ service:
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -956,7 +956,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, Arg1>(_ se
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -978,7 +978,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, Arg1, Arg2
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1000,7 +1000,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, Arg1, Arg2
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1021,7 +1021,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M>(_ servi
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1042,7 +1042,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, Arg1>(_
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1064,7 +1064,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, Arg1, A
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1086,7 +1086,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, Arg1, A
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1107,7 +1107,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N>(_ se
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1128,7 +1128,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, Arg1
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1150,7 +1150,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, Arg1
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1172,7 +1172,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, Arg1
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1193,7 +1193,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(_
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1214,7 +1214,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, A
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1236,7 +1236,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, A
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1258,7 +1258,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, A
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1279,7 +1279,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1300,7 +1300,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1322,7 +1322,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1344,7 +1344,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1365,7 +1365,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1386,7 +1386,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1408,7 +1408,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1430,7 +1430,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1451,7 +1451,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1472,7 +1472,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1494,7 +1494,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1516,7 +1516,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1537,7 +1537,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1558,7 +1558,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1580,7 +1580,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:
@@ -1602,7 +1602,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2, Arg3) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self), initializer: MyService.init`
  - Parameters:
@@ -1623,7 +1623,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, argument: Arg1.self), initializer: MyService.init`
  - Parameters:
@@ -1644,7 +1644,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self), initializer: MyService.init`
  - Parameters:
@@ -1666,7 +1666,7 @@ public func autoregister<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P
    } as (Resolver, Arg1, Arg2) -> Service)
 }
 
-/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.
+/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
  Usage: `autoregister(MyService.self, arguments: Arg1.self, Arg2.self, Arg3.self), initializer: MyService.init`
  - Parameters:

@@ -25,7 +25,7 @@ func headers(_ fileName: String) -> String {
 func registerComment(_ dependencies: Int, arguments: Int) -> String {
     let genericArguments = (1..<(arguments+1)).map{ "\(genericArgumentPrefix)\($0)" } // ["Arg1", "Arg2", "Arg3"]
     return [
-        "/** Registers a factory that resolves the Service based on dependencies infered from the Service initializer.",
+        "/** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.",
         " ",
         " Usage: `autoregister(MyService.self\((arguments > 0) ? ", \(arguments == 1 ? "argument" : "arguments"): \(commaConcat(genericArguments.map{"\($0).self"}))" : "")), initializer: MyService.init`",
         " - Parameters:",

@@ -140,7 +140,7 @@ public func autoregister<Service, A, B>(_ service: Service.Type, initializer: (A
 }
 ```
 
-The initializer is a function like any other. By passing it as a parameter its dependencies can be infered as `(A, B)` and automatically resolved. These functions are generated for up to 20 dependencies. Checkout the [code](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Sources/AutoRegistration.swift) for more info.
+The initializer is a function like any other. By passing it as a parameter its dependencies can be inferred as `(A, B)` and automatically resolved. These functions are generated for up to 20 dependencies. Checkout the [code](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Sources/AutoRegistration.swift) for more info.
 
 ### Operators ###
 This extension also aims to reduce the amount of boilerplate while improving readability of the registration code. For that reason the operator `~>` is introduced. 
@@ -153,7 +153,7 @@ Petowner(pet: r~>)
 Petowner(pet: r.resolve(AnimalType.self)!)
 ```
 
-The dependency is again infered from the type in initializer. To specify concrete class you can use:
+The dependency is again inferred from the type in initializer. To specify concrete class you can use:
 
 ```swift
 Petowner(pet: r ~> Cat.self)
