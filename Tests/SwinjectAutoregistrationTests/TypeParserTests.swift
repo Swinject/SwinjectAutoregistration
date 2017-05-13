@@ -107,7 +107,7 @@ class TypeParserSpec: QuickSpec {
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
-                //Type print adds one unneccessary tuple to the output
+                //Type print adds one unnecessary tuple to the output
                 XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([Type.closure(parameters: [self.identifier("String")], returnType: self.identifier("String"), throws: false), self.identifier("Int")])], returnType: self.identifier("String"), throws: false))
             }
             
