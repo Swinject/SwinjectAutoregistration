@@ -91,6 +91,20 @@ class TypeParser {
         return nil
     }
     
+    func parseTypeAnnotation() -> Type? {
+        let originalLocation = scanner.scanLocation
+        
+        //Scan param name
+        _ = parseIdentifier()
+        
+        //Return if param name is not specified
+        if scanner.scanString(string: ":") == nil {
+            scanner.scanLocation = originalLocation
+        }
+        
+        return parseType()
+    }
+    
     func parseTypeIdentifier() -> TypeIdentifier? {
         guard let typeName = parseIdentifier() else { return nil }
         
@@ -140,9 +154,11 @@ class TypeParser {
         
         var types: [Type] = []
         
-        if let type = parseType() { types.append(type) }
+        if let type = parseTypeAnnotation() { types.append(type) }
         
-        while scanner.scanString(string: ",") != nil, let type = parseType() {
+        
+        
+        while scanner.scanString(string: ",") != nil, let type = parseTypeAnnotation() {
             types.append(type)
         }
         
