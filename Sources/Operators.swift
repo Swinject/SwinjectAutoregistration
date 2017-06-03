@@ -82,6 +82,26 @@ public func ~> <Service, Arg1>(r: Resolver, o: (service: Service.Type, name: Str
     return r.resolve(o.service, name: o.name, argument: o.argument)!
 }
 
+//@available(*, deprecated, message: "Arguments passed in sequence have been deprecated, pass arguments in tuple instead. e.g: ~> (Service.self, arguments: (arg1, arg2))")
+//public func ~> <Service, Arg1: Any, Arg2: Any>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
+//    return r.resolve(o.0, arguments: o.1, o.2)!
+//}
+
+@available(*, deprecated, message: "Comma-separated arguments have been deprecated, pass arguments in tuple instead. e.g: ~> (Service.self, name: \"Service\", arguments: (arg1, arg2))")
+public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.2, o.3)!
+}
+
+@available(*, deprecated, message: "Comma-separated arguments have been deprecated, pass arguments in tuple instead. e.g: ~> (Service.self, arguments: (arg1, arg2, arg3))")
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2, Arg3) ) -> Service {
+    return r.resolve(o.0, arguments: o.1, o.2, o.3)!
+}
+
+@available(*, deprecated, message: "Comma-separated arguments have been deprecated, pass arguments in tuple instead. e.g: ~> (Service.self, name: \"Service\", arguments: (arg1, arg2, arg3))")
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2, Arg3) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.2, o.3, o.4)!
+}
+
 /** Binary operator ~> equivalent to `r.resolve(Service.Type, arguments: (Arg1, Arg2))!`
  
  Usage: `SomeClass(dependencyA: r ~> (DependencyA.self, arguments: (arg1, arg2)))`
@@ -93,8 +113,8 @@ public func ~> <Service, Arg1>(r: Resolver, o: (service: Service.Type, name: Str
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2) ) -> Service {
-    return r.resolve(o.0, arguments: o.1, o.2)!
+public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, arguments: (Arg1, Arg2)) ) -> Service {
+    return r.resolve(o.0, arguments: o.arguments.0, o.arguments.1)!
 }
 
 
@@ -109,8 +129,8 @@ public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, arguments: A
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2) ) -> Service {
-    return r.resolve(o.0, name: o.1, arguments: o.2, o.3)!
+public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, name: String, arguments: (Arg1, Arg2)) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.arguments.0, o.arguments.1)!
 }
 
 
@@ -125,8 +145,8 @@ public func ~> <Service, Arg1, Arg2>(r: Resolver, o: (Service.Type, name: String
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, arguments: Arg1, Arg2, Arg3) ) -> Service {
-    return r.resolve(o.0, arguments: o.1, o.2, o.3)!
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, arguments: (Arg1, Arg2, Arg3)) ) -> Service {
+    return r.resolve(o.0, arguments: o.arguments.0, o.arguments.1, o.arguments.2)!
 }
 
 /** Binary operator ~> equivalent to `r.resolve(Service.Type, name: "ServiceName", arguments: (Arg1, Arg2, Arg3))!`
@@ -140,6 +160,6 @@ public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, argume
  - Returns: The resolved service type instance.
  - Important: Fails on unresolvable service.
  */
-public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, name: String, arguments: Arg1, Arg2, Arg3) ) -> Service {
-    return r.resolve(o.0, name: o.1, arguments: o.2, o.3, o.4)!
+public func ~> <Service, Arg1, Arg2, Arg3>(r: Resolver, o: (Service.Type, name: String, arguments: (Arg1, Arg2, Arg3)) ) -> Service {
+    return r.resolve(o.0, name: o.1, arguments: o.arguments.0, o.arguments.1, o.arguments.2)!
 }
