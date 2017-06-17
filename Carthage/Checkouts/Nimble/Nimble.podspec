@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "Nimble"
-  s.version      = "5.1.1"
+  s.version      = "7.0.0"
   s.summary      = "A Matcher Framework for Swift and Objective-C"
   s.description  = <<-DESC
                    Use Nimble to express the expected outcomes of Swift or Objective-C expressions. Inspired by Cedar.
                    DESC
   s.homepage     = "https://github.com/Quick/Nimble"
-  s.license      = { :type => "Apache 2.0", :file => "LICENSE.md" }
+  s.license      = { :type => "Apache 2.0", :file => "LICENSE" }
   s.author       = "Quick Contributors"
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.10"
@@ -17,23 +17,25 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/**/*.{swift,h,m,c}"
 
   s.osx.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
   ]
   s.ios.exclude_files = [
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
   ]
   s.tvos.exclude_files = [
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.{h,c}",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.m",
+    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/CwlCatchException.m",
+    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
-  s.tvos.private_header_files = "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.h"
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
