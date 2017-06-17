@@ -35,6 +35,7 @@ Dependency injection (DI) is a software design pattern that implements Inversion
 - **[SwinjectPropertyLoader](https://github.com/Swinject/SwinjectPropertyLoader)**: Loading property values from resources.
 - **[SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)**: Automatic dependency injection via Storyboard.
 - **[Swinject-CodeGen](https://github.com/Swinject/Swinject-CodeGen)**: Type-safe code generation of `Container` from a CSV/YAML file defining dependencies.
+- **[SwinjectAutoregistration](https://github.com/Swinject/SwinjectAutoregistration)**: Automatic registration of services by leveraging the Swift Generics.
 
 ## Requirements
 
@@ -63,10 +64,10 @@ github "Swinject/Swinject" ~> 1.1.4
 #### Swift 3.0.x
 
 ```
-github "Swinject/Swinject" "2.0.0-beta.3"
+github "Swinject/Swinject" ~> 2.0.0
 
 # Uncomment if you use SwinjectStoryboard
-# github "Swinject/SwinjectStoryboard" "1.0.0-beta.3"
+# github "Swinject/SwinjectStoryboard" ~> 1.0.0
 ```
 
 Then run `carthage update --no-use-binaries` command or just `carthage update`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
@@ -93,10 +94,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
 use_frameworks!
 
-pod 'Swinject', '2.0.0-beta.3'
+pod 'Swinject', '~> 2.0.0'
 
 # Uncomment if you use SwinjectStoryboard
-# pod 'SwinjectStoryboard', '1.0.0-beta.3'
+# pod 'SwinjectStoryboard', '~> 1.0.0'
 ```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
@@ -210,17 +211,19 @@ Typically services are registered to a container in `AppDelegate` if you do not 
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    let container = Container() { c in
-        c.register(Animal.self) { _ in Cat(name: "Mimi") }
-        c.register(Person.self) { r in
+    let container: Container = {
+        let container = Container()
+        container.register(Animal.self) { _ in Cat(name: "Mimi") }
+        container.register(Person.self) { r in
             PetOwner(pet: r.resolve(Animal.self)!)
         }
-        c.register(PersonViewController.self) { r in
+        container.register(PersonViewController.self) { r in
             let controller = PersonViewController()
             controller.person = r.resolve(Person.self)
             return controller
         }
-    }
+        return container
+    }()
 
     func application(
         _ application: UIApplication,

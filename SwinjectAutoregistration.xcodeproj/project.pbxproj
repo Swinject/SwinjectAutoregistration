@@ -27,6 +27,9 @@
 		AC4AC94F1E33CB9600E6355A /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC94A1E33C75200E6355A /* Type.swift */; };
 		AC4AC9501E33CB9700E6355A /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC94A1E33C75200E6355A /* Type.swift */; };
 		AC4AC9511E33CB9700E6355A /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC94A1E33C75200E6355A /* Type.swift */; };
+		AC5A8FAB1ED1DAA00027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
+		AC5A8FBB1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
+		AC5A8FBC1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
 		ACA1032C1E3E3391004B8CD4 /* TypeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103261E3E3386004B8CD4 /* TypeParserTests.swift */; };
 		ACA1032D1E3E3392004B8CD4 /* TypeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103261E3E3386004B8CD4 /* TypeParserTests.swift */; };
 		ACA1032E1E3E3393004B8CD4 /* TypeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103261E3E3386004B8CD4 /* TypeParserTests.swift */; };
@@ -338,6 +341,7 @@
 		AC1191181E301E3A00B112D9 /* CheckResolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckResolved.swift; sourceTree = "<group>"; };
 		AC4AC9481E33C71D00E6355A /* TypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeParser.swift; sourceTree = "<group>"; };
 		AC4AC94A1E33C75200E6355A /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorsSpec.swift; sourceTree = "<group>"; };
 		ACA103251E3E3386004B8CD4 /* AutoregistrationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoregistrationSpec.swift; sourceTree = "<group>"; };
 		ACA103261E3E3386004B8CD4 /* TypeParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeParserTests.swift; sourceTree = "<group>"; };
 		ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionErrorSpec.swift; sourceTree = "<group>"; };
@@ -464,6 +468,7 @@
 				ACA103251E3E3386004B8CD4 /* AutoregistrationSpec.swift */,
 				ACA103261E3E3386004B8CD4 /* TypeParserTests.swift */,
 				ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */,
+				AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */,
 			);
 			path = SwinjectAutoregistrationTests;
 			sourceTree = "<group>";
@@ -1153,6 +1158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5A8FAB1ED1DAA00027334A /* OperatorsSpec.swift in Sources */,
 				ACA1032C1E3E3391004B8CD4 /* TypeParserTests.swift in Sources */,
 				ACA103321E3E339E004B8CD4 /* AutoregistrationSpec.swift in Sources */,
 				ACA1032F1E3E3397004B8CD4 /* ResolutionErrorSpec.swift in Sources */,
@@ -1191,6 +1197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5A8FBB1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */,
 				ACA1032D1E3E3392004B8CD4 /* TypeParserTests.swift in Sources */,
 				ACA103331E3E339F004B8CD4 /* AutoregistrationSpec.swift in Sources */,
 				ACA103301E3E3398004B8CD4 /* ResolutionErrorSpec.swift in Sources */,
@@ -1215,6 +1222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5A8FBC1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */,
 				ACA1032E1E3E3393004B8CD4 /* TypeParserTests.swift in Sources */,
 				ACA103341E3E33A0004B8CD4 /* AutoregistrationSpec.swift in Sources */,
 				ACA103311E3E339A004B8CD4 /* ResolutionErrorSpec.swift in Sources */,

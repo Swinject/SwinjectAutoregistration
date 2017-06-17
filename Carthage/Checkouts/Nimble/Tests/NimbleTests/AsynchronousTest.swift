@@ -45,10 +45,10 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             expect { value }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually not equal <0>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
     }
@@ -61,12 +61,12 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var value = 0
 
-        let sleepThenSetValueTo: (Int) -> () = { newValue in
+        let sleepThenSetValueTo: (Int) -> Void = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
             value = newValue
         }
 
-        var asyncOperation: () -> () = { sleepThenSetValueTo(1) }
+        var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
         if #available(OSX 10.10, *) {
             DispatchQueue.global().async(execute: asyncOperation)
@@ -98,7 +98,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
     func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
-            waitUntil(timeout: 1) { done in return }
+            waitUntil(timeout: 1) { _ in return }
         }
     }
 
@@ -106,7 +106,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                let asyncOperation: () -> () = {
+                let asyncOperation: () -> Void = {
                     Thread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
@@ -172,22 +172,20 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
-#if !SWIFT_PACKAGE
-        waitUntil { done in
-            deferToMainQueue {
-                done()
-                expect {
+        failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+            waitUntil { done in
+                deferToMainQueue {
                     done()
-                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+                    done()
+                }
             }
         }
-#endif
     }
 
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        let asyncOperation: () -> () = {
+        let asyncOperation: () -> Void = {
             expect {
                 waitUntil { done in done() }
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
@@ -205,7 +203,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testToEventuallyMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        let asyncOperation: () -> () = {
+        let asyncOperation: () -> Void = {
             expect {
                 expect(1).toEventually(equal(2))
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))

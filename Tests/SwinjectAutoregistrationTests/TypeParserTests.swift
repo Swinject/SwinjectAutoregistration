@@ -99,7 +99,7 @@ class TypeParserSpec: QuickSpec {
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
-                XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([self.identifier("String"), self.identifier("Int")])], returnType: self.identifier("String"), throws: false))
+                XCTAssertEqual(type, Type.closure(parameters: [self.identifier("String"), self.identifier("Int")], returnType: self.identifier("String"), throws: false))
             }
             
             it("scans nested function type") {
@@ -107,8 +107,7 @@ class TypeParserSpec: QuickSpec {
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
-                //Type print adds one unnecessary tuple to the output
-                XCTAssertEqual(type, Type.closure(parameters: [Type.tuple([Type.closure(parameters: [self.identifier("String")], returnType: self.identifier("String"), throws: false), self.identifier("Int")])], returnType: self.identifier("String"), throws: false))
+                XCTAssertEqual(type, Type.closure(parameters: [Type.closure(parameters: [self.identifier("String")], returnType: self.identifier("String"), throws: false), self.identifier("Int")], returnType: self.identifier("String"), throws: false))
             }
             
             it("scans no parameter function type") {
@@ -117,7 +116,7 @@ class TypeParserSpec: QuickSpec {
                 let type = parser.parseType()
                 
                 let void = Type.tuple([]) // Void is empty tuple
-                XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: false))
+                XCTAssertEqual(type, Type.closure(parameters: [], returnType: void, throws: false))
             }
             
             it("scans throwing function type") {
@@ -126,7 +125,7 @@ class TypeParserSpec: QuickSpec {
                 let type = parser.parseType()
                 
                 let void = Type.tuple([]) // Void is empty tuple
-                XCTAssertEqual(type, Type.closure(parameters: [void], returnType: void, throws: true))
+                XCTAssertEqual(type, Type.closure(parameters: [], returnType: void, throws: true))
             }
             
             it("scans implicitly unwrapped optional") {
