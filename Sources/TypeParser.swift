@@ -11,16 +11,16 @@ import Foundation
     extension Scanner {
         func scanString(string: String) -> String? {
             var value: NSString?
-            if self.scanString(string, into: &value), let value = value as? String {
-                return value
+            if self.scanString(string, into: &value), let value = value {
+                return value as String
             }
             return nil
         }
         
         func scanCharactersFromSet(_ set: CharacterSet) -> String? {
             var value: NSString?
-            if self.scanCharacters(from: set, into: &value), let value = value as? String {
-                return value
+            if self.scanCharacters(from: set, into: &value), let value = value {
+                return value as String
             }
             return nil
         }
