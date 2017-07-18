@@ -67,6 +67,13 @@ func commaConcat(_ xs: [String]) -> String {
     return xs.joined(separator: ", ")
 }
 
+func extraCommas(_ string: String, when condition: Bool) -> String {
+    if condition {
+        return "(\(string))"
+    }
+    return string
+}
+
 func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoVariables: Bool = false) -> String {
     // If there is only one argument and one dependency, it can be checked by compiler
     let isArgumentInjection = dependenciesCount == 1 && argumentsCount == 1
@@ -98,9 +105,9 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
         initializer =
             "           " + services.joined(separator: "; ") + "\n" +
             "           checkResolved(initializer: initializer, services: \(commaConcat(genericParameters.map{$0.lowercased()})))\n" +
-            "           return initializer(\(commaConcat(genericParameters.map{ "\($0.lowercased())!" })))\n"
+        "           return initializer(\(extraCommas(commaConcat(genericParameters.map{ "\($0.lowercased())!" }), when: dependenciesCount != 1)))\n"
     } else {
-        initializer = "       initializer(\(commaConcat(resolvers.map{"\($0)\(isArgumentInjection ? "" : "!")"})))"
+        initializer = "       initializer(\(extraCommas(commaConcat(resolvers.map{"\($0)\(isArgumentInjection ? "" : "!")"}), when: dependenciesCount != 1)))"
     }
     
     let closureParameters = commaConcat(["res"] + genericArgumentsVars)
@@ -108,7 +115,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     var register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
         "@discardableResult",
-        "public func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(concatenatedParameters)) -> Service) -> ServiceEntry<Service> {",
+        "public func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(extraCommas(concatenatedParameters, when: dependenciesCount != 1))) -> Service) -> ServiceEntry<Service> {",
     ]
     
     if argumentsCount > 1 {
@@ -176,7 +183,7 @@ func checkGenerator(_ dependencies: Int) -> String {
     "   return \(recursiveUnresolvedCall)( \(genericParameters.last!.lowercased()) == nil ? \"\\(\(genericParameters.last!).self)\" : nil )",
     "}",
     "",
-    "func checkResolved<Service, \(generics)>(initializer: (\(generics)) -> Service, services\(servicesDefinition)){",
+    "func checkResolved<Service, \(generics)>(initializer: (\(extraCommas(generics, when: dependencies != 1))) -> Service, services\(servicesDefinition)){",
     "   let unresolved = ( \(serviceArrayString) ).filter { $0 == nil }",
     "   if unresolved.count > 0 {",
     "       let errorMessage = resolutionErrors(forInitializer: initializer).map { \"\\($0.message)\\n\" }.joined()",
@@ -206,17 +213,18 @@ func write(to outputPath: String, lines: [String]) throws{
 print("Generating 💬")
 
 
-let dependenciesCount = Int(CommandLine.arguments[safe: 1] ?? "9")!
+let dependenciesCount = Int(CommandLine.arguments[safe: 1] ?? "20")!
 let argumentsCount = Int(CommandLine.arguments[safe: 2] ?? "3")!
 let breakCount = Int(CommandLine.arguments[safe: 3] ?? "0")!
 
 
-let registers = (0...dependenciesCount).map { dep in
-    (0...argumentsCount).filter{ dep >= $0 }.map { arg in
+let registerLines = (0...dependenciesCount).map { dep in
+    (0...argumentsCount).filter{ dep >= $0 }.map { arg -> String in
         registerGenerator(dep, argumentsCount: arg, breakIntoVariables: dep + arg > breakCount)
     }
-    }.reduce([]){ $0 + $1}
+    }
 
+let registers = registerLines.reduce([]){ $0 + $1}
 
 var autoregistrationOutput = [
     "let maxDependencies = \(dependenciesCount)",

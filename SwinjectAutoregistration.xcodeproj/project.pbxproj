@@ -584,17 +584,17 @@
 			isa = PBXGroup;
 			children = (
 				CD5B9E641D832A84007ED05F /* Quick.framework */,
-				CD5B9E661D832A84007ED05F /* Quick-macOSTests.xctest */,
-				CD5B9E681D832A84007ED05F /* QuickFocused-macOSTests.xctest */,
-				AC4AC95A1E3530DB00E6355A /* QuickAfterSuite-macOSTests.xctest */,
+				CD5B9E661D832A84007ED05F /* Quick - macOSTests.xctest */,
+				CD5B9E681D832A84007ED05F /* QuickFocused - macOSTests.xctest */,
+				AC4AC95A1E3530DB00E6355A /* QuickAfterSuite - macOSTests.xctest */,
 				CD5B9E6A1D832A84007ED05F /* Quick.framework */,
-				CD5B9E6C1D832A84007ED05F /* Quick-iOSTests.xctest */,
-				CD5B9E6E1D832A84007ED05F /* QuickFocused-iOSTests.xctest */,
-				AC4AC95C1E3530DB00E6355A /* QuickAfterSuite-iOSTests.xctest */,
+				CD5B9E6C1D832A84007ED05F /* Quick - iOSTests.xctest */,
+				CD5B9E6E1D832A84007ED05F /* QuickFocused - iOSTests.xctest */,
+				AC4AC95C1E3530DB00E6355A /* QuickAfterSuite - iOSTests.xctest */,
 				CD5B9E701D832A84007ED05F /* Quick.framework */,
-				CD5B9E721D832A84007ED05F /* Quick-tvOSTests.xctest */,
-				CD5B9E741D832A84007ED05F /* QuickFocused-tvOSTests.xctest */,
-				AC4AC95E1E3530DB00E6355A /* QuickAfterSuite-tvOSTests.xctest */,
+				CD5B9E721D832A84007ED05F /* Quick - tvOSTests.xctest */,
+				CD5B9E741D832A84007ED05F /* QuickFocused - tvOSTests.xctest */,
+				AC4AC95E1E3530DB00E6355A /* QuickAfterSuite - tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -910,24 +910,24 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AC4AC95A1E3530DB00E6355A /* QuickAfterSuite-macOSTests.xctest */ = {
+		AC4AC95A1E3530DB00E6355A /* QuickAfterSuite - macOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickAfterSuite-macOSTests.xctest";
+			path = "QuickAfterSuite - macOSTests.xctest";
 			remoteRef = AC4AC9591E3530DB00E6355A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AC4AC95C1E3530DB00E6355A /* QuickAfterSuite-iOSTests.xctest */ = {
+		AC4AC95C1E3530DB00E6355A /* QuickAfterSuite - iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickAfterSuite-iOSTests.xctest";
+			path = "QuickAfterSuite - iOSTests.xctest";
 			remoteRef = AC4AC95B1E3530DB00E6355A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AC4AC95E1E3530DB00E6355A /* QuickAfterSuite-tvOSTests.xctest */ = {
+		AC4AC95E1E3530DB00E6355A /* QuickAfterSuite - tvOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickAfterSuite-tvOSTests.xctest";
+			path = "QuickAfterSuite - tvOSTests.xctest";
 			remoteRef = AC4AC95D1E3530DB00E6355A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -980,17 +980,17 @@
 			remoteRef = CD5B9E631D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E661D832A84007ED05F /* Quick-macOSTests.xctest */ = {
+		CD5B9E661D832A84007ED05F /* Quick - macOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Quick-macOSTests.xctest";
+			path = "Quick - macOSTests.xctest";
 			remoteRef = CD5B9E651D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E681D832A84007ED05F /* QuickFocused-macOSTests.xctest */ = {
+		CD5B9E681D832A84007ED05F /* QuickFocused - macOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickFocused-macOSTests.xctest";
+			path = "QuickFocused - macOSTests.xctest";
 			remoteRef = CD5B9E671D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1001,17 +1001,17 @@
 			remoteRef = CD5B9E691D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E6C1D832A84007ED05F /* Quick-iOSTests.xctest */ = {
+		CD5B9E6C1D832A84007ED05F /* Quick - iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Quick-iOSTests.xctest";
+			path = "Quick - iOSTests.xctest";
 			remoteRef = CD5B9E6B1D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E6E1D832A84007ED05F /* QuickFocused-iOSTests.xctest */ = {
+		CD5B9E6E1D832A84007ED05F /* QuickFocused - iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickFocused-iOSTests.xctest";
+			path = "QuickFocused - iOSTests.xctest";
 			remoteRef = CD5B9E6D1D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1022,17 +1022,17 @@
 			remoteRef = CD5B9E6F1D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E721D832A84007ED05F /* Quick-tvOSTests.xctest */ = {
+		CD5B9E721D832A84007ED05F /* Quick - tvOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Quick-tvOSTests.xctest";
+			path = "Quick - tvOSTests.xctest";
 			remoteRef = CD5B9E711D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD5B9E741D832A84007ED05F /* QuickFocused-tvOSTests.xctest */ = {
+		CD5B9E741D832A84007ED05F /* QuickFocused - tvOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "QuickFocused-tvOSTests.xctest";
+			path = "QuickFocused - tvOSTests.xctest";
 			remoteRef = CD5B9E731D832A84007ED05F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1308,7 +1308,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-D DEBUG -Xfrontend -debug-time-function-bodies";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1319,7 +1319,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1329,6 +1329,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1338,6 +1339,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1388,6 +1390,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1430,6 +1433,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1440,6 +1444,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1449,6 +1454,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1458,6 +1464,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -1468,6 +1475,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -1517,6 +1525,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
@@ -1558,6 +1567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1569,6 +1579,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1578,6 +1589,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1629,6 +1641,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1672,6 +1685,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSXTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
