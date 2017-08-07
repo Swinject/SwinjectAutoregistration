@@ -52,7 +52,7 @@ Here is a simple example to auto-register a pet owner
 ```swift
 let container = Container()
 container.register(Animal.self) { _ in Cat(name: "Mimi") } // Regular register method
-container.autoregister(PersonType.self, initializer: PetOwner.init) // Autoregistration
+container.autoregister(Person.self, initializer: PetOwner.init) // Autoregistration
 ```
 
 where PetOwner looks like this:
@@ -120,9 +120,9 @@ Swinject will register `Person` with the argument of type `String`. When `contai
 To also pass pet as argument you can call
 
 ```swift
-container.autoregister(PersonType.self, arguments: String.self, AnimalType.self, initializer: PetOwner.init)
+container.autoregister(Person.self, arguments: String.self, Animal.self, initializer: PetOwner.init)
 //or
-container.autoregister(PersonType.self, arguments: AnimalType.self, String.self, initializer: PetOwner.init)
+container.autoregister(Person.self, arguments: Animal.self, String.self, initializer: PetOwner.init)
 ```
 
 > The order of the arguments listed is interchangeable. The auto-registration can't be used with more arguments and/or dependencies of the same type.
@@ -150,7 +150,7 @@ Petowner(pet: r~>)
 
 // equivalent to
 
-Petowner(pet: r.resolve(AnimalType.self)!)
+Petowner(pet: r.resolve(Animal.self)!)
 ```
 
 The dependency is again inferred from the type in initializer. To specify concrete class you can use:
@@ -188,17 +188,17 @@ container.autoregister(Person.self, initializer: PetOwner.init(name:pet:))
 There are also cases where auto-registration **can't** be used:
 
   * Can't use services with **optional dependencies** in their initializers
-     * e.g: `PersonOwner(name:String, pet: AnimalType?)` 
+     * e.g: `PersonOwner(name:String, pet: Animal?)` 
   * Can't use services with **implicitly unwrapped dependencies** in their initializers
-     * e.g: `PersonOwner(name:String, pet: AnimalType!)` 
+     * e.g: `PersonOwner(name:String, pet: Animal!)` 
   * Can't use services with **named dependencies** in their initializers
      * There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered: 
      
      ```swift
-     	container.register(AnimalType.self, name: "mimi") { _ in Cat(name: "Mimi") }
-     	container.register(AnimalType.self, name: "charles") { _ in Cat(name: "Charles") }
-		container.register(PersonType.self) {
-			PetOwner(pet: r.resolve(AnimalType.self, name: "mimi")
+     	container.register(Animal.self, name: "mimi") { _ in Cat(name: "Mimi") }
+     	container.register(Animal.self, name: "charles") { _ in Cat(name: "Charles") }
+		container.register(Person.self) {
+			PetOwner(pet: r.resolve(Animal.self, name: "mimi")
 		}
      ```
 
