@@ -12,20 +12,21 @@
     expect(@2).toNot(beGreaterThan(@2));
     expect(@2).to(beGreaterThan(0));
     expect(@2).toNot(beGreaterThan(2));
+    expect(2.5).to(beGreaterThan(1.5));
 }
 
 - (void)testNegativeMatches {
     expectFailureMessage(@"expected to be greater than <0>, got <-1>", ^{
         expect(@(-1)).to(beGreaterThan(@(0)));
     });
-    expectFailureMessage(@"expected to not be greater than <1>, got <0>", ^{
-        expect(@0).toNot(beGreaterThan(@(1)));
+    expectFailureMessage(@"expected to not be greater than <1>, got <2>", ^{
+        expect(@2).toNot(beGreaterThan(@(1)));
     });
     expectFailureMessage(@"expected to be greater than <0>, got <-1>", ^{
         expect(-1).to(beGreaterThan(0));
     });
-    expectFailureMessage(@"expected to not be greater than <1>, got <0>", ^{
-        expect(0).toNot(beGreaterThan(1));
+    expectFailureMessage(@"expected to not be greater than <1>, got <2>", ^{
+        expect(2).toNot(beGreaterThan(1));
     });
 }
 
