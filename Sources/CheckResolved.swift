@@ -26,7 +26,7 @@ func unresolvedService<A, B>(_ a: A?, _ b: B?) -> String? {
    return unresolvedService(a) ?? ( b == nil ? "\(B.self)" : nil )
 }
 
-func checkResolved<Service, A, B>(initializer: (A, B) -> Service, services a: A?, _ b: B?){
+func checkResolved<Service, A, B>(initializer: ((A, B)) -> Service, services a: A?, _ b: B?){
    let unresolved = ( [a, b] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -38,7 +38,7 @@ func unresolvedService<A, B, C>(_ a: A?, _ b: B?, _ c: C?) -> String? {
    return unresolvedService(a, b) ?? ( c == nil ? "\(C.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C>(initializer: (A, B, C) -> Service, services a: A?, _ b: B?, _ c: C?){
+func checkResolved<Service, A, B, C>(initializer: ((A, B, C)) -> Service, services a: A?, _ b: B?, _ c: C?){
    let unresolved = ( [a, b, c] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -50,7 +50,7 @@ func unresolvedService<A, B, C, D>(_ a: A?, _ b: B?, _ c: C?, _ d: D?) -> String
    return unresolvedService(a, b, c) ?? ( d == nil ? "\(D.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D>(initializer: (A, B, C, D) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?){
+func checkResolved<Service, A, B, C, D>(initializer: ((A, B, C, D)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?){
    let unresolved = ( [a, b, c, d] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -62,7 +62,7 @@ func unresolvedService<A, B, C, D, E>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E
    return unresolvedService(a, b, c, d) ?? ( e == nil ? "\(E.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E>(initializer: (A, B, C, D, E) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?){
+func checkResolved<Service, A, B, C, D, E>(initializer: ((A, B, C, D, E)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?){
    let unresolved = ( [a, b, c, d, e] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -74,7 +74,7 @@ func unresolvedService<A, B, C, D, E, F>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, _ e
    return unresolvedService(a, b, c, d, e) ?? ( f == nil ? "\(F.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F>(initializer: (A, B, C, D, E, F) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?){
+func checkResolved<Service, A, B, C, D, E, F>(initializer: ((A, B, C, D, E, F)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?){
    let unresolved = ( [a, b, c, d, e, f] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -86,7 +86,7 @@ func unresolvedService<A, B, C, D, E, F, G>(_ a: A?, _ b: B?, _ c: C?, _ d: D?, 
    return unresolvedService(a, b, c, d, e, f) ?? ( g == nil ? "\(G.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G>(initializer: (A, B, C, D, E, F, G) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?){
+func checkResolved<Service, A, B, C, D, E, F, G>(initializer: ((A, B, C, D, E, F, G)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?){
    let unresolved = ( [a, b, c, d, e, f, g] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -98,7 +98,7 @@ func unresolvedService<A, B, C, D, E, F, G, H>(_ a: A?, _ b: B?, _ c: C?, _ d: D
    return unresolvedService(a, b, c, d, e, f, g) ?? ( h == nil ? "\(H.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H>(initializer: (A, B, C, D, E, F, G, H) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?){
+func checkResolved<Service, A, B, C, D, E, F, G, H>(initializer: ((A, B, C, D, E, F, G, H)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?){
    let unresolved = ( [a, b, c, d, e, f, g, h] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -110,7 +110,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I>(_ a: A?, _ b: B?, _ c: C?, _ d
    return unresolvedService(a, b, c, d, e, f, g, h) ?? ( i == nil ? "\(I.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I>(initializer: (A, B, C, D, E, F, G, H, I) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I>(initializer: ((A, B, C, D, E, F, G, H, I)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -122,7 +122,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J>(_ a: A?, _ b: B?, _ c: C?, 
    return unresolvedService(a, b, c, d, e, f, g, h, i) ?? ( j == nil ? "\(J.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J>(initializer: (A, B, C, D, E, F, G, H, I, J) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J>(initializer: ((A, B, C, D, E, F, G, H, I, J)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -134,7 +134,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K>(_ a: A?, _ b: B?, _ c: C
    return unresolvedService(a, b, c, d, e, f, g, h, i, j) ?? ( k == nil ? "\(K.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K>(initializer: (A, B, C, D, E, F, G, H, I, J, K) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K>(initializer: ((A, B, C, D, E, F, G, H, I, J, K)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -146,7 +146,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L>(_ a: A?, _ b: B?, _ c
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k) ?? ( l == nil ? "\(L.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -158,7 +158,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M>(_ a: A?, _ b: B?, 
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l) ?? ( m == nil ? "\(M.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -170,7 +170,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N>(_ a: A?, _ b: B
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m) ?? ( n == nil ? "\(N.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -182,7 +182,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(_ a: A?, _ b
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n) ?? ( o == nil ? "\(O.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -194,7 +194,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(_ a: A?, 
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) ?? ( p == nil ? "\(P.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o, p] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -206,7 +206,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q>(_ a: A
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) ?? ( q == nil ? "\(Q.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o, p, q] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -218,7 +218,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(_ a
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) ?? ( r == nil ? "\(R.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o, p, q, r] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -230,7 +230,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S>(
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) ?? ( s == nil ? "\(S.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?, _ s: S?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?, _ s: S?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o, p, q, r, s] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()
@@ -242,7 +242,7 @@ func unresolvedService<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, 
    return unresolvedService(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) ?? ( t == nil ? "\(T.self)" : nil )
 }
 
-func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T>(initializer: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?, _ s: S?, _ t: T?){
+func checkResolved<Service, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T>(initializer: ((A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T)) -> Service, services a: A?, _ b: B?, _ c: C?, _ d: D?, _ e: E?, _ f: F?, _ g: G?, _ h: H?, _ i: I?, _ j: J?, _ k: K?, _ l: L?, _ m: M?, _ n: N?, _ o: O?, _ p: P?, _ q: Q?, _ r: R?, _ s: S?, _ t: T?){
    let unresolved = ( [a, b, c, d, e, f, g, h, i, j] as [Any?] + [k, l, m, n, o, p, q, r, s, t] as [Any?] ).filter { $0 == nil }
    if unresolved.count > 0 {
        let errorMessage = resolutionErrors(forInitializer: initializer).map { "\($0.message)\n" }.joined()

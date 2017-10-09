@@ -2,9 +2,9 @@ import Foundation
 import XCTest
 import Nimble
 
-fileprivate protocol TestProtocol {}
-fileprivate class TestClassConformingToProtocol: TestProtocol {}
-fileprivate struct TestStructConformingToProtocol: TestProtocol {}
+private protocol TestProtocol {}
+private class TestClassConformingToProtocol: TestProtocol {}
+private struct TestStructConformingToProtocol: TestProtocol {}
 
 final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAnInstanceOfTest) -> () throws -> Void)] {
@@ -49,7 +49,7 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessageForNil("expected to be an instance of NSString, got <nil>") {
             expect(nil as NSString?).to(beAnInstanceOf(NSString.self))
         }
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         let numberTypeName = "__NSCFNumber"
 #else
         let numberTypeName = "NSNumber"
@@ -57,8 +57,8 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
             expect(NSNumber(value:1)).to(beAnInstanceOf(NSString.self))
         }
-        failsWithErrorMessage("expected to not be an instance of NSNumber, got <\(numberTypeName) instance>") {
-            expect(NSNumber(value:1)).toNot(beAnInstanceOf(NSNumber.self))
+        failsWithErrorMessage("expected to not be an instance of \(numberTypeName), got <\(numberTypeName) instance>") {
+            expect(NSNumber(value:1)).toNot(beAnInstanceOf(type(of: NSNumber(value:1))))
         }
     }
 

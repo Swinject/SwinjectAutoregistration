@@ -1,4 +1,4 @@
-osx_image: xcode8
+osx_image: xcode8.3
 language: generic
 matrix:
   include:
@@ -12,7 +12,13 @@ matrix:
     - os: osx
       env: TYPE=macos
     - os: osx
+      env: TYPE=macos
+      osx_image: xcode9
+    - os: osx
       env: TYPE=swiftpm
+    - os: osx
+      env: TYPE=swiftpm
+      osx_image: xcode9
     - os: linux
       dist: trusty
       sudo: required

@@ -35,7 +35,7 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
 
     func testBeIdenticalToNegativeMessage() {
         let value1 = NSArray(array: [])
-        let value2 = NSArray(array: [])
+        let value2 = value1
         let message = "expected to not be identical to \(identityAsString(value2)), got \(identityAsString(value1))"
         failsWithErrorMessage(message) {
             expect(value1).toNot(beIdenticalTo(value2))
@@ -52,15 +52,15 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
         let value = NSDate()
         expect(value).to(be(value))
         expect(NSNumber(value:1)).toNot(be(NSString(string: "turtles")))
-        #if _runtime(_ObjC)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
             expect([1]).toNot(be([1]))
         #else
             expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
         #endif
 
         let value1 = NSArray(array: [])
-        let value2 = NSArray(array: [])
-        let message = "expected to not be identical to \(identityAsString(value2)), got \(identityAsString(value1))"
+        let value2 = value1
+        let message = "expected to not be identical to \(identityAsString(value1)), got \(identityAsString(value2))"
         failsWithErrorMessage(message) {
             expect(value1).toNot(be(value2))
         }

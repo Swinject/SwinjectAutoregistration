@@ -1,8 +1,13 @@
-osx_image: xcode8
+osx_image: xcode8.3
 language: generic
 matrix:
   include:
     - os: osx
+      env:
+        - PLATFORM=macos
+        - XCODE_ACTION="build-for-testing test-without-building"
+    - os: osx
+      osx_image: xcode9
       env:
         - PLATFORM=macos
         - XCODE_ACTION="build-for-testing test-without-building"
@@ -18,12 +23,21 @@ matrix:
       env:
         - PLATFORM=swiftpm
     - os: osx
+      osx_image: xcode9
+      env:
+        - PLATFORM=swiftpm
+    - os: osx
       sudo: required
       env:
         - PODSPEC=1
     - os: linux
       sudo: required
       dist: trusty
+    - os: linux
+      sudo: required
+      dist: trusty
+      env:
+        - SWIFT_VERSION=4.0-DEVELOPMENT-SNAPSHOT-2017-09-04-a
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then ./script/travis-install-macos; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./script/travis-install-linux; fi
