@@ -18,6 +18,10 @@ class AutoregistrationSpec: QuickSpec {
     class DependencyH {}
     class DependencyI {}
     class DependencyJ {}
+
+    class Service0 {
+        init(){}
+    }
     
     class Service1 {
         init(a: DependencyA){}
@@ -100,6 +104,12 @@ class AutoregistrationSpec: QuickSpec {
                 container.autoregister(DependencyH.self, initializer: DependencyH.init)
                 container.autoregister(DependencyI.self, initializer: DependencyI.init)
                 container.autoregister(DependencyJ.self, initializer: DependencyJ.init)
+            }
+
+            it("registers service with zero dependencies") {
+                container.autoregister(Service0.self, initializer: Service0.init)
+                let service = container.resolve(Service0.self)
+                expect(service).notTo(beNil())
             }
             
             it("registers service with one dependency") {
