@@ -5,9 +5,7 @@
 //  Created by Jakub Vaňo on 13/06/2017.
 //  Copyright © 2017 Swinject Contributors. All rights reserved.
 //
-// swiftlint:disable type_body_length
 // swiftlint:disable function_body_length
-// swiftlint:disable line_length
 
 import Quick
 import Nimble
@@ -28,7 +26,7 @@ class ContainerSpec_CustomStringConvertible: QuickSpec {
 
             expect(container.description) ==
                 "[\n"
-                + "    { Service: Animal, Factory: (Resolver) -> Animal, ObjectScope: graph }\n"
+                + "    { Service: Animal, Factory: Resolver -> Animal, ObjectScope: graph }\n"
                 + "]"
         }
         it("describes a registration with name.") {
@@ -36,7 +34,7 @@ class ContainerSpec_CustomStringConvertible: QuickSpec {
 
             expect(container.description) ==
                 "[\n"
-                + "    { Service: Animal, Name: \"My Cat\", Factory: (Resolver) -> Animal, ObjectScope: graph }\n"
+                + "    { Service: Animal, Name: \"My Cat\", Factory: Resolver -> Animal, ObjectScope: graph }\n"
                 + "]"
         }
         it("describes a registration with arguments.") {
@@ -53,7 +51,7 @@ class ContainerSpec_CustomStringConvertible: QuickSpec {
 
             expect(container.description) ==
                 "[\n"
-                + "    { Service: Animal, Factory: (Resolver) -> Animal, ObjectScope: container }\n"
+                + "    { Service: Animal, Factory: Resolver -> Animal, ObjectScope: container }\n"
                 + "]"
         }
         it("describes a registration with initCompleted.") {
@@ -62,7 +60,8 @@ class ContainerSpec_CustomStringConvertible: QuickSpec {
 
             expect(container.description) ==
                 "[\n"
-                + "    { Service: Animal, Factory: (Resolver) -> Animal, ObjectScope: graph, InitCompleted: Specified }\n"
+                + "    { Service: Animal, Factory: Resolver -> Animal, ObjectScope: graph, "
+                + "InitCompleted: Specified 1 closures }\n"
                 + "]"
         }
         it("describes multiple registrations.") {
@@ -71,8 +70,8 @@ class ContainerSpec_CustomStringConvertible: QuickSpec {
 
             expect(container.description) ==
                 "[\n"
-                + "    { Service: Animal, Name: \"1\", Factory: (Resolver) -> Animal, ObjectScope: graph },\n"
-                + "    { Service: Animal, Name: \"2\", Factory: (Resolver) -> Animal, ObjectScope: graph }\n"
+                + "    { Service: Animal, Name: \"1\", Factory: Resolver -> Animal, ObjectScope: graph },\n"
+                + "    { Service: Animal, Name: \"2\", Factory: Resolver -> Animal, ObjectScope: graph }\n"
                 + "]"
         }
     }

@@ -34,21 +34,22 @@ internal final class LoggingDebugHelper: DebugHelper {
     }
 }
 
-internal func description<Service>(
-    serviceType: Service.Type,
+internal func description(
+    serviceType: Any.Type,
     serviceKey: ServiceKey,
     objectScope: ObjectScopeProtocol? = nil,
-    initCompleted: FunctionType? = nil
+    initCompleted: [Any] = []
 ) -> String {
     // The protocol order in "protocol<>" is non-deterministic.
     let nameDescription = serviceKey.name.map { ", Name: \"\($0)\"" } ?? ""
     let optionDescription = serviceKey.option.map { ", \($0)" } ?? ""
-    let initCompletedDescription = initCompleted.map { _ in ", InitCompleted: Specified" } ?? ""
+    let initCompletedDescription = initCompleted.isEmpty ?
+        "" : ", InitCompleted: Specified \(initCompleted.count) closures"
     let objectScopeDescription = objectScope.map { ", ObjectScope: \($0)" } ?? ""
     return "Service: \(serviceType)"
         + nameDescription
         + optionDescription
-        + ", Factory: \(serviceKey.factoryType)"
+        + ", Factory: \(serviceKey.argumentsType) -> \(serviceKey.serviceType)"
         + objectScopeDescription
         + initCompletedDescription
 }

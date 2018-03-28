@@ -5,13 +5,13 @@
 //  Created by mike.owens on 12/9/15.
 //  Copyright © 2015 Swinject Contributors. All rights reserved.
 //
-// swiftlint:disable type_body_length
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 
 import Foundation
 import Quick
 import Nimble
-import Swinject
+@testable import Swinject
 
 class AssemblerSpec: QuickSpec {
     override func spec() {
@@ -46,6 +46,26 @@ class AssemblerSpec: QuickSpec {
 
                 let sushi = assembler.resolver.resolve(Food.self)
                 expect(sushi).to(beNil())
+            }
+
+            it("uses injected default object scope") {
+                let assembler = Assembler([], parent: nil, defaultObjectScope: ObjectScope.container)
+
+                assembler.apply(assembly: ContainerSpyAssembly())
+                let container = assembler.resolver.resolve(Container.self)
+                let serviceEntry = container?.register(Animal.self) { _ in Siamese(name: "Siam") }
+
+                expect(serviceEntry?.objectScope) === ObjectScope.container
+            }
+
+            it("uses graph scope if no default object scope is injected") {
+                let assembler = Assembler([], parent: nil)
+
+                assembler.apply(assembly: ContainerSpyAssembly())
+                let container = assembler.resolver.resolve(Container.self)
+                let serviceEntry = container?.register(Animal.self) { _ in Siamese(name: "Siam") }
+
+                expect(serviceEntry?.objectScope) === ObjectScope.graph
             }
 
             it("can assembly a multiple container") {
@@ -269,6 +289,47 @@ class AssemblerSpec: QuickSpec {
 
                 let childCat = childAssembler.resolver.resolve(Animal.self)
                 expect(childCat).toNot(beNil())
+            }
+
+            it("uses injected default object scope") {
+                let parentContainer = Container()
+                let parentAssembler = Assembler(container: parentContainer)
+                let childAssembler = Assembler(parentAssembler: parentAssembler,
+                                               defaultObjectScope: ObjectScope.container)
+
+                childAssembler.apply(assembly: ContainerSpyAssembly())
+                let container = childAssembler.resolver.resolve(Container.self)
+                let serviceEntry = container?.register(Animal.self) { _ in Siamese(name: "Siam") }
+
+                expect(serviceEntry?.objectScope) === ObjectScope.container
+            }
+
+            it("has default object scope of graph type") {
+                let parentContainer = Container()
+                let parentAssembler = Assembler(container: parentContainer)
+                let childAssembler = Assembler(parentAssembler: parentAssembler)
+
+                childAssembler.apply(assembly: ContainerSpyAssembly())
+                let container = childAssembler.resolver.resolve(Container.self)
+                let serviceEntry = container?.register(Animal.self) { _ in Siamese(name: "Siam") }
+
+                expect(serviceEntry?.objectScope) === ObjectScope.graph
+            }
+
+            it("uses given list of behaviors to container") {
+                let spy = BehaviorSpy()
+                let assembler = Assembler(parentAssembler: Assembler(), behaviors: [spy])
+
+                assembler.apply(assembly: ContainerSpyAssembly())
+
+                expect(spy.entries).to(haveCount(1))
+            }
+
+            it("uses given list of behaviors before applying assemblies") {
+                let spy = BehaviorSpy()
+                _ = Assembler([ContainerSpyAssembly()], parent: Assembler(), behaviors: [spy])
+
+                expect(spy.entries).to(haveCount(1))
             }
         }
     }

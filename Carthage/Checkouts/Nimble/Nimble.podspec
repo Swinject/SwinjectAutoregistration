@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Nimble"
-  s.version      = "7.0.2"
+  s.version      = "7.0.3"
   s.summary      = "A Matcher Framework for Swift and Objective-C"
   s.description  = <<-DESC
                    Use Nimble to express the expected outcomes of Swift or Objective-C expressions. Inspired by Cedar.
@@ -14,25 +14,28 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Quick/Nimble.git",
                      :tag => "v#{s.version}" }
 
-  s.source_files = "Sources/**/*.{swift,h,m,c}"
+  s.source_files = [
+    "Sources/**/*.{swift,h,m,c}",
+    "Carthage/Checkouts/CwlCatchException/Sources/**/*.{swift,h,m,c}",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/**/*.{swift,h,m,c}",
+  ]
 
   s.osx.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Posix/CwlPreconditionTesting_POSIX.h",
   ]
   s.ios.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Posix/CwlPreconditionTesting_POSIX.h",
   ]
   s.tvos.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/CwlCatchException.m",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/include/CwlCatchException.h",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
