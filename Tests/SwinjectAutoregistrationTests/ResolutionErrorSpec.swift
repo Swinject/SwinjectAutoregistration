@@ -8,10 +8,6 @@ extension ResolutionError: Equatable {}
 
 public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     switch (lhs, rhs){
-    case (.optional(let lname), .optional(let rname)):
-        return lname == rname
-    case (.implicitlyUnwrappedOptional(let lname), .implicitlyUnwrappedOptional(let rname)):
-        return lname == rname
     case (.tooManyDependencies(let ldependencyCount), .tooManyDependencies(let rdependencyCount)):
         return ldependencyCount == rdependencyCount
     default:
@@ -59,11 +55,7 @@ class ResolutionErrorSpec: QuickSpec {
     class UnwrappedService {
         init(a: DependencyA!, b: DependencyB){}
     }
-    
-    class BadService {
-        init(a: DependencyA, b: DependencyB, c: DependencyC!, d: DependencyD?, e: DependencyE!, f: DependencyF, g: DependencyG, h: DependencyH?, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ, u: DependencyA){}
-    }
-    
+
     class OptionalSingleTupleService {
         init(tuple: (a: DependencyA?, b: DependencyB?, c: DependencyC?)){}
     }
@@ -100,17 +92,12 @@ class ResolutionErrorSpec: QuickSpec {
             
             it("does show warning for service with optional dependency"){
                 let w = resolutionErrors(forInitializer: OptionalService.init)
-                expect(w.first) == ResolutionError.optional("DependencyB")
+                expect(w.count) == 0
             }
             
-            it("does show warning for service with implicitly unwrapped dependency"){
+            it("doesnt show warning for service with implicitly unwrapped dependency"){
                 let w = resolutionErrors(forInitializer: UnwrappedService.init)
-                expect(w.first) == ResolutionError.implicitlyUnwrappedOptional("DependencyA")
-            }
-            
-            it("does show multiple warnings"){
-                let w = resolutionErrors(forInitializer: BadService.init)
-                expect(w.count) == 5
+                expect(w.count) == 0
             }
             
             // This fails
@@ -130,9 +117,9 @@ class ResolutionErrorSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            it("does show warning for optional closure"){
+            it("doesnt show warning for optional closure"){
                 let w = resolutionErrors(forInitializer: OptionalNestedClosureService.init)
-                expect(w.count) == 1
+                expect(w.count) == 0
             }
             
         }
