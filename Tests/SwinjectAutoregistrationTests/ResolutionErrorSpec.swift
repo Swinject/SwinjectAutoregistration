@@ -8,6 +8,8 @@ extension ResolutionError: Equatable {}
 
 public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     switch (lhs, rhs){
+    case (.implicitlyUnwrappedOptional(let lname), .implicitlyUnwrappedOptional(let rname)):
+        return lname == rname
     case (.tooManyDependencies(let ldependencyCount), .tooManyDependencies(let rdependencyCount)):
         return ldependencyCount == rdependencyCount
     default:
@@ -55,7 +57,11 @@ class ResolutionErrorSpec: QuickSpec {
     class UnwrappedService {
         init(a: DependencyA!, b: DependencyB){}
     }
-
+    
+    class BadService {
+        init(a: DependencyA, b: DependencyB, c: DependencyC!, d: DependencyD?, e: DependencyE!, f: DependencyF, g: DependencyG, h: DependencyH?, i: DependencyI, j: DependencyJ, k: DependencyA, l: DependencyB, m: DependencyC, n: DependencyD, o: DependencyE, p: DependencyF, q: DependencyG, r: DependencyH, s: DependencyI, t: DependencyJ, u: DependencyA){}
+    }
+    
     class OptionalSingleTupleService {
         init(tuple: (a: DependencyA?, b: DependencyB?, c: DependencyC?)){}
     }
@@ -90,14 +96,19 @@ class ResolutionErrorSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            it("does show warning for service with optional dependency"){
+            it("doesnt show warning for service with optional dependency"){
                 let w = resolutionErrors(forInitializer: OptionalService.init)
                 expect(w.count) == 0
             }
             
-            it("doesnt show warning for service with implicitly unwrapped dependency"){
+            it("does show warning for service with implicitly unwrapped dependency"){
                 let w = resolutionErrors(forInitializer: UnwrappedService.init)
-                expect(w.count) == 0
+                expect(w.first) == ResolutionError.implicitlyUnwrappedOptional("DependencyA")
+            }
+            
+            it("does show multiple warnings"){
+                let w = resolutionErrors(forInitializer: BadService.init)
+                expect(w.count) == 3
             }
             
             // This fails

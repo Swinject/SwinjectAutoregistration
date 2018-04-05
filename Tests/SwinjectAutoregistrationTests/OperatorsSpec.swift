@@ -125,16 +125,6 @@ class OperatorsSpec: QuickSpec {
                 let service = container ~> Service0?.self
                 expect(service).notTo(beNil())
             }
-
-            it("resolves unwrapped service with postfix operator") {
-                let service: Service0! = container~>
-                expect(service).notTo(beNil())
-            }
-
-            it("resolves unwrapped service using infix operator") {
-                let service = container ~> Service0!.self
-                expect(service).notTo(beNil())
-            }
         }
 	}
 	
