@@ -495,7 +495,7 @@
 				CD5B9E321D832A4F007ED05F /* Mac OS X */,
 				CD5B9E381D832A4F007ED05F /* tvOS */,
 			);
-			name = Configurations;
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 		CD5B9E221D832A4F007ED05F /* Base */ = {
@@ -505,8 +505,7 @@
 				CD5B9E241D832A4F007ED05F /* Configurations */,
 				CD5B9E291D832A4F007ED05F /* Targets */,
 			);
-			name = Base;
-			path = Carthage/Checkouts/xcconfigs/Base;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		CD5B9E241D832A4F007ED05F /* Configurations */ = {
@@ -538,8 +537,7 @@
 				CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */,
 				CD5B9E311D832A4F007ED05F /* iOS-StaticLibrary.xcconfig */,
 			);
-			name = iOS;
-			path = Carthage/Checkouts/xcconfigs/iOS;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		CD5B9E321D832A4F007ED05F /* Mac OS X */ = {
@@ -551,8 +549,7 @@
 				CD5B9E361D832A4F007ED05F /* Mac-Framework.xcconfig */,
 				CD5B9E371D832A4F007ED05F /* Mac-StaticLibrary.xcconfig */,
 			);
-			name = "Mac OS X";
-			path = "Carthage/Checkouts/xcconfigs/Mac OS X";
+			path = "Mac OS X";
 			sourceTree = "<group>";
 		};
 		CD5B9E381D832A4F007ED05F /* tvOS */ = {
@@ -563,8 +560,7 @@
 				CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */,
 				CD5B9E3C1D832A4F007ED05F /* tvOS-StaticLibrary.xcconfig */,
 			);
-			name = tvOS;
-			path = Carthage/Checkouts/xcconfigs/tvOS;
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 		CD5B9E3E1D832A6E007ED05F /* Products */ = {
@@ -645,8 +641,7 @@
 				CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */,
 				CD5B9EB51D832C81007ED05F /* watchOS-StaticLibrary.xcconfig */,
 			);
-			name = watchOS;
-			path = Carthage/Checkouts/xcconfigs/watchOS;
+			path = watchOS;
 			sourceTree = "<group>";
 		};
 		CD5B9EC11D832D5A007ED05F /* Products */ = {
