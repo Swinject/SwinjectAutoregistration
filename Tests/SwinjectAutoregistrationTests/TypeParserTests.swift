@@ -17,7 +17,7 @@ class ClassA{
     class Nested{}
 }
 
-class _x0😪name²〡yﷰ {}
+class _x0name²y {}
 
 class `protocol` {}
 
@@ -38,7 +38,7 @@ class TypeParserSpec: QuickSpec {
         describe("autoregistration") {
             
             it("scans type identifier") {
-                let string = "\(_x0😪name²〡yﷰ.self)"
+                let string = "\(_x0name²y.self)"
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
