@@ -9,12 +9,9 @@
 import Foundation
 
 enum ResolutionError {
-    case implicitlyUnwrappedOptional(String)
     case tooManyDependencies(Int)
     var message: String {
         switch self {
-        case .implicitlyUnwrappedOptional(let name):
-            return "⚠ Autoregistration of implicitly unwrapped optional dependency (\(name))! is not supported. Use regular `register` method. "
         case .tooManyDependencies(let dependencyCount):
             return "⚠ Autoregistration is limited to maximum of \(maxDependencies) dependencies, tried to resolve \(dependencyCount). Use regular `register` method instead. "
         }
@@ -47,14 +44,6 @@ func resolutionErrors<Service, Parameters>(forInitializer initializer: (Paramete
     
     if dependencies.count > maxDependencies {
         warnings.append(.tooManyDependencies(dependencies.count))
-    }
-    
-    for dependency in dependencies {
-        if case .identifier(let dependencyType) = dependency, let generic = dependencyType.genericTypes.first {
-            if dependencyType.name == "ImplicitlyUnwrappedOptional" {
-                warnings.append(.implicitlyUnwrappedOptional("\(generic)"))
-            }
-        }
     }
     
     return warnings

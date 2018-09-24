@@ -133,7 +133,7 @@ class TypeParserSpec: QuickSpec {
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
-                XCTAssertEqual(type, self.generic_identifier("ImplicitlyUnwrappedOptional", generics: ["String"]))
+                XCTAssertEqual(type, self.generic_identifier("Optional", generics: ["String"]))
             }
             
             it("scans optional") {

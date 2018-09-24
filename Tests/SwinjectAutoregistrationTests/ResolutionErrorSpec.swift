@@ -8,12 +8,8 @@ extension ResolutionError: Equatable {}
 
 public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     switch (lhs, rhs){
-    case (.implicitlyUnwrappedOptional(let lname), .implicitlyUnwrappedOptional(let rname)):
-        return lname == rname
     case (.tooManyDependencies(let ldependencyCount), .tooManyDependencies(let rdependencyCount)):
         return ldependencyCount == rdependencyCount
-    default:
-        return false
     }
 }
 
@@ -100,17 +96,12 @@ class ResolutionErrorSpec: QuickSpec {
                 let w = resolutionErrors(forInitializer: OptionalService.init)
                 expect(w.count) == 0
             }
-            
-            it("does show warning for service with implicitly unwrapped dependency"){
+
+            it("doesnt show warning for service with unwrapped dependency"){
                 let w = resolutionErrors(forInitializer: UnwrappedService.init)
-                expect(w.first) == ResolutionError.implicitlyUnwrappedOptional("DependencyA")
+                expect(w.count) == 0
             }
-            
-            it("does show multiple warnings"){
-                let w = resolutionErrors(forInitializer: BadService.init)
-                expect(w.count) == 3
-            }
-            
+
             // This fails
             // Single argument tuple looks exactly the same as multiple arguments when printed
             xit("doesnt show warning for single argument tuple of optionals"){
