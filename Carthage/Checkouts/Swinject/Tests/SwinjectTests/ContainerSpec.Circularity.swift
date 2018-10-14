@@ -5,7 +5,6 @@
 //  Created by Yoichi Tagaya on 7/29/15.
 //  Copyright © 2015 Swinject Contributors. All rights reserved.
 //
-// swiftlint:disable type_body_length
 // swiftlint:disable function_body_length
 
 import Quick
@@ -120,6 +119,19 @@ class ContainerSpec_Circularity: QuickSpec {
                 expect(c.a as? ADependingOnB === a).to(beTrue()) // Workaround for crash in Nimble
                 expect(d.b as? BDependingOnC === b).to(beTrue()) // Workaround for crash in Nimble
                 expect(d.c as? CDependingOnAD === c).to(beTrue()) // Workaround for crash in Nimble
+            }
+        }
+        describe("Graph root is in weak object scope") {
+            it("does not deallocate during graph resolution") {
+                container.register(B.self) { r in BDependingOnC(c: r.resolve(C.self)!) }
+                    .inObjectScope(.weak)
+                container.register(C.self) { _ in CDependingOnWeakB() }
+                    .initCompleted { r, c in (c as! CDependingOnWeakB).b = r.resolve(B.self) }
+
+                let b = container.resolve(B.self) as? BDependingOnC
+                let c = b?.c as? CDependingOnWeakB
+
+                expect(c?.b).notTo(beNil())
             }
         }
     }

@@ -5,8 +5,6 @@
 //  Created by Yoichi Tagaya on 11/23/15.
 //  Copyright © 2015 Swinject Contributors. All rights reserved.
 //
-// swiftlint:disable type_body_length
-// swiftlint:disable function_body_length
 
 import Dispatch
 import Quick
@@ -32,25 +30,10 @@ class SynchronizedResolverSpec: QuickSpec {
                         .inObjectScope(.graph)
                 }.synchronize()
 
-                waitUntil(timeout: 2.0) { done in
-                    let queue = DispatchQueue(
-                        label: "SwinjectTests.SynchronizedContainerSpec.Queue",
-                        attributes: .concurrent
-                    )
-                    let totalThreads = 500 // 500 threads are enough to get fail unless the container is thread safe.
-                    let counter = Counter(max: 2 * totalThreads)
-                    for _ in 0..<totalThreads {
-                        queue.async {
-                            let parent = container.resolve(ParentProtocol.self) as! Parent
-                            let child = parent.child as! Child
-                            expect(child.parent as? Parent === parent).to(beTrue()) // Workaround for crash in Nimble
-
-                            counter.increment()
-                            if counter.count >= totalThreads {
-                                done()
-                            }
-                        }
-                    }
+                onMultipleThreads {
+                    let parent = container.resolve(ParentProtocol.self) as! Parent
+                    let child = parent.child as! Child
+                    expect(child.parent as? Parent === parent).to(beTrue()) // Workaround for crash in Nimble
                 }
             }
             it("can access parent and child containers without dead lock.") {
@@ -62,34 +45,48 @@ class SynchronizedResolverSpec: QuickSpec {
                     let parentResolver = parentContainer.synchronize()
                     let childResolver = Container(parent: parentContainer).synchronize()
 
-                    waitUntil(timeout: 2.0) { done in
-                        let queue = DispatchQueue(
-                            label: "SwinjectTests.SynchronizedContainerSpec.Queue",
-                            attributes: .concurrent
-                        )
-                        let totalThreads = 500
-                        let counter = Counter(max: 2 * totalThreads)
-
-                        for _ in 0..<totalThreads {
-                            queue.async {
-                                _ = parentResolver.resolve(Animal.self) as! Cat
-                                if counter.increment() == .reachedMax {
-                                    done()
-                                }
-                            }
-                            queue.async {
-                                _ = childResolver.resolve(Animal.self) as! Cat
-                                if counter.increment() == .reachedMax {
-                                    done()
-                                }
-                            }
-                        }
-                    }
+                    onMultipleThreads(actions: [
+                        { _ = parentResolver.resolve(Animal.self) as! Cat },    // swiftlint:disable:this opening_brace
+                        { _ = childResolver.resolve(Animal.self) as! Cat }
+                    ])
                 }
 
                 runInObjectScope(.transient)
                 runInObjectScope(.graph)
                 runInObjectScope(.container)
+            }
+            it("uses distinct graph identifier") {
+                var graphs = Set<GraphIdentifier>()
+                let container = Container {
+                    $0.register(Dog.self) {
+                        graphs.insert(($0 as! Container).currentObjectGraph!)
+                        return Dog()
+                    }
+                }.synchronize()
+
+                onMultipleThreads { _ = container.resolve(Dog.self) }
+
+                expect(graphs.count) == totalThreads
+            }
+        }
+        describe("Nested resolve") {
+            it("can make it without deadlock") {
+                let container = Container()
+                let threadSafeResolver = container.synchronize()
+                container.register(ChildProtocol.self) { _ in  Child() }
+                container.register(ParentProtocol.self) { _ in
+                    Parent(child: threadSafeResolver.resolve(ChildProtocol.self)!)
+                }
+
+                let queue = DispatchQueue(
+                    label: "SwinjectTests.SynchronizedContainerSpec.Queue", attributes: .concurrent
+                )
+                waitUntil(timeout: 2.0) { done in
+                    queue.async {
+                        _ = threadSafeResolver.resolve(ParentProtocol.self)
+                        done()
+                    }
+                }
             }
         }
     }
@@ -118,5 +115,31 @@ fileprivate final class Counter {
             }
         }
         return status
+    }
+}
+
+private let totalThreads = 500 // 500 threads are enough to get fail unless the container is thread safe.
+
+private func onMultipleThreads(action: @escaping () -> Void) {
+    onMultipleThreads(actions: [action])
+}
+
+private func onMultipleThreads(actions: [() -> Void]) {
+    waitUntil(timeout: 2.0) { done in
+        let queue = DispatchQueue(
+            label: "SwinjectTests.SynchronizedContainerSpec.Queue",
+            attributes: .concurrent
+        )
+        let counter = Counter(max: actions.count * totalThreads)
+        for _ in 0..<totalThreads {
+            actions.forEach { action in
+                queue.async {
+                    action()
+                    if counter.increment() == .reachedMax {
+                        done()
+                    }
+                }
+            }
+        }
     }
 }

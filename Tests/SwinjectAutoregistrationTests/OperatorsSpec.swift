@@ -115,6 +115,16 @@ class OperatorsSpec: QuickSpec {
                 expect(service3).toNot(beNil())
                 expect(service3_name).toNot(beNil())
             }
+
+            it("resolves optional service with postfix operator") {
+                let service: Service0? = container~>
+                expect(service).notTo(beNil())
+            }
+
+            it("resolves optional service using infix operator") {
+                let service = container ~> Service0?.self
+                expect(service).notTo(beNil())
+            }
         }
 	}
 	

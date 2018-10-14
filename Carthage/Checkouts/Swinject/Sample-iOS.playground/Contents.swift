@@ -221,7 +221,7 @@ class Horse: Animal {
     }
 }
 
-// The factory closure can take arguments after the `Resolvable` parameter (in this example, unused as `_`).
+// The factory closure can take arguments after the `Resolver` parameter (in this example, unused as `_`).
 // Note that the container already has an Animal without a registration name,
 // but the factory with the arguments is recognized as a different registration to resolve.
 container.register(Animal.self) { _, name in Horse(name: name) }
@@ -231,11 +231,11 @@ container.register(Animal.self) { _, name, running in Horse(name: name, running:
 // If you pass an argument, pass it to `argument` parameter.
 // If you pass more arguments, pass them as a tuple to `arguments` parameter.
 let horse1 = container.resolve(Animal.self, argument: "Spirit") as! Horse
-print(horse1.name)
+print(horse1.name!)
 print(horse1.running)
 
 let horse2 = container.resolve(Animal.self, arguments: "Lucky", true) as! Horse
-print(horse2.name)
+print(horse2.name!)
 print(horse2.running)
 
 /*:

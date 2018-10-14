@@ -195,6 +195,18 @@ class AutoregistrationSpec: QuickSpec {
                 let service = container.resolve(Service4.self, arguments: DependencyC(), DependencyD(), DependencyB())
                 expect(service).notTo(beNil())
             }
+
+            it("registers with service with optional dependencies") {
+                container.autoregister(OptionalService.self, initializer: OptionalService.init)
+                let service = container.resolve(OptionalService.self)
+                expect(service).notTo(beNil())
+            }
+
+            it("registers with service with unwrapped dependencies") {
+                container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
+                let service = container.resolve(UnwrappedService.self)
+                expect(service).notTo(beNil())
+            }
             
             #if !os(Linux)
             it("throws assertion when same type arguments are passed") {
@@ -207,20 +219,6 @@ class AutoregistrationSpec: QuickSpec {
                 expect { () -> Void in
                     container.autoregister(Service21.self, initializer: Service21.init)
                     _ = container.resolve(Service21.self)
-                }.to(throwAssertion())
-            }
-            
-            it("throws assertion when trying to resolve service with optional dependency") {
-                expect { () -> Void in
-                    container.autoregister(OptionalService.self, initializer: OptionalService.init)
-                    _ = container.resolve(OptionalService.self)
-                }.to(throwAssertion())
-            }
-            
-            it("throws assertion when trying to resolve service with unwrapped dependency") {
-                expect { () -> Void in
-                    container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
-                    _ = container.resolve(UnwrappedService.self)
                 }.to(throwAssertion())
             }
             #endif

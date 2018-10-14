@@ -8,14 +8,8 @@ extension ResolutionError: Equatable {}
 
 public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     switch (lhs, rhs){
-    case (.optional(let lname), .optional(let rname)):
-        return lname == rname
-    case (.implicitlyUnwrappedOptional(let lname), .implicitlyUnwrappedOptional(let rname)):
-        return lname == rname
     case (.tooManyDependencies(let ldependencyCount), .tooManyDependencies(let rdependencyCount)):
         return ldependencyCount == rdependencyCount
-    default:
-        return false
     }
 }
 
@@ -98,21 +92,16 @@ class ResolutionErrorSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            it("does show warning for service with optional dependency"){
+            it("doesnt show warning for service with optional dependency"){
                 let w = resolutionErrors(forInitializer: OptionalService.init)
-                expect(w.first) == ResolutionError.optional("DependencyB")
+                expect(w.count) == 0
             }
-            
-            it("does show warning for service with implicitly unwrapped dependency"){
+
+            it("doesnt show warning for service with unwrapped dependency"){
                 let w = resolutionErrors(forInitializer: UnwrappedService.init)
-                expect(w.first) == ResolutionError.implicitlyUnwrappedOptional("DependencyA")
+                expect(w.count) == 0
             }
-            
-            it("does show multiple warnings"){
-                let w = resolutionErrors(forInitializer: BadService.init)
-                expect(w.count) == 5
-            }
-            
+
             // This fails
             // Single argument tuple looks exactly the same as multiple arguments when printed
             xit("doesnt show warning for single argument tuple of optionals"){
@@ -130,9 +119,9 @@ class ResolutionErrorSpec: QuickSpec {
                 expect(w.count) == 0
             }
             
-            it("does show warning for optional closure"){
+            it("doesnt show warning for optional closure"){
                 let w = resolutionErrors(forInitializer: OptionalNestedClosureService.init)
-                expect(w.count) == 1
+                expect(w.count) == 0
             }
             
         }

@@ -24,7 +24,7 @@ Swinject is available through [Carthage](https://github.com/Carthage/Carthage) o
 To install Swinject with Carthage, add the following line to your `Cartfile`.
 
 ```
-github "Swinject/Swinject" "2.1.0"
+github "Swinject/Swinject" "2.4.0"
 github "Swinject/SwinjectAutoregistration" "2.1.0"
 ```
 
@@ -39,7 +39,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
 use_frameworks!
 
-pod 'Swinject', '2.1.0'
+pod 'Swinject', '2.4.0'
 pod 'SwinjectAutoregistration', '2.1.0'
 ```
 
@@ -187,8 +187,6 @@ container.autoregister(Person.self, initializer: PetOwner.init(name:pet:))
 
 There are also cases where auto-registration **can't** be used:
 
-  * Can't use services with **optional dependencies** in their initializers
-     * e.g: `PersonOwner(name:String, pet: Animal?)` 
   * Can't use services with **implicitly unwrapped dependencies** in their initializers
      * e.g: `PersonOwner(name:String, pet: Animal!)` 
   * Can't use services with **named dependencies** in their initializers

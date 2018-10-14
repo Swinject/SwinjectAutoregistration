@@ -15,6 +15,18 @@ matrix:
       env: TYPE=macos
       osx_image: xcode9
     - os: osx
+      env: TYPE=macos
+      osx_image: xcode9.1
+    - os: osx
+      env: TYPE=macos
+      osx_image: xcode9.2
+    - os: osx
+      env: TYPE=macos
+      osx_image: xcode9.3
+    - os: osx
+      env: TYPE=macos
+      osx_image: xcode9.4
+    - os: osx
       env: TYPE=swiftpm
     - os: osx
       env: TYPE=swiftpm
@@ -23,6 +35,14 @@ matrix:
       dist: trusty
       sudo: required
       env: TYPE=swiftpm
+      install:
+        - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
+    - os: linux
+      dist: trusty
+      sudo: required
+      env:
+        - TYPE=swiftpm
+        - SWIFT_VERSION=4.0.2
       install:
         - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
 install:

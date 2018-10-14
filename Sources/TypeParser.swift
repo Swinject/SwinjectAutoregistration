@@ -9,7 +9,7 @@
 import Foundation
 #if !os(Linux)
     extension Scanner {
-        func scanString(string: String) -> String? {
+        func scanString(_ string: String) -> String? {
             var value: NSString?
             if self.scanString(string, into: &value), let value = value {
                 return value as String
@@ -98,7 +98,7 @@ class TypeParser {
         _ = parseIdentifier()
         
         //Return if param name is not specified
-        if scanner.scanString(string: ":") == nil {
+        if scanner.scanString(":") == nil {
             scanner.scanLocation = originalLocation
         }
         
@@ -111,7 +111,7 @@ class TypeParser {
         let genericTypes = parseGenericArgumentClause() ?? []
         var subTypeIdentifier: TypeIdentifier? = nil
         
-        if scanner.scanString(string: ".") != nil, let typeIdentifier = parseTypeIdentifier() {
+        if scanner.scanString(".") != nil, let typeIdentifier = parseTypeIdentifier() {
             subTypeIdentifier = typeIdentifier
         }
         
@@ -120,16 +120,16 @@ class TypeParser {
     }
     
     func parseGenericArgumentClause() -> [Type]? {
-        guard scanner.scanString(string: "<") != nil else { return nil }
+        guard scanner.scanString("<") != nil else { return nil }
         guard let type = parseType() else { return nil }
         
         var types: [Type] = [type]
         
-        while scanner.scanString(string: ",") != nil, let type = parseType(){
+        while scanner.scanString(",") != nil, let type = parseType(){
             types.append(type)
         }
         
-        guard scanner.scanString(string: ">") != nil else { return nil }
+        guard scanner.scanString(">") != nil else { return nil }
         return types
     }
     
@@ -140,7 +140,7 @@ class TypeParser {
         
         var protocolTypes: [TypeIdentifier] = [protocolType]
         
-        while scanner.scanString(string: "&") != nil, let protocolType = parseTypeIdentifier() {
+        while scanner.scanString("&") != nil, let protocolType = parseTypeIdentifier() {
             protocolTypes.append(protocolType)
         }
         
@@ -150,7 +150,7 @@ class TypeParser {
     }
     
     func parseTupleType() -> [Type]? {
-        guard scanner.scanString(string: "(") != nil else { return nil }
+        guard scanner.scanString("(") != nil else { return nil }
         
         var types: [Type] = []
         
@@ -158,11 +158,11 @@ class TypeParser {
         
         
         
-        while scanner.scanString(string: ",") != nil, let type = parseTypeAnnotation() {
+        while scanner.scanString(",") != nil, let type = parseTypeAnnotation() {
             types.append(type)
         }
         
-        guard scanner.scanString(string: ")") != nil else { return nil }
+        guard scanner.scanString(")") != nil else { return nil }
         
         return types
     }
@@ -172,10 +172,10 @@ class TypeParser {
         
         guard let parameters = parseTupleType() else { return nil }
         
-        let `throws` = scanner.scanString(string: "throws") != nil
+        let `throws` = scanner.scanString("throws") != nil
         // - rethrows is not allowed for closures
         
-        guard scanner.scanString(string: "->") != nil else { scanner.scanLocation = originalLocation; return nil }
+        guard scanner.scanString("->") != nil else { scanner.scanLocation = originalLocation; return nil }
         
         guard let returnType = parseType() else { scanner.scanLocation = originalLocation; return nil }
         
