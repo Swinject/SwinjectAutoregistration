@@ -196,13 +196,13 @@ class AutoregistrationSpec: QuickSpec {
                 expect(service).notTo(beNil())
             }
 
-            it("registers with service with optional dependencies") {
+            it("registers service with optional dependencies") {
                 container.autoregister(OptionalService.self, initializer: OptionalService.init)
                 let service = container.resolve(OptionalService.self)
                 expect(service).notTo(beNil())
             }
 
-            it("registers with service with unwrapped dependencies") {
+            it("registers service with unwrapped dependencies") {
                 container.autoregister(UnwrappedService.self, initializer: UnwrappedService.init)
                 let service = container.resolve(UnwrappedService.self)
                 expect(service).notTo(beNil())
