@@ -111,7 +111,7 @@ class TypeParserSpec: QuickSpec {
             }
             
             it("scans no parameter function type") {
-                let string = "\(((Void) -> Void).self)"
+                let string = "\((() -> Void).self)"
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
@@ -120,7 +120,7 @@ class TypeParserSpec: QuickSpec {
             }
             
             it("scans throwing function type") {
-                let string = "\(((Void) throws -> Void).self)"
+                let string = "\((() throws -> Void).self)"
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
