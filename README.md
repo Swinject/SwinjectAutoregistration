@@ -184,13 +184,13 @@ container.autoregister(Person.self, initializer: PetOwner.init(name:pet:))
  
 Auto-registration **can't** be used with **named dependencies** in their initializers. There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered: 
      
-     ```swift
-     	container.register(Animal.self, name: "mimi") { _ in Cat(name: "Mimi") }
-     	container.register(Animal.self, name: "charles") { _ in Cat(name: "Charles") }
-		container.register(Person.self) {
-			PetOwner(pet: r.resolve(Animal.self, name: "mimi")
-		}
-     ```
+```swift
+container.register(Animal.self, name: "mimi") { _ in Cat(name: "Mimi") }
+container.register(Animal.self, name: "charles") { _ in Cat(name: "Charles") }
+container.register(Person.self) {
+    PetOwner(pet: r.resolve(Animal.self, name: "mimi")
+}
+```
 
 ## Credits
 
