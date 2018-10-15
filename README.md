@@ -24,8 +24,8 @@ Swinject is available through [Carthage](https://github.com/Carthage/Carthage) o
 To install Swinject with Carthage, add the following line to your `Cartfile`.
 
 ```
-github "Swinject/Swinject" "2.4.0"
-github "Swinject/SwinjectAutoregistration" "2.1.0"
+github "Swinject/Swinject" "2.5.0"
+github "Swinject/SwinjectAutoregistration" "2.5.0"
 ```
 
 Then run `carthage update --no-use-binaries` command or just `carthage update`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
@@ -39,8 +39,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
 use_frameworks!
 
-pod 'Swinject', '2.4.0'
-pod 'SwinjectAutoregistration', '2.1.0'
+pod 'Swinject', '2.5.0'
+pod 'SwinjectAutoregistration', '2.5.0'
 ```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
@@ -153,13 +153,13 @@ Petowner(pet: r~>)
 Petowner(pet: r.resolve(Animal.self)!)
 ```
 
-The dependency is again inferred from the type in initializer. To specify concrete class you can use:
+The dependency is again inferred from the type in the initializer. To specify a concrete class you can use:
 
 ```swift
 Petowner(pet: r ~> Cat.self)
 ```
 
-To use name:
+To use a named service:
 
 ```swift
 Petowner(pet: r ~> (Cat.self, name: "mimi"))
@@ -182,15 +182,7 @@ The solution is to specify the initializer like this:
 container.autoregister(Person.self, initializer: PetOwner.init(name:pet:))
 ```
  
-
-
-
-There are also cases where auto-registration **can't** be used:
-
-  * Can't use services with **implicitly unwrapped dependencies** in their initializers
-     * e.g: `PersonOwner(name:String, pet: Animal!)` 
-  * Can't use services with **named dependencies** in their initializers
-     * There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered: 
+Auto-registration **can't** be used with **named dependencies** in their initializers. There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered: 
      
      ```swift
      	container.register(Animal.self, name: "mimi") { _ in Cat(name: "Mimi") }
