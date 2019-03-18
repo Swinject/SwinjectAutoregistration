@@ -7,7 +7,7 @@
 //
 
 
- import Swinject 
+import Swinject
 
 
 let maxDependencies = 20
