@@ -108,8 +108,8 @@ class OperatorsSpec: QuickSpec {
                 //let service2_name: Service2 = container ~> (Service2.self, name: "MyService2", arguments: "Arg1", 5)
                 
                 //This is deprecated
-                let service3 = container ~> (Service3.self, arguments: "Arg1", 5, 0.2)
-                let service3_name = container ~> (Service3.self, name: "MyService3", arguments: "Arg1", 5, 0.2)
+                let service3 = container ~> (Service3.self, arguments: ("Arg1", 5, 0.2))
+                let service3_name = container ~> (Service3.self, name: "MyService3", arguments: ("Arg1", 5, 0.2))
                 
                 
                 expect(service3).toNot(beNil())

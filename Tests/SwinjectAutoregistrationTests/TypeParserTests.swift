@@ -129,7 +129,7 @@ class TypeParserSpec: QuickSpec {
             }
             
             it("scans implicitly unwrapped optional") {
-                let string = "\((String!).self)"
+                let string = "\((String).self)"
                 let parser = TypeParser(string: string)
                 let type = parser.parseType()
                 
