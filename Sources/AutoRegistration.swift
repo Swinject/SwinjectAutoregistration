@@ -7,14 +7,14 @@
 //
 
 
- import Swinject 
+import Swinject
 
 
 let maxDependencies = 20
 let maxArguments = 3
 
 
-public extension Container {
+extension Container {
 
 /** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
@@ -28,7 +28,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service>(_ service: Service.Type, name: String? = nil, initializer: @escaping (()) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service>(_ service: Service.Type, name: String? = nil, initializer: @escaping (()) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
        initializer(())
    } as (Resolver) -> Service)
@@ -46,7 +46,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A>(_ service: Service.Type, name: String? = nil, initializer: @escaping (A) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A>(_ service: Service.Type, name: String? = nil, initializer: @escaping (A) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
            let a: A? = res.resolve()
            checkResolved(initializer: initializer, services: a)
@@ -67,7 +67,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping (Arg1) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping (Arg1) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res, arg1 in 
            let arg1: Arg1? = arg1
            checkResolved(initializer: initializer, services: arg1)
@@ -88,7 +88,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
            let a: A? = res.resolve(); let b: B? = res.resolve()
            checkResolved(initializer: initializer, services: a, b)
@@ -109,7 +109,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res, arg1 in 
            let a: A? = res.resolve(argument: arg1); let b: B? = res.resolve(argument: arg1)
            checkResolved(initializer: initializer, services: a, b)
@@ -130,7 +130,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2 in 
            let a: A? = res.resolve(arguments: arg1, arg2); let b: B? = res.resolve(arguments: arg1, arg2)
@@ -152,7 +152,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
            let a: A? = res.resolve(); let b: B? = res.resolve(); let c: C? = res.resolve()
            checkResolved(initializer: initializer, services: a, b, c)
@@ -173,7 +173,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res, arg1 in 
            let a: A? = res.resolve(argument: arg1); let b: B? = res.resolve(argument: arg1); let c: C? = res.resolve(argument: arg1)
            checkResolved(initializer: initializer, services: a, b, c)
@@ -194,7 +194,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2 in 
            let a: A? = res.resolve(arguments: arg1, arg2); let b: B? = res.resolve(arguments: arg1, arg2); let c: C? = res.resolve(arguments: arg1, arg2)
@@ -216,7 +216,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2, arg3]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2), \(arg3)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2, arg3 in 
            let a: A? = res.resolve(arguments: arg1, arg2, arg3); let b: B? = res.resolve(arguments: arg1, arg2, arg3); let c: C? = res.resolve(arguments: arg1, arg2, arg3)
@@ -238,7 +238,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
            let a: A? = res.resolve(); let b: B? = res.resolve(); let c: C? = res.resolve(); let d: D? = res.resolve()
            checkResolved(initializer: initializer, services: a, b, c, d)
@@ -259,7 +259,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res, arg1 in 
            let a: A? = res.resolve(argument: arg1); let b: B? = res.resolve(argument: arg1); let c: C? = res.resolve(argument: arg1); let d: D? = res.resolve(argument: arg1)
            checkResolved(initializer: initializer, services: a, b, c, d)
@@ -280,7 +280,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2 in 
            let a: A? = res.resolve(arguments: arg1, arg2); let b: B? = res.resolve(arguments: arg1, arg2); let c: C? = res.resolve(arguments: arg1, arg2); let d: D? = res.resolve(arguments: arg1, arg2)
@@ -302,7 +302,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2, arg3]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2), \(arg3)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2, arg3 in 
            let a: A? = res.resolve(arguments: arg1, arg2, arg3); let b: B? = res.resolve(arguments: arg1, arg2, arg3); let c: C? = res.resolve(arguments: arg1, arg2, arg3); let d: D? = res.resolve(arguments: arg1, arg2, arg3)
@@ -324,7 +324,7 @@ public extension Container {
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E>(_ service: Service.Type, name: String? = nil, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res in 
            let a: A? = res.resolve(); let b: B? = res.resolve(); let c: C? = res.resolve(); let d: D? = res.resolve(); let e: E? = res.resolve()
            checkResolved(initializer: initializer, services: a, b, c, d, e)
@@ -366,7 +366,7 @@ func autoregister<Service, A, B, C, D, E, Arg1>(_ service: Service.Type, name: S
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2 in 
            let a: A? = res.resolve(arguments: arg1, arg2); let b: B? = res.resolve(arguments: arg1, arg2); let c: C? = res.resolve(arguments: arg1, arg2); let d: D? = res.resolve(arguments: arg1, arg2); let e: E? = res.resolve(arguments: arg1, arg2)
@@ -388,7 +388,7 @@ func autoregister<Service, A, B, C, D, E, Arg1>(_ service: Service.Type, name: S
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D, E)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2, arg3]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2), \(arg3)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2, arg3 in 
            let a: A? = res.resolve(arguments: arg1, arg2, arg3); let b: B? = res.resolve(arguments: arg1, arg2, arg3); let c: C? = res.resolve(arguments: arg1, arg2, arg3); let d: D? = res.resolve(arguments: arg1, arg2, arg3); let e: E? = res.resolve(arguments: arg1, arg2, arg3)
@@ -431,7 +431,7 @@ func autoregister<Service, A, B, C, D, E, F>(_ service: Service.Type, name: Stri
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E, F, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E, F, Arg1>(_ service: Service.Type, name: String? = nil, argument  arg1: Arg1.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
    return self.register(service.self, name: name, factory: { res, arg1 in 
            let a: A? = res.resolve(argument: arg1); let b: B? = res.resolve(argument: arg1); let c: C? = res.resolve(argument: arg1); let d: D? = res.resolve(argument: arg1); let e: E? = res.resolve(argument: arg1); let f: F? = res.resolve(argument: arg1)
            checkResolved(initializer: initializer, services: a, b, c, d, e, f)
@@ -452,7 +452,7 @@ func autoregister<Service, A, B, C, D, E, F>(_ service: Service.Type, name: Stri
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2 in 
            let a: A? = res.resolve(arguments: arg1, arg2); let b: B? = res.resolve(arguments: arg1, arg2); let c: C? = res.resolve(arguments: arg1, arg2); let d: D? = res.resolve(arguments: arg1, arg2); let e: E? = res.resolve(arguments: arg1, arg2); let f: F? = res.resolve(arguments: arg1, arg2)
@@ -474,7 +474,7 @@ func autoregister<Service, A, B, C, D, E, F>(_ service: Service.Type, name: Stri
  - Important: Might fail if one of the dependencies is unresolvable.
  */
 @discardableResult
-    func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
+func autoregister<Service, A, B, C, D, E, F, Arg1, Arg2, Arg3>(_ service: Service.Type, name: String? = nil, arguments  arg1: Arg1.Type, _ arg2: Arg2.Type, _ arg3: Arg3.Type, initializer: @escaping ((A, B, C, D, E, F)) -> Service) -> ServiceEntry<Service> {
    precondition(hasUnique(arguments: [arg1, arg2, arg3]), "Autoregistration of service with dynamic arguments of the same type (\(arg1), \(arg2), \(arg3)) is not supported")
    return self.register(service.self, name: name, factory: { res, arg1, arg2, arg3 in 
            let a: A? = res.resolve(arguments: arg1, arg2, arg3); let b: B? = res.resolve(arguments: arg1, arg2, arg3); let c: C? = res.resolve(arguments: arg1, arg2, arg3); let d: D? = res.resolve(arguments: arg1, arg2, arg3); let e: E? = res.resolve(arguments: arg1, arg2, arg3); let f: F? = res.resolve(arguments: arg1, arg2, arg3)

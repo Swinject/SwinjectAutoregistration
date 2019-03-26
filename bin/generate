@@ -112,7 +112,7 @@ func registerGenerator(_ dependenciesCount: Int, argumentsCount: Int, breakIntoV
     var register = [
         registerComment(dependenciesCount, arguments: argumentsCount),
         "@discardableResult",
-        "public func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(extraParentheses(concatenatedParameters, when: dependenciesCount != 1))) -> Service) -> ServiceEntry<Service> {",
+        "func autoregister<\(genericsDefinition)>(_ service: Service.Type, name: String? = nil\(argumentsDefinition), initializer: @escaping (\(extraParentheses(concatenatedParameters, when: dependenciesCount != 1))) -> Service) -> ServiceEntry<Service> {",
     ]
     
     if argumentsCount > 1 {
@@ -196,7 +196,7 @@ func checkGenerator(_ dependencies: Int) -> String {
 func write(to outputPath: String, lines: [String]) throws{
     let output = ([
         headers(outputPath),
-        "\n\n import Swinject \n\n",
+        "\n\nimport Swinject\n\n",
         ]
         + lines)
         .joined(separator: "\n")
@@ -227,7 +227,7 @@ var autoregistrationOutput = [
     "let maxDependencies = \(dependenciesCount)",
     "let maxArguments = \(argumentsCount)",
     "\n",
-    "public extension Container {\n",
+    "extension Container {\n",
         registers.joined(separator: "\n\n"),
     "\n\n}",
 ]
