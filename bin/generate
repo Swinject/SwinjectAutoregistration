@@ -227,7 +227,7 @@ var autoregistrationOutput = [
     "let maxDependencies = \(dependenciesCount)",
     "let maxArguments = \(argumentsCount)",
     "\n",
-    "extension Container {\n",
+    "public extension Container {\n",
         registers.joined(separator: "\n\n"),
     "\n\n}",
 ]

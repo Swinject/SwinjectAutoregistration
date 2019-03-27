@@ -14,7 +14,7 @@ let maxDependencies = 20
 let maxArguments = 3
 
 
-extension Container {
+public extension Container {
 
 /** Registers a factory that resolves the Service based on dependencies inferred from the Service initializer.
  
