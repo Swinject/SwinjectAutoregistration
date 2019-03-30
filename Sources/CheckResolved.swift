@@ -7,7 +7,7 @@
 //
 
 
- import Swinject 
+import Swinject
 
 
 func unresolvedService<A>(_ a: A?) -> String? {

@@ -128,14 +128,6 @@ class TypeParserSpec: QuickSpec {
                 XCTAssertEqual(type, Type.closure(parameters: [], returnType: void, throws: true))
             }
             
-            it("scans implicitly unwrapped optional") {
-                let string = "\((String!).self)"
-                let parser = TypeParser(string: string)
-                let type = parser.parseType()
-                
-                XCTAssertEqual(type, self.generic_identifier("Optional", generics: ["String"]))
-            }
-            
             it("scans optional") {
                 let string = "\((Int?).self)"
                 let parser = TypeParser(string: string)
