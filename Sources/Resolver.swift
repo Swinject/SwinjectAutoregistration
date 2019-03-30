@@ -7,7 +7,7 @@
 //
 
 
- import Swinject 
+import Swinject
 
 
 extension Resolver {

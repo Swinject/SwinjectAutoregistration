@@ -622,13 +622,15 @@
 				TargetAttributes = {
 					CD5B9EBF1D832D5A007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1020;
 					};
 					CD5B9EC91D832D5A007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					CD5B9EEF1D83323F007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1020;
 					};
 					CD5B9EFF1D8334BA007ED05F = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -648,10 +650,11 @@
 			};
 			buildConfigurationList = CD5B9E191D832813007ED05F /* Build configuration list for PBXProject "SwinjectAutoregistration" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CD5B9E151D832813007ED05F;
 			productRefGroup = CD5B9EC11D832D5A007ED05F /* Products */;
