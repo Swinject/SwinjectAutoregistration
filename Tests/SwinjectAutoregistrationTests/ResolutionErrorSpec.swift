@@ -1,4 +1,4 @@
-#if !os(Linux)
+#if !SWIFT_PACKAGE
 import Quick
 import Nimble
 
