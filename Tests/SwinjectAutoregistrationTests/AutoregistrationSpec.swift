@@ -207,8 +207,8 @@ class AutoregistrationSpec: QuickSpec {
                 let service = container.resolve(UnwrappedService.self)
                 expect(service).notTo(beNil())
             }
-            
-            #if !os(Linux)
+
+            #if !SWIFT_PACKAGE
             it("throws assertion when same type arguments are passed") {
                 expect { () -> Void in
                     container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
@@ -237,8 +237,8 @@ class AutoregistrationSpec: QuickSpec {
                 expect(unresolvableService).to(beNil())
                 expect(logs.count) == 1
             }
-            
-            #if !os(Linux)
+
+            #if !SWIFT_PACKAGE
             it("does not loose any logs while multithreading"){
                 var logs: [String] = []
                 Container.loggingFunction = { logs.append($0) }
@@ -265,6 +265,7 @@ class AutoregistrationSpec: QuickSpec {
                 expect(logs.count).toEventually(equal(resolutionsCount))
             }
             #endif
+
 
         }
     }

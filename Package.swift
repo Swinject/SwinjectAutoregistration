@@ -1,8 +1,23 @@
+// swift-tools-version:4.2
+
 import PackageDescription
 
 let package = Package(
     name: "SwinjectAutoregistration",
+    products: [
+        .library(
+            name: "SwinjectAutoregistration",
+            targets: ["SwinjectAutoregistration"])
+    ],
     dependencies: [
-        .Package(url: "https://github.com/Swinject/Swinject.git", majorVersion: 2)
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.6.0"),
+    ],
+    targets: [
+        .target(
+            name: "SwinjectAutoregistration",
+            dependencies: [
+                "Swinject",
+            ],
+            path: "Sources"),
     ]
 )
