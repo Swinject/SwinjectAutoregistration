@@ -21,6 +21,7 @@ matrix:
     - env: JOB="POD_LINT"
       osx_image: xcode10.2
       before_install:
+      - gem uninstall --all
       - gem install cocoapods
       - pod setup
       script:
