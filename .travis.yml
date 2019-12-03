@@ -21,9 +21,6 @@ matrix:
     - env: JOB="POD_LINT"
       osx_image: xcode10.2
       before_install:
-      - gem uninstall --all
-      - gem install cocoapods
-      - pod setup
       script:
         - pod lib lint
     - env: JOB="XCODE" DEST="OS=10.0,name=iPhone 6" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test" PLATFORM="iOS"
