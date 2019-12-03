@@ -16,7 +16,7 @@ SwinjectAutoregistration is an extension of Swinject that allows to automaticall
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
   s.requires_arc = true
-
+  s.swift_version = '5.0'
   s.source_files = 'Sources/**/*.{swift,h}'
   s.dependency 'Swinject', '~> 2.6'
 end

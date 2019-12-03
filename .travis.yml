@@ -1,58 +1,45 @@
 language: objective-c
-osx_image: xcode10
 env:
   global:
-  - LC_CTYPE=en_US.UTF-8
-  - PROJECT=SwinjectAutoregistration.xcodeproj
-  - secure: hm/FXmGDpmasULa06cLteREUdFhJ23oTeYQc5g/QjFwhOdln6RqPkqUGMSi3iKpNh4raqW0dH8Jpq/FmjyJG9M9zmIZQbjQiyLwiTvszGKs6YVi+QFsqGIF0GZ5WfB3OIcpNPOlkXhnay18MP+J3bfEhNcKdGdpQ/LIZ2UKgYDJiD1rhullBg8Rc+PxjEUnG4VrjqEje/TcBdX3uP8l7aULla30CrwxmdAfIxjqrrPZeID26fNVF+T/hcNIpMxjB3j16h6k5994USNdu8BpCbqph8aARxgj2cpbsoh9C3EBoqvLGSKnaHmU6kkRS+TagcyAXo+dlgtnxQxa5L/aFMRNpgLshZEZWP/IxH+Q+AJlTF8InjfkDqSpqrNpwt/nls1m+IJecBBxRhaHY0YOwDlFD+f11usGIwSB+7RO1SPXQI98LMUqQpUNvOVw7CVcLSEBNJ1fJBXLKxuQCnuADEHutwLyQhylYYGIsoU9voLT2nc3aJEGD10kn9vStfhYhRbOgK8k0+ycmvFpBO7oi0muQWfggQR8Ldc2Yb+dN+O+79ZDrOYNE74UpNXcazILbUBwB8NiKbBKJ1Jl2wG+hBI5VHtUfo/kI8J/JukkPGSdJ/QyMyoddG+gdXC9Qv0UihAD87lSVD86QIjx8He3TN5Vk+zzzhqG7YzVdRPkj8Bk=
+    - LC_CTYPE=en_US.UTF-8
+    - PROJECT=SwinjectAutoregistration.xcodeproj
 git:
   submodules: false
 matrix:
   include:
-  - env: JOB="LINUX_SPM"
-    os: linux
-    language: generic
-    sudo: required
-    dist: trusty
-    before_install:
-    - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
-    script:
-    - mv .Package.test.swift Package.swift
-    - swift build
-    - swift test
-  - env: JOB="POD_LINT"
-    script:
-    - bundle exec pod repo update
-    - bundle exec pod lib lint
-  - env: JOB="XCODE" DEST="OS=9.3,name=iPhone 6" SCHEME="SwinjectAutoregistration-iOS"
-      SDK="iphonesimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="OS=10.3.1,name=iPhone 7 Plus" SCHEME="SwinjectAutoregistration-iOS"
-      SDK="iphonesimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="OS=12.0,name=iPhone 8 Plus" SCHEME="SwinjectAutoregistration-iOS"
-      SDK="iphonesimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="arch=x86_64" SCHEME="SwinjectAutoregistration-OSX" SDK="macosx"
-      ACTION="test"
-  - env: JOB="XCODE" DEST="OS=9.2,name=Apple TV 1080p" SCHEME="SwinjectAutoregistration-tvOS"
-      SDK="appletvsimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="OS=10.2,name=Apple TV 1080p" SCHEME="SwinjectAutoregistration-tvOS"
-      SDK="appletvsimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="OS=12.0,name=Apple TV 4K" SCHEME="SwinjectAutoregistration-tvOS"
-      SDK="appletvsimulator" ACTION="test"
-  - env: JOB="XCODE" DEST="OS=3.2,name=Apple Watch - 42mm" SCHEME="SwinjectAutoregistration-watchOS"
-      SDK="watchsimulator" ACTION="build"
-  - env: JOB="XCODE" DEST="OS=4.2,name=Apple Watch - 42mm" SCHEME="SwinjectAutoregistration-watchOS"
-      SDK="watchsimulator" ACTION="build"
-  - env: JOB="XCODE" DEST="OS=5.0,name=Apple Watch Series 2 - 42mm" SCHEME="SwinjectAutoregistration-watchOS"
-      SDK="watchsimulator" ACTION="build"
+    - env: JOB="LINUX_SPM" SWIFT_VERSION="5.0"
+      os: linux
+      language: generic
+      sudo: required
+      dist: trusty
+      before_install:
+        - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
+      script:
+        - mv .Package.test.swift Package.swift
+        - swift build
+        - swift test
+    - env: JOB="POD_LINT"
+      osx_image: xcode10.2
+      before_install:
+      script:
+        - pod lib lint
+    - env: JOB="XCODE" DEST="OS=10.0,name=iPhone 6" SCHEME="SwinjectAutoregistration-iOS" SDK="iphonesimulator" ACTION="test" PLATFORM="iOS"
+      osx_image: xcode10.2
+    - env: JOB="XCODE" DEST="arch=x86_64" SCHEME="SwinjectAutoregistration-OSX" SDK="macosx" ACTION="test" PLATFORM="OSX"
+      osx_image: xcode10.2
+    - env: JOB="XCODE" DEST="OS=10.0,name=Apple TV 1080p" SCHEME="SwinjectAutoregistration-tvOS" SDK="appletvsimulator" ACTION="test" PLATFORM="tvOS"
+      osx_image: xcode10.2
+    - env: JOB="XCODE" DEST="OS=4.2,name=Apple Watch - 42mm" SCHEME="SwinjectAutoregistration-watchOS" SDK="watchsimulator" ACTION="build" PLATFORM="watchOS"
+      osx_image: xcode10.2
+
 before_install:
-- curl -L -O https://github.com/Carthage/Carthage/releases/download/0.28.0/Carthage.pkg
-- sudo installer -pkg Carthage.pkg -target /
-- rm Carthage.pkg
-- carthage update --verbose --cache-builds
+  - curl -L -O https://github.com/Carthage/Carthage/releases/download/0.33.0/Carthage.pkg
+  - sudo installer -pkg Carthage.pkg -target /
+  - rm Carthage.pkg
+  - travis_wait carthage bootstrap --verbose --platform $PLATFORM
 script:
-- set -o pipefail
-- xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination
-  "$DEST" -configuration Release ENABLE_TESTABILITY=YES | xcpretty
+  - set -o pipefail
+  - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DEST" -configuration Release ENABLE_TESTABILITY=YES | xcpretty
 notifications:
   email:
     on_success: never
