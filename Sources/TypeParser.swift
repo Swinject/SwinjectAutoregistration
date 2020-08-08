@@ -7,7 +7,7 @@
 //
 
 import Foundation
-#if !os(Linux)
+#if !os(Linux) && !os(Android)
     extension Scanner {
         func scanString(_ string: String) -> String? {
             var value: NSString?
@@ -187,7 +187,7 @@ class TypeParser {
         // See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/swift/grammar/identifier-head
         
         //Identifier head
-        #if os(Linux)
+        #if os(Linux) || os(Android)
             var head = CharacterSet()
         #else
             let head = NSMutableCharacterSet()
@@ -215,7 +215,7 @@ class TypeParser {
         ranges.forEach { head.insert(charactersIn: $0) }
         
         //Identifier characters
-        #if os(Linux)
+        #if os(Linux) || os(Android)
             var characters = head
         #else
             let characters = head.copy() as! NSMutableCharacterSet

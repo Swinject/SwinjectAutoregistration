@@ -21,10 +21,10 @@ enum ResolutionError {
 /// Shows warnings based on information parsed from initializers description
 
 func resolutionErrors<Service, Parameters>(forInitializer initializer: (Parameters) -> Service) -> [ResolutionError] {
-    #if os(Linux)
+    #if os(Linux) || os(Android)
         //Warnings are not supported on Linux
         return []
-    #endif
+    #else
     let parser = TypeParser(string: String(describing: Parameters.self))
     guard let type = parser.parseType() else { return [] }
     
@@ -47,6 +47,7 @@ func resolutionErrors<Service, Parameters>(forInitializer initializer: (Paramete
     }
     
     return warnings
+    #endif
 }
 
 func hasUnique(arguments: [Any.Type]) -> Bool {
