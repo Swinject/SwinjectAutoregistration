@@ -210,16 +210,18 @@ class AutoregistrationSpec: QuickSpec {
 
             #if !SWIFT_PACKAGE
             it("throws assertion when same type arguments are passed") {
-                expect { () -> Void in
+                let expectation: Expectation<Void> = expect { 
                     container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)
-                }.to(throwAssertion())
+                }
+                expectation.to(throwAssertion())
             }
             
             it("throws assertion when trying to resolve service with too many dependencies") {
-                expect { () -> Void in
+                let expectation: Expectation<Void> = expect { () -> Void in
                     container.autoregister(Service21.self, initializer: Service21.init)
                     _ = container.resolve(Service21.self)
-                }.to(throwAssertion())
+                }
+                expectation.to(throwAssertion())
             }
             #endif
             

@@ -62,9 +62,10 @@ class OperatorsSpec: QuickSpec {
                     var logs = [String]()
                     Container.loggingFunction = { logs.append($0) }
                 
-                    expect { () -> Void in
+                    let expectation: Expectation<Void> = expect {
                         _ = container ~> (Service0.self, name: "NonExistentService")
-                    }.to(throwAssertion())
+                    }
+                    expectation.to(throwAssertion())
                 
                     expect(logs.count) == 1
             }
