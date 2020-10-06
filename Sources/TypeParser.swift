@@ -7,40 +7,23 @@
 //
 
 import Foundation
+
 #if !os(Linux) && !os(Android)
-    extension Scanner {
-        func scanString(_ string: String) -> String? {
-            var value: NSString?
-            if self.scanString(string, into: &value), let value = value {
-                return value as String
-            }
-            return nil
-        }
-        
-        func scanCharactersFromSet(_ set: CharacterSet) -> String? {
-            var value: NSString?
-            if self.scanCharacters(from: set, into: &value), let value = value {
-                return value as String
-            }
-            return nil
-        }
+extension NSMutableCharacterSet {
+    func insert(charactersIn range: Range<UnicodeScalar>) {
+        let nsRange = NSRange(location: Int(range.lowerBound.value), length: Int(range.upperBound.value - range.lowerBound.value))
+        self.addCharacters(in: nsRange)
     }
     
-    extension NSMutableCharacterSet {
-        func insert(charactersIn range: Range<UnicodeScalar>) {
-            let nsRange = NSRange(location: Int(range.lowerBound.value), length: Int(range.upperBound.value - range.lowerBound.value))
-            self.addCharacters(in: nsRange)
-        }
-        
-        func insert(charactersIn string: String) {
-            self.addCharacters(in: string)
-        }
-        
-        func formUnion(_ set: CharacterSet) {
-            self.formUnion(with: set)
-        }
+    func insert(charactersIn string: String) {
+        self.addCharacters(in: string)
     }
-#endif
+    
+    func formUnion(_ set: CharacterSet) {
+        self.formUnion(with: set)
+    }
+}
+
 
 
 
@@ -233,3 +216,5 @@ class TypeParser {
     }
     
 }
+
+#endif
