@@ -7,8 +7,34 @@
 //
 
 import Foundation
-
 #if !os(Linux) && !os(Android)
+
+extension Scanner {
+    func scan(string: String) -> String? {
+        if #available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *) {
+            return self.scanString(string)
+        } else {
+            var value: NSString?
+            if self.scanString(string, into: &value), let value = value {
+                return value as String
+            }
+            return nil
+        }
+    }
+    
+    func scan(charactersFromSet set: CharacterSet) -> String? {
+        if #available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *) {
+            return self.scanCharacters(from: set)
+        } else {
+            var value: NSString?
+            if self.scanCharacters(from: set, into: &value), let value = value {
+                return value as String
+            }
+            return nil
+        }
+    }
+}
+    
 extension NSMutableCharacterSet {
     func insert(charactersIn range: Range<UnicodeScalar>) {
         let nsRange = NSRange(location: Int(range.lowerBound.value), length: Int(range.upperBound.value - range.lowerBound.value))
@@ -23,9 +49,6 @@ extension NSMutableCharacterSet {
         self.formUnion(with: set)
     }
 }
-
-
-
 
 private func ..<(start: Int, end: Int) -> Range<UnicodeScalar> {
     return UnicodeScalar(start)! ..< UnicodeScalar(end)!
@@ -81,7 +104,7 @@ class TypeParser {
         _ = parseIdentifier()
         
         //Return if param name is not specified
-        if scanner.scanString(":") == nil {
+        if scanner.scan(string: ":") == nil {
             scanner.scanLocation = originalLocation
         }
         
@@ -94,7 +117,7 @@ class TypeParser {
         let genericTypes = parseGenericArgumentClause() ?? []
         var subTypeIdentifier: TypeIdentifier? = nil
         
-        if scanner.scanString(".") != nil, let typeIdentifier = parseTypeIdentifier() {
+        if scanner.scan(string: ".") != nil, let typeIdentifier = parseTypeIdentifier() {
             subTypeIdentifier = typeIdentifier
         }
         
@@ -103,16 +126,16 @@ class TypeParser {
     }
     
     func parseGenericArgumentClause() -> [Type]? {
-        guard scanner.scanString("<") != nil else { return nil }
+        guard scanner.scan(string: "<") != nil else { return nil }
         guard let type = parseType() else { return nil }
         
         var types: [Type] = [type]
         
-        while scanner.scanString(",") != nil, let type = parseType(){
+        while scanner.scan(string: ",") != nil, let type = parseType(){
             types.append(type)
         }
         
-        guard scanner.scanString(">") != nil else { return nil }
+        guard scanner.scan(string: ">") != nil else { return nil }
         return types
     }
     
@@ -123,7 +146,7 @@ class TypeParser {
         
         var protocolTypes: [TypeIdentifier] = [protocolType]
         
-        while scanner.scanString("&") != nil, let protocolType = parseTypeIdentifier() {
+        while scanner.scan(string: "&") != nil, let protocolType = parseTypeIdentifier() {
             protocolTypes.append(protocolType)
         }
         
@@ -133,7 +156,7 @@ class TypeParser {
     }
     
     func parseTupleType() -> [Type]? {
-        guard scanner.scanString("(") != nil else { return nil }
+        guard scanner.scan(string: "(") != nil else { return nil }
         
         var types: [Type] = []
         
@@ -141,11 +164,11 @@ class TypeParser {
         
         
         
-        while scanner.scanString(",") != nil, let type = parseTypeAnnotation() {
+        while scanner.scan(string: ",") != nil, let type = parseTypeAnnotation() {
             types.append(type)
         }
         
-        guard scanner.scanString(")") != nil else { return nil }
+        guard scanner.scan(string: ")") != nil else { return nil }
         
         return types
     }
@@ -155,10 +178,10 @@ class TypeParser {
         
         guard let parameters = parseTupleType() else { return nil }
         
-        let `throws` = scanner.scanString("throws") != nil
+        let `throws` = scanner.scan(string: "throws") != nil
         // - rethrows is not allowed for closures
         
-        guard scanner.scanString("->") != nil else { scanner.scanLocation = originalLocation; return nil }
+        guard scanner.scan(string: "->") != nil else { scanner.scanLocation = originalLocation; return nil }
         
         guard let returnType = parseType() else { scanner.scanLocation = originalLocation; return nil }
         
@@ -209,9 +232,9 @@ class TypeParser {
         let charactersRanges =  [0x0300..<0x036F, 0x1DC0..<0x1DFF, 0x20D0..<0x20FF, 0xFE20..<0xFE2F]
         charactersRanges.forEach { characters.insert(charactersIn: $0) }
         
-        guard let headString = scanner.scanCharactersFromSet(head as CharacterSet) else { return nil }
+        guard let headString = scanner.scan(charactersFromSet: head as CharacterSet) else { return nil }
         
-        let charactersString = scanner.scanCharactersFromSet(characters as CharacterSet)
+        let charactersString = scanner.scan(charactersFromSet: characters as CharacterSet)
         return "\(headString)\(charactersString ?? "")"
     }
     
