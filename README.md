@@ -6,7 +6,7 @@ SwinjectAutoregistration
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/SwinjectAutoregistration.svg?style=flat)](http://cocoapods.org/pods/SwinjectAutoregistration)
 [![License](https://img.shields.io/cocoapods/l/SwinjectAutoregistration.svg?style=flat)](http://cocoapods.org/pods/SwinjectAutoregistration)
 [![Platform](https://img.shields.io/cocoapods/p/SwinjectAutoregistration.svg?style=flat)](http://cocoapods.org/pods/SwinjectAutoregistration)
-[![Swift Version](https://img.shields.io/badge/Swift-3-F16D39.svg?style=flat)](https://developer.apple.com/swift)
+[![Swift Version](https://img.shields.io/badge/Swift-5-F16D39.svg?style=flat)](https://developer.apple.com/swift)
 
 SwinjectAutoregistration is an extension of Swinject that allows to automatically register your services and greatly reduce the amount of boilerplate code.
 
@@ -190,6 +190,33 @@ container.register(Animal.self, name: "charles") { _ in Cat(name: "Charles") }
 container.register(Person.self) {
     PetOwner(pet: r.resolve(Animal.self, name: "mimi")
 }
+```
+
+### Swift 5.3
+Since Swift 5.3 the compiler behaves differently when infering initializers in structs that have variables with a default value:
+
+```swift
+struct Cat {
+    let height: Int = 50
+}
+```
+
+Compiler will generate two init functions:
+
+`Cat.init` and `Cat.init(height:)`
+
+Since the Swift 5.3 the following registration
+
+```swift
+container.autoregister(Animal.self, initializer: Cat.init)
+```
+
+will try to use the `Cat.init(height:)` which will then fail with `Unresolved service: Int Initializer: (Int) -> Animal`
+
+Solution is to make the compiler use the init without a parameter
+
+```swift
+container.autoregister(Animal.self, initializer: Cat.init as () -> Cat)
 ```
 
 ## Credits
