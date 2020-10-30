@@ -7,7 +7,12 @@ let package = Package(
     products: [
         .library(
             name: "SwinjectAutoregistration",
+            targets: ["SwinjectAutoregistration"]),
+        .library(
+            name: "SwinjectAutoregistration-Dynamic",
+            type: .dynamic,
             targets: ["SwinjectAutoregistration"])
+        
     ],
     dependencies: [
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.6.0"),
