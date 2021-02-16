@@ -3,10 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EF48F7F25DBAB1F00CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48F8425DBAB3700CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48F8F25DBAB3700CC767D /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8D25DBAB3700CC767D /* Quick.xcframework */; };
+		4EF48F9025DBAB3700CC767D /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8E25DBAB3700CC767D /* Nimble.xcframework */; };
+		4EF48F9525DBAB3E00CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48F9E25DBAB4300CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48FA725DBAB4D00CC767D /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8E25DBAB3700CC767D /* Nimble.xcframework */; };
+		4EF48FA825DBAB4D00CC767D /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8D25DBAB3700CC767D /* Quick.xcframework */; };
+		4EF48FA925DBAB4D00CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48FB225DBAB5200CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
+		4EF48FBB25DBAB5800CC767D /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8E25DBAB3700CC767D /* Nimble.xcframework */; };
+		4EF48FBC25DBAB5800CC767D /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F8D25DBAB3700CC767D /* Quick.xcframework */; };
+		4EF48FBD25DBAB5800CC767D /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */; };
 		AC11910A1E301CD200B112D9 /* ResolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1191091E301CD200B112D9 /* ResolutionError.swift */; };
 		AC1191191E301E3A00B112D9 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1191171E301E3A00B112D9 /* Resolver.swift */; };
 		AC11911A1E301E3A00B112D9 /* CheckResolved.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1191181E301E3A00B112D9 /* CheckResolved.swift */; };
@@ -39,28 +52,6 @@
 		ACA103321E3E339E004B8CD4 /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103251E3E3386004B8CD4 /* AutoregistrationSpec.swift */; };
 		ACA103331E3E339F004B8CD4 /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103251E3E3386004B8CD4 /* AutoregistrationSpec.swift */; };
 		ACA103341E3E33A0004B8CD4 /* AutoregistrationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103251E3E3386004B8CD4 /* AutoregistrationSpec.swift */; };
-		C3124A022174D30200AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A012174D30200AF0983 /* Swinject.framework */; };
-		C3124A052174D3A100AF0983 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A032174D3A100AF0983 /* Nimble.framework */; };
-		C3124A062174D3A100AF0983 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A042174D3A100AF0983 /* Quick.framework */; };
-		C3124A072174D3AC00AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A012174D30200AF0983 /* Swinject.framework */; };
-		C3124A0D2174D3F400AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A0A2174D3F400AF0983 /* Swinject.framework */; };
-		C3124A0E2174D40900AF0983 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A092174D3F400AF0983 /* Nimble.framework */; };
-		C3124A0F2174D40E00AF0983 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A082174D3F400AF0983 /* Quick.framework */; };
-		C3124A102174D41300AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A0A2174D3F400AF0983 /* Swinject.framework */; };
-		C3124A122174D43D00AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A112174D43D00AF0983 /* Swinject.framework */; };
-		C3124A172174D49900AF0983 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A132174D48700AF0983 /* Nimble.framework */; };
-		C3124A182174D49D00AF0983 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A142174D48700AF0983 /* Quick.framework */; };
-		C3124A192174D4A200AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A112174D43D00AF0983 /* Swinject.framework */; };
-		C3124A1B2174D4C200AF0983 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3124A1A2174D4C200AF0983 /* Swinject.framework */; };
-		C3124A1D2174D56800AF0983 /* Swinject.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A012174D30200AF0983 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A1E2174D56C00AF0983 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A042174D3A100AF0983 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A1F2174D56F00AF0983 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A032174D3A100AF0983 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A212174D59200AF0983 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A132174D48700AF0983 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A222174D59500AF0983 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A142174D48700AF0983 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A232174D59800AF0983 /* Swinject.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A112174D43D00AF0983 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A252174D5BC00AF0983 /* Swinject.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A0A2174D3F400AF0983 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A262174D5C000AF0983 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A092174D3F400AF0983 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3124A272174D5C200AF0983 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C3124A082174D3F400AF0983 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5B9ECB1D832D5A007ED05F /* SwinjectAutoregistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9EC01D832D5A007ED05F /* SwinjectAutoregistration.framework */; };
 		CD5B9EDF1D832E32007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5B9EE01D833088007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
@@ -102,46 +93,10 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		C3124A1C2174D53E00AF0983 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C3124A1D2174D56800AF0983 /* Swinject.framework in CopyFiles */,
-				C3124A1E2174D56C00AF0983 /* Quick.framework in CopyFiles */,
-				C3124A1F2174D56F00AF0983 /* Nimble.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C3124A202174D58100AF0983 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C3124A212174D59200AF0983 /* Nimble.framework in CopyFiles */,
-				C3124A222174D59500AF0983 /* Quick.framework in CopyFiles */,
-				C3124A232174D59800AF0983 /* Swinject.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C3124A242174D5B400AF0983 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C3124A252174D5BC00AF0983 /* Swinject.framework in CopyFiles */,
-				C3124A262174D5C000AF0983 /* Nimble.framework in CopyFiles */,
-				C3124A272174D5C200AF0983 /* Quick.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swinject.xcframework; path = Carthage/Build/Swinject.xcframework; sourceTree = "<group>"; };
+		4EF48F8D25DBAB3700CC767D /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
+		4EF48F8E25DBAB3700CC767D /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		AC1191091E301CD200B112D9 /* ResolutionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionError.swift; sourceTree = "<group>"; };
 		AC1191171E301E3A00B112D9 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		AC1191181E301E3A00B112D9 /* CheckResolved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckResolved.swift; sourceTree = "<group>"; };
@@ -205,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3124A022174D30200AF0983 /* Swinject.framework in Frameworks */,
+				4EF48F7F25DBAB1F00CC767D /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,10 +168,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF48F8F25DBAB3700CC767D /* Quick.xcframework in Frameworks */,
+				4EF48F9025DBAB3700CC767D /* Nimble.xcframework in Frameworks */,
+				4EF48F8425DBAB3700CC767D /* Swinject.xcframework in Frameworks */,
 				CD5B9ECB1D832D5A007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				C3124A072174D3AC00AF0983 /* Swinject.framework in Frameworks */,
-				C3124A052174D3A100AF0983 /* Nimble.framework in Frameworks */,
-				C3124A062174D3A100AF0983 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3124A1B2174D4C200AF0983 /* Swinject.framework in Frameworks */,
+				4EF48F9525DBAB3E00CC767D /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3124A122174D43D00AF0983 /* Swinject.framework in Frameworks */,
+				4EF48F9E25DBAB4300CC767D /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,10 +195,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF48FA725DBAB4D00CC767D /* Nimble.xcframework in Frameworks */,
+				4EF48FA825DBAB4D00CC767D /* Quick.xcframework in Frameworks */,
+				4EF48FA925DBAB4D00CC767D /* Swinject.xcframework in Frameworks */,
 				CD5B9F0A1D8334BA007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				C3124A192174D4A200AF0983 /* Swinject.framework in Frameworks */,
-				C3124A172174D49900AF0983 /* Nimble.framework in Frameworks */,
-				C3124A182174D49D00AF0983 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3124A0D2174D3F400AF0983 /* Swinject.framework in Frameworks */,
+				4EF48FB225DBAB5200CC767D /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +214,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF48FBB25DBAB5800CC767D /* Nimble.xcframework in Frameworks */,
+				4EF48FBC25DBAB5800CC767D /* Quick.xcframework in Frameworks */,
+				4EF48FBD25DBAB5800CC767D /* Swinject.xcframework in Frameworks */,
 				CD5B9F761D833A15007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				C3124A102174D41300AF0983 /* Swinject.framework in Frameworks */,
-				C3124A0E2174D40900AF0983 /* Nimble.framework in Frameworks */,
-				C3124A0F2174D40E00AF0983 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +247,9 @@
 		C3124A002174D30200AF0983 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EF48F8E25DBAB3700CC767D /* Nimble.xcframework */,
+				4EF48F8D25DBAB3700CC767D /* Quick.xcframework */,
+				4EF48F7E25DBAB1F00CC767D /* Swinject.xcframework */,
 				C3124A132174D48700AF0983 /* Nimble.framework */,
 				C3124A1A2174D4C200AF0983 /* Swinject.framework */,
 				C3124A142174D48700AF0983 /* Quick.framework */,
@@ -506,7 +464,6 @@
 				CD5B9EC61D832D5A007ED05F /* Sources */,
 				CD5B9EC71D832D5A007ED05F /* Frameworks */,
 				CD5B9EC81D832D5A007ED05F /* Resources */,
-				C3124A1C2174D53E00AF0983 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -561,7 +518,6 @@
 				CD5B9F051D8334BA007ED05F /* Sources */,
 				CD5B9F061D8334BA007ED05F /* Frameworks */,
 				CD5B9F071D8334BA007ED05F /* Resources */,
-				C3124A202174D58100AF0983 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -598,7 +554,6 @@
 				CD5B9F2D1D833711007ED05F /* Sources */,
 				CD5B9F2E1D833711007ED05F /* Frameworks */,
 				CD5B9F2F1D833711007ED05F /* Resources */,
-				C3124A242174D5B400AF0983 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -844,6 +799,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-D DEBUG -Xfrontend -debug-time-function-bodies";
@@ -860,6 +816,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -871,10 +828,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
@@ -884,10 +837,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
@@ -917,10 +866,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -937,7 +882,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-iOSTests";
@@ -972,10 +921,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -986,7 +931,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1000,10 +949,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
@@ -1014,10 +959,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9EB41D832C81007ED05F /* watchOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
@@ -1028,10 +969,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1042,10 +979,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1075,10 +1008,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1094,7 +1023,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOSTests";
@@ -1129,10 +1062,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1142,7 +1071,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1157,10 +1090,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E361D832A4F007ED05F /* Mac-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
 			};
@@ -1170,10 +1099,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E361D832A4F007ED05F /* Mac-Framework.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
 			};
@@ -1204,10 +1129,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1223,7 +1144,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1260,10 +1185,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1273,7 +1194,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSXTests";
