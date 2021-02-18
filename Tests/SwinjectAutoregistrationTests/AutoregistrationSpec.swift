@@ -208,7 +208,7 @@ class AutoregistrationSpec: QuickSpec {
                 expect(service).notTo(beNil())
             }
 
-            #if !SWIFT_PACKAGE
+            #if !SWIFT_PACKAGE && arch(x86_64)
             it("throws assertion when same type arguments are passed") {
                 let expectation: Expectation<Void> = expect { 
                     container.autoregister(SameArgumentsService.self, arguments: String.self, Int.self, String.self, initializer: SameArgumentsService.init)

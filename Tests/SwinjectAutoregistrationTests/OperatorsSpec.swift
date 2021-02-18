@@ -57,7 +57,7 @@ class OperatorsSpec: QuickSpec {
                 expect(service).toNot(beNil())
             }
 
-            #if !SWIFT_PACKAGE
+            #if !SWIFT_PACKAGE && arch(x86_64)
             it("fails with message on unresolvable service") {
                     var logs = [String]()
                     Container.loggingFunction = { logs.append($0) }
