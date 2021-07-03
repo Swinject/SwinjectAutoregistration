@@ -1,7 +1,6 @@
 #if !SWIFT_PACKAGE
-import Quick
-import Nimble
 
+import XCTest
 @testable import SwinjectAutoregistration
 
 extension ResolutionError: Equatable {}
@@ -13,7 +12,7 @@ public func ==(lhs: ResolutionError, rhs: ResolutionError) -> Bool {
     }
 }
 
-class ResolutionErrorSpec: QuickSpec {
+class ResolutionErrorTests: XCTestCase {
 	
     class DependencyA {}
     class DependencyB {}
@@ -75,57 +74,52 @@ class ResolutionErrorSpec: QuickSpec {
     }
 
     
-    override func spec() {
-        describe("warnings checker") {
-            it("does show warning for service with too many dependencies"){
-                let w = resolutionErrors(forInitializer: Service21.init)
-                expect(w.first) == ResolutionError.tooManyDependencies(21)
-            }
-            
-            it("doesnt show warning for single dependency"){
-                let w = resolutionErrors(forInitializer: Service1.init)
-                expect(w.count) == 0
-            }
+    func testShowingWarningForServiceWithTooManyDependencies() {
+        let w = resolutionErrors(forInitializer: Service21.init)
+        XCTAssertEqual(w.first, ResolutionError.tooManyDependencies(21))
+    }
+    
+    func testNotShowingWarningForSingleDependency() {
+        let w = resolutionErrors(forInitializer: Service1.init)
+        XCTAssertEqual(w.count, 0)
+    }
 
-            it("doesnt show warning for service with 9 dependencies"){
-                let w = resolutionErrors(forInitializer: Service9.init)
-                expect(w.count) == 0
-            }
-            
-            it("doesnt show warning for service with optional dependency"){
-                let w = resolutionErrors(forInitializer: OptionalService.init)
-                expect(w.count) == 0
-            }
+    func testShowingWarningForServiceWith9Dependencies() {
+        let w = resolutionErrors(forInitializer: Service9.init)
+        XCTAssertEqual(w.count, 0)
+    }
+    
+    func testShowingWarningForServiceWithOptionalDependency() {
+        let w = resolutionErrors(forInitializer: OptionalService.init)
+        XCTAssertEqual(w.count, 0)
+    }
 
-            it("doesnt show warning for service with unwrapped dependency"){
-                let w = resolutionErrors(forInitializer: UnwrappedService.init)
-                expect(w.count) == 0
-            }
+    func testNotShowingWarningForServiceWithUnwrappedDependency() {
+        let w = resolutionErrors(forInitializer: UnwrappedService.init)
+        XCTAssertEqual(w.count, 0)
+    }
 
-            // This fails
-            // Single argument tuple looks exactly the same as multiple arguments when printed
-            xit("doesnt show warning for single argument tuple of optionals"){
-                let w = resolutionErrors(forInitializer: OptionalSingleTupleService.init)
-                expect(w.count) == 0
-            }
-            
-            it("doesnt show warning for mutiple argument tuples of optionals"){
-                let w = resolutionErrors(forInitializer: OptionalMutipleTupleService.init)
-                expect(w.count) == 0
-            }
-            
-            it("doesnt show warning for nested closures"){
-                let w = resolutionErrors(forInitializer: NestedClosureService.init)
-                expect(w.count) == 0
-            }
-            
-            it("doesnt show warning for optional closure"){
-                let w = resolutionErrors(forInitializer: OptionalNestedClosureService.init)
-                expect(w.count) == 0
-            }
-            
-        }
-	}
-	
+    // This might fail
+    // Single argument tuple looks exactly the same as multiple arguments when printed
+    func testNotShowingWarningForSingleArgumentTupleOfOptonals() {
+        let w = resolutionErrors(forInitializer: OptionalSingleTupleService.init)
+        XCTAssertEqual(w.count, 0)
+    }
+    
+    func testNotShowingWarningForMultiipleArgumentTuplesOfOptionals() {
+        let w = resolutionErrors(forInitializer: OptionalMutipleTupleService.init)
+        XCTAssertEqual(w.count, 0)
+    }
+    
+    func testNotShowingWarningForNestedClosures() {
+        let w = resolutionErrors(forInitializer: NestedClosureService.init)
+        XCTAssertEqual(w.count, 0)
+    }
+    
+    func testNotShowingWarningForOptionalClosure() {
+        let w = resolutionErrors(forInitializer: OptionalNestedClosureService.init)
+        XCTAssertEqual(w.count, 0)
+    }
+
 }
 #endif

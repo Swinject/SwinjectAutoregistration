@@ -58,9 +58,9 @@
 		AC5A8FAB1ED1DAA00027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
 		AC5A8FBB1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
 		AC5A8FBC1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */; };
-		ACA1032F1E3E3397004B8CD4 /* ResolutionErrorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */; };
-		ACA103301E3E3398004B8CD4 /* ResolutionErrorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */; };
-		ACA103311E3E339A004B8CD4 /* ResolutionErrorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */; };
+		ACA1032F1E3E3397004B8CD4 /* ResolutionErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorTests.swift */; };
+		ACA103301E3E3398004B8CD4 /* ResolutionErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorTests.swift */; };
+		ACA103311E3E339A004B8CD4 /* ResolutionErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA103271E3E3386004B8CD4 /* ResolutionErrorTests.swift */; };
 		CD5B9ECB1D832D5A007ED05F /* SwinjectAutoregistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5B9EC01D832D5A007ED05F /* SwinjectAutoregistration.framework */; };
 		CD5B9EDF1D832E32007ED05F /* SwinjectAutoregistration.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5B9ED91D832E18007ED05F /* SwinjectAutoregistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5B9EE01D833088007ED05F /* AutoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5B9E8C1D832BF9007ED05F /* AutoRegistration.swift */; };
@@ -153,7 +153,7 @@
 		AC4AC9481E33C71D00E6355A /* TypeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeParser.swift; sourceTree = "<group>"; };
 		AC4AC94A1E33C75200E6355A /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorsSpec.swift; sourceTree = "<group>"; };
-		ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionErrorSpec.swift; sourceTree = "<group>"; };
+		ACA103271E3E3386004B8CD4 /* ResolutionErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionErrorTests.swift; sourceTree = "<group>"; };
 		CD5B9E231D832A4F007ED05F /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		CD5B9E251D832A4F007ED05F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		CD5B9E261D832A4F007ED05F /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 			children = (
 				986C0CCB26906C6F001BFBFC /* AutoregistrationTests.swift */,
 				986C0CCF269076F6001BFBFC /* TypeParserTests.swift */,
-				ACA103271E3E3386004B8CD4 /* ResolutionErrorSpec.swift */,
+				ACA103271E3E3386004B8CD4 /* ResolutionErrorTests.swift */,
 				AC5A8FAA1ED1DAA00027334A /* OperatorsSpec.swift */,
 			);
 			path = SwinjectAutoregistrationTests;
@@ -732,7 +732,7 @@
 				AC5A8FAB1ED1DAA00027334A /* OperatorsSpec.swift in Sources */,
 				986C0CD0269076F6001BFBFC /* TypeParserTests.swift in Sources */,
 				986C0CCC26906C6F001BFBFC /* AutoregistrationTests.swift in Sources */,
-				ACA1032F1E3E3397004B8CD4 /* ResolutionErrorSpec.swift in Sources */,
+				ACA1032F1E3E3397004B8CD4 /* ResolutionErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,7 +771,7 @@
 				AC5A8FBB1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */,
 				986C0CD1269076F6001BFBFC /* TypeParserTests.swift in Sources */,
 				986C0CCD26906C6F001BFBFC /* AutoregistrationTests.swift in Sources */,
-				ACA103301E3E3398004B8CD4 /* ResolutionErrorSpec.swift in Sources */,
+				ACA103301E3E3398004B8CD4 /* ResolutionErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,7 +796,7 @@
 				AC5A8FBC1ED1DC2B0027334A /* OperatorsSpec.swift in Sources */,
 				986C0CD2269076F6001BFBFC /* TypeParserTests.swift in Sources */,
 				986C0CCE26906C6F001BFBFC /* AutoregistrationTests.swift in Sources */,
-				ACA103311E3E339A004B8CD4 /* ResolutionErrorSpec.swift in Sources */,
+				ACA103311E3E339A004B8CD4 /* ResolutionErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
