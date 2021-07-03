@@ -9,25 +9,13 @@
 /* Begin PBXBuildFile section */
 		0A47832F25CCA1E600BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
 		0A47833425CCA1F400BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
-		0A47833B25CCA1F400BE64FF /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; };
-		0A47833C25CCA1F400BE64FF /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; };
 		0A47834125CCA20000BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
 		0A47834625CCA20A00BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
-		0A47834B25CCA21400BE64FF /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; };
-		0A47834C25CCA21400BE64FF /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; };
 		0A47834D25CCA21400BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
 		0A47835225CCA21E00BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
-		0A47835725CCA22700BE64FF /* Nimble.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; };
-		0A47835825CCA22700BE64FF /* Quick.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; };
 		0A47835925CCA22700BE64FF /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; };
-		0A47837425CCA28500BE64FF /* Nimble.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A47837525CCA28500BE64FF /* Quick.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A47837625CCA28500BE64FF /* Swinject.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A47837F25CCA33E00BE64FF /* Nimble.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A47838025CCA33E00BE64FF /* Quick.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A47838125CCA33E00BE64FF /* Swinject.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A47838625CCA3B300BE64FF /* Nimble.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833A25CCA1F400BE64FF /* Nimble.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A47838725CCA3B300BE64FF /* Quick.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47833925CCA1F400BE64FF /* Quick.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A47838825CCA3B400BE64FF /* Swinject.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A47832E25CCA1E600BE64FF /* Swinject.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		986C0CCC26906C6F001BFBFC /* AutoregistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C0CCB26906C6F001BFBFC /* AutoregistrationTests.swift */; };
 		986C0CCD26906C6F001BFBFC /* AutoregistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C0CCB26906C6F001BFBFC /* AutoregistrationTests.swift */; };
@@ -109,8 +97,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A47837425CCA28500BE64FF /* Nimble.xcframework in CopyFiles */,
-				0A47837525CCA28500BE64FF /* Quick.xcframework in CopyFiles */,
 				0A47837625CCA28500BE64FF /* Swinject.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,8 +107,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A47838625CCA3B300BE64FF /* Nimble.xcframework in CopyFiles */,
-				0A47838725CCA3B300BE64FF /* Quick.xcframework in CopyFiles */,
 				0A47838825CCA3B400BE64FF /* Swinject.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,8 +117,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A47837F25CCA33E00BE64FF /* Nimble.xcframework in CopyFiles */,
-				0A47838025CCA33E00BE64FF /* Quick.xcframework in CopyFiles */,
 				0A47838125CCA33E00BE64FF /* Swinject.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,8 +125,6 @@
 
 /* Begin PBXFileReference section */
 		0A47832E25CCA1E600BE64FF /* Swinject.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swinject.xcframework; path = Carthage/Build/Swinject.xcframework; sourceTree = "<group>"; };
-		0A47833925CCA1F400BE64FF /* Quick.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Quick.xcframework; path = Carthage/Build/Quick.xcframework; sourceTree = "<group>"; };
-		0A47833A25CCA1F400BE64FF /* Nimble.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Nimble.xcframework; path = Carthage/Build/Nimble.xcframework; sourceTree = "<group>"; };
 		986C0CCB26906C6F001BFBFC /* AutoregistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoregistrationTests.swift; sourceTree = "<group>"; };
 		986C0CCF269076F6001BFBFC /* TypeParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeParserTests.swift; sourceTree = "<group>"; };
 		AC1191091E301CD200B112D9 /* ResolutionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolutionError.swift; sourceTree = "<group>"; };
@@ -207,8 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9ECB1D832D5A007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				0A47833B25CCA1F400BE64FF /* Quick.xcframework in Frameworks */,
-				0A47833C25CCA1F400BE64FF /* Nimble.xcframework in Frameworks */,
 				0A47833425CCA1F400BE64FF /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,8 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9F0A1D8334BA007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				0A47834B25CCA21400BE64FF /* Nimble.xcframework in Frameworks */,
-				0A47834C25CCA21400BE64FF /* Quick.xcframework in Frameworks */,
 				0A47834D25CCA21400BE64FF /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,8 +229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5B9F761D833A15007ED05F /* SwinjectAutoregistration.framework in Frameworks */,
-				0A47835725CCA22700BE64FF /* Nimble.xcframework in Frameworks */,
-				0A47835825CCA22700BE64FF /* Quick.xcframework in Frameworks */,
 				0A47835925CCA22700BE64FF /* Swinject.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +259,6 @@
 		C3124A002174D30200AF0983 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0A47833A25CCA1F400BE64FF /* Nimble.xcframework */,
-				0A47833925CCA1F400BE64FF /* Quick.xcframework */,
 				0A47832E25CCA1E600BE64FF /* Swinject.xcframework */,
 			);
 			name = Frameworks;
