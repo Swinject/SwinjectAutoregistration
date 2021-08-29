@@ -836,6 +836,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
 			name = Debug;
@@ -849,6 +850,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
 			name = Release;
@@ -974,7 +976,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -988,7 +990,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1002,7 +1004,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1016,7 +1018,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
