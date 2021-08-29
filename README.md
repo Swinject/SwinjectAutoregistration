@@ -219,6 +219,12 @@ Solution is to make the compiler use the init without a parameter
 container.autoregister(Animal.self, initializer: Cat.init as () -> Cat)
 ```
 
+## For Maintainers
+
+  ### Making a new release version
+
+  Our release procedure is described as [Makefile](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Makefile). Run `make help` coomand for more info.
+
 ## Credits
 
 SwinjectAutoregistration generics is inspired by:
