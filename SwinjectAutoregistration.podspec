@@ -18,5 +18,5 @@ SwinjectAutoregistration is an extension of Swinject that allows to automaticall
   s.requires_arc = true
   s.swift_version = '5.0'
   s.source_files = 'Sources/**/*.{swift,h}'
-  s.dependency 'Swinject', '~> 2.7'
+  s.dependency 'Swinject', '2.7.1'
 end
