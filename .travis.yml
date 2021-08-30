@@ -16,8 +16,8 @@ matrix:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
       script:
         - mv .Package.test.swift Package.swift
+        - swift test --generate-linuxmain
         - swift build
-        - swift test
     - env: JOB="POD_LINT"
       osx_image: xcode12
       before_install:
