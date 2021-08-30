@@ -10,9 +10,7 @@ let package = Package(
             targets: ["SwinjectAutoregistration"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.1"),
-        .package(url: "https://github.com/Quick/Quick", from: "3.0.0"),
-        .package(url: "https://github.com/Quick/Nimble", from: "9.0.0")
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.1")
     ],
     targets: [
         .target(
@@ -24,8 +22,6 @@ let package = Package(
         .testTarget(
             name: "SwinjectAutoregistrationTests",
             dependencies: [
-                "Quick",
-                "Nimble",
                 "Swinject",
                 "SwinjectAutoregistration",
             ])
