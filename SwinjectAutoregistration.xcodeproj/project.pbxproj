@@ -833,6 +833,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -847,6 +848,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E301D832A4F007ED05F /* iOS-Framework.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1000,6 +1002,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build",
@@ -1014,6 +1017,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD5B9E3B1D832A4F007ED05F /* tvOS-Framework.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build",
