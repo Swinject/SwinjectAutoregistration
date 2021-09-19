@@ -171,6 +171,7 @@
 		CD5B9F091D8334BA007ED05F /* SwinjectAutoregistration-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwinjectAutoregistration-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5B9F281D833711007ED05F /* SwinjectAutoregistration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwinjectAutoregistration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5B9F311D833711007ED05F /* SwinjectAutoregistration-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwinjectAutoregistration-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF3CD0EF26DC25D3007090D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +268,7 @@
 		CD5B9E151D832813007ED05F = {
 			isa = PBXGroup;
 			children = (
+				FF3CD0EF26DC25D3007090D2 /* README.md */,
 				CD5B9E8B1D832BF9007ED05F /* Sources */,
 				CD5B9E8E1D832BF9007ED05F /* Tests */,
 				CD5B9EC11D832D5A007ED05F /* Products */,
