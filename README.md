@@ -17,7 +17,7 @@ SwinjectAutoregistration is an extension of Swinject that allows to automaticall
 
 ## Installation
 
-Swinject is available through [Carthage](https://github.com/Carthage/Carthage) or [CocoaPods](https://cocoapods.org).
+Swinject is available through [Carthage](https://github.com/Carthage/Carthage), [CocoaPods](https://cocoapods.org) or [Swift Package Manager](https://swift.org/package-manager/).
 
 ### Carthage
 
@@ -28,7 +28,7 @@ github "Swinject/Swinject" "2.7.0"
 github "Swinject/SwinjectAutoregistration" "2.7.0"
 ```
 
-Then run `carthage update --no-use-binaries` command or just `carthage update`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
+Then run `carthage update --use-xcframeworks --no-use-binaries` command or just `carthage update --use-xcframeworks`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
 
 ### CocoaPods
 
@@ -44,6 +44,23 @@ pod 'SwinjectAutoregistration', '2.7.0'
 ```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
+
+### Swift Package Manager
+
+in `Package.swift` add the following:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Swinject/SwinjectAutoregistration.git", from: "2.7.0")
+],
+targets: [
+    .target(
+        name: "MyProject",
+        dependencies: [..., "SwinjectAutoregistration"]
+    )
+    ...
+]
+```
 
 ### Registration
 
@@ -78,12 +95,12 @@ container.autoregister(MyService.self, initializer: MyService.init)
 with equivalent code in pure Swinject:
 
 ```swift
-container.register(MyService.self) { r in 
+container.register(MyService.self) { r in
 	MyService(dependencyA: r.resolve(DependencyA.self)!, dependencyB: r.resolve(DependencyB.self)!, dependencyC: r.resolve(DependencyC.self)!, dependencyD: r.resolve(DependencyD.self)!)
 }
 ```
 
-Another advantage is that if you add more dependencies during the development the registration code doesn't have to be rewritten. 
+Another advantage is that if you add more dependencies during the development the registration code doesn't have to be rewritten.
 
 
 #### Registration with name
@@ -134,7 +151,7 @@ Wondering how does that work? Generics are heavily leveraged for the auto-regist
 
 ```swift
 public func autoregister<Service, A, B>(_ service: Service.Type, initializer: (A, B) -> Service) -> ServiceEntry<Service> {
-   return self.register(service.self, factory: { r in 
+   return self.register(service.self, factory: { r in
        return initializer(r.resolve(A.self)!, r.resolve(B.self)!)
    } as (ResolverType) -> Service)
 }
@@ -143,7 +160,7 @@ public func autoregister<Service, A, B>(_ service: Service.Type, initializer: (A
 The initializer is a function like any other. By passing it as a parameter its dependencies can be inferred as `(A, B)` and automatically resolved. These functions are generated for up to 20 dependencies. Checkout the [code](https://github.com/Swinject/SwinjectAutoregistration/blob/master/Sources/AutoRegistration.swift) for more info.
 
 ### Operators ###
-This extension also aims to reduce the amount of boilerplate while improving readability of the registration code. For that reason the operator `~>` is introduced. 
+This extension also aims to reduce the amount of boilerplate while improving readability of the registration code. For that reason the operator `~>` is introduced.
 
 ```swift
 Petowner(pet: r~>)
@@ -174,16 +191,16 @@ Petowner(pet: r ~> (Cat.self, arguments: ("Mimi", UIColor.black)))
 ```
 
 ### Limitations ###
-When a service has multiple initializers, swift compiler can't be sure which should be used and you will get a `ambigious use of init(x: y: z:)`. This can also happen if the service is extending another class that have initializer with the same number of arguments. 
+When a service has multiple initializers, swift compiler can't be sure which should be used and you will get a `ambigious use of init(x: y: z:)`. This can also happen if the service is extending another class that have initializer with the same number of arguments.
 
 The solution is to specify the initializer like this:
 
 ```
 container.autoregister(Person.self, initializer: PetOwner.init(name:pet:))
 ```
- 
-Auto-registration **can't** be used with **named dependencies** in their initializers. There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered: 
-     
+
+Auto-registration **can't** be used with **named dependencies** in their initializers. There is no way to get a name of dependency from the initializer. For example, following code can't be auto-registered:
+
 ```swift
 container.register(Animal.self, name: "mimi") { _ in Cat(name: "Mimi") }
 container.register(Animal.self, name: "charles") { _ in Cat(name: "Charles") }
