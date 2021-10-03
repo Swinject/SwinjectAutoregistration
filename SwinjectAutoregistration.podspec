@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwinjectAutoregistration'
-  s.version          = '2.7.0'
+  s.version          = "2.8.1"
   s.summary          = 'Autoregistration for Swinject'
   s.description      = <<-DESC
 SwinjectAutoregistration is an extension of Swinject that allows to automatically inject dependencies into registered services.
