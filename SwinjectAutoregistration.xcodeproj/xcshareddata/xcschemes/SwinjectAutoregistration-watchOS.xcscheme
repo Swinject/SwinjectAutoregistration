@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ACA2557A2709E653007AA055"
+               BuildableName = "SwinjectAutoregistration-watchOSTests.xctest"
+               BlueprintName = "SwinjectAutoregistration-watchOSTests"
+               ReferencedContainer = "container:SwinjectAutoregistration.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
