@@ -38,6 +38,21 @@ public func ~> <Service>(r: Resolver, service: Service.Type) -> Service {
     return r.resolve(service)!
 }
 
+/** Binary operator ~> equivalent to `r.resolve(Proto.Type)! as! Service`
+
+ Usage: `let mockImpl: MockImpl = r ~> DependencyA.self`
+ - Parameters:
+ - r: Resolver
+ - proto: Protocol implemented by the Service
+
+ - Returns: The resolved service type instance, retrieved via its registered protocol.
+ - Important: Fails on unresolvable service or casting error.
+ */
+infix operator ~~> : AdditionPrecedence
+public func ~~> <Proto, Service>(r: Resolver, proto: Proto.Type) -> Service {
+    return r.resolve(proto)! as! Service
+}
+
 /** Binary operator ~> equivalent to `r.resolve(Service.Type, name: "ServiceName")!`
  
  Usage: `SomeClass(dependencyA: r ~> (DependencyA.self, name: "ServiceName"))`
