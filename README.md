@@ -96,7 +96,7 @@ with equivalent code in pure Swinject:
 
 ```swift
 container.register(MyService.self) { r in
-	MyService(dependencyA: r.resolve(DependencyA.self)!, dependencyB: r.resolve(DependencyB.self)!, dependencyC: r.resolve(DependencyC.self)!, dependencyD: r.resolve(DependencyD.self)!)
+    MyService(dependencyA: r.resolve(DependencyA.self)!, dependencyB: r.resolve(DependencyB.self)!, dependencyC: r.resolve(DependencyC.self)!, dependencyD: r.resolve(DependencyD.self)!)
 }
 ```
 
