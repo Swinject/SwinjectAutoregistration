@@ -12,8 +12,8 @@ SwinjectAutoregistration is an extension of Swinject that allows to automaticall
 
 ## Requirements
 
-- iOS 9.0+ / Mac OS X 10.10+ / tvOS 9.0+
-- Xcode 8+
+- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+
+- Xcode 14.3+
 
 ## Installation
 
@@ -36,7 +36,7 @@ To install Swinject with CocoaPods, add the following lines to your `Podfile`.
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0' # or platform :osx, '10.10' if your target is OS X.
+platform :ios, '11.0' # or platform :osx, '10.13' if your target is OS X.
 use_frameworks!
 
 pod 'Swinject', '2.8.3'
