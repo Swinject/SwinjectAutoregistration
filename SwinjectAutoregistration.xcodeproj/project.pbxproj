@@ -931,7 +931,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -997,7 +997,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -1044,7 +1044,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
 			name = Debug;
@@ -1058,7 +1058,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swinject.SwinjectAutoregistration-iOS";
 			};
 			name = Release;
@@ -1184,7 +1184,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -1198,7 +1198,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-watchOS";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -1212,7 +1212,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
@@ -1226,7 +1226,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-tvOS";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
 		};
@@ -1348,6 +1348,7 @@
 					"$(PROJECT_DIR)/Carthage/Build",
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
 			};
 			name = Debug;
@@ -1361,6 +1362,7 @@
 					"$(PROJECT_DIR)/Carthage/Build",
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSX";
 			};
 			name = Release;
@@ -1414,7 +1416,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSXTests";
@@ -1468,7 +1470,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.swinject.SwinjectAutoregistration-OSXTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
