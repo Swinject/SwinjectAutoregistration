@@ -24,8 +24,8 @@ Swinject is available through [Carthage](https://github.com/Carthage/Carthage), 
 To install Swinject with Carthage, add the following line to your `Cartfile`.
 
 ```
-github "Swinject/Swinject" "2.8.4"
-github "Swinject/SwinjectAutoregistration" "2.8.4"
+github "Swinject/Swinject" "2.9.1"
+github "Swinject/SwinjectAutoregistration" "2.9.1"
 ```
 
 Then run `carthage update --use-xcframeworks --no-use-binaries` command or just `carthage update --use-xcframeworks`. For details of the installation and usage of Carthage, visit [its project page](https://github.com/Carthage/Carthage).
@@ -39,8 +39,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0' # or platform :osx, '10.13' if your target is OS X.
 use_frameworks!
 
-pod 'Swinject', '2.8.4'
-pod 'SwinjectAutoregistration', '2.8.4'
+pod 'Swinject', '2.9.1'
+pod 'SwinjectAutoregistration', '2.9.1'
 ```
 
 Then run `pod install` command. For details of the installation and usage of CocoaPods, visit [its official website](https://cocoapods.org).
@@ -51,7 +51,7 @@ in `Package.swift` add the following:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Swinject/SwinjectAutoregistration.git", from: "2.8.4")
+    .package(url: "https://github.com/Swinject/SwinjectAutoregistration.git", from: "2.9.1")
 ],
 targets: [
     .target(
